@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://504pwk0xrnxr"]
+
+[ext_resource type="ArrayMesh" uid="uid://rlg0y3fguycd" path="res://Assets/Meshes/mesh_reaper.tres" id="1_1ws32"]
+[ext_resource type="Texture2D" uid="uid://bcuh0218jkdg1" path="res://Assets/Textures/reapertexture.png" id="1_03613"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dhqmi"]
+shading_mode = 0
+disable_ambient_light = true
+albedo_texture = ExtResource("1_03613")
+
+[node name="Reaper" type="Node3D" unique_id=1972070130]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=690383331]
+transform = Transform3D(1.2, 0, 0, 0, 1.6, 0, 0, 0, 1.2, 0, 2.6096845, 0)
+material_override = SubResource("StandardMaterial3D_dhqmi")
+transparency = 0.01
+cast_shadow = 0
+mesh = ExtResource("1_1ws32")

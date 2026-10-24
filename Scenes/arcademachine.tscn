@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cvdiuifwvqj2y"]
+
+[ext_resource type="ArrayMesh" uid="uid://b83pe7tu18vli" path="res://Assets/Meshes/mesh_arcademachine.tres" id="1_ee7rn"]
+[ext_resource type="Texture2D" uid="uid://b5ncpmkg3hk4t" path="res://Assets/Textures/arcadetexture04.png" id="2_84dlg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hv83o"]
+albedo_texture = ExtResource("2_84dlg")
+
+[node name="Arcade Machine" type="Node3D" unique_id=1472305607]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=296512874]
+transform = Transform3D(0.6, 0, 0, 0, 0.8, 0, 0, 0, 0.6, 0, 0.7939725, 0)
+mesh = ExtResource("1_ee7rn")
+surface_material_override/0 = SubResource("StandardMaterial3D_hv83o")
