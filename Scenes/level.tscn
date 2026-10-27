@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b0iodptuv6jx2" path="res://Scenes/light_fixture.tscn" id="4_81xng"]
 [ext_resource type="Script" uid="uid://bl2333ck62u18" path="res://Scripts/path_network.gd" id="4_bvt00"]
 [ext_resource type="PackedScene" uid="uid://dpdii3tgy8nwl" path="res://Scenes/door.tscn" id="6_0f350"]
+[ext_resource type="PackedScene" uid="uid://cvdiuifwvqj2y" path="res://Scenes/arcademachine.tscn" id="10_oqgf2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6phgx"]
 sky_top_color = Color(0.52, 0.52, 0.52, 1)
@@ -82,33 +83,92 @@ metadata/_custom_type_script = "uid://wemsouvon5f2"
 [node name="Level Pieces" type="Node3D" parent="." unique_id=1277743287]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.5)
 
-[node name="Floor" parent="Level Pieces" unique_id=1933338827 instance=ExtResource("2_6phgx")]
-dimensions = Vector2(33, 17)
+[node name="Floor01" parent="Level Pieces" unique_id=1933338827 instance=ExtResource("2_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.5, 0, 0)
+dimensions = Vector2(82, 33)
 
-[node name="Ceiling" parent="Level Pieces" unique_id=1638297570 instance=ExtResource("2_6phgx")]
+[node name="Floor02" parent="Level Pieces" unique_id=191469484 instance=ExtResource("2_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5, 0, 30)
+dimensions = Vector2(70, 27)
+
+[node name="Floor03" parent="Level Pieces" unique_id=510898824 instance=ExtResource("2_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5, 0, -44.5)
+dimensions = Vector2(70, 56)
+
+[node name="High Ceiling 1" parent="Level Pieces" unique_id=1638297570 instance=ExtResource("2_6phgx")]
 transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 10, 0)
 dimensions = Vector2(33, 17)
+b_top = true
+
+[node name="Low Ceiling 1" parent="Level Pieces" unique_id=576428944 instance=ExtResource("2_6phgx")]
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, -37.5, 4, -1)
+dimensions = Vector2(57, 96)
 b_top = true
 
 [node name="Boundary Walls" type="Node3D" parent="Level Pieces" unique_id=54337689]
 
 [node name="Wall" parent="Level Pieces/Boundary Walls" unique_id=265251398 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 9)
-dimensions = Vector3(33, 10, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 5, 17)
+dimensions = Vector3(21, 10, 1)
 
 [node name="Wall2" parent="Level Pieces/Boundary Walls" unique_id=1772906807 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -9)
-dimensions = Vector3(33, 10, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 5, -17)
+dimensions = Vector3(21, 10, 1)
 
 [node name="Wall3" parent="Level Pieces/Boundary Walls" unique_id=1843521832 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 17, 5, 0)
-dimensions = Vector3(17, 10, 1)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 17, 5, 9)
+dimensions = Vector3(15, 10, 1)
+
+[node name="Wall6" parent="Level Pieces/Boundary Walls" unique_id=777649121 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 17, 7, 0)
+dimensions = Vector3(3, 6, 1)
+
+[node name="Final Door Piece" parent="Level Pieces/Boundary Walls" unique_id=1623354981 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 17, 2, 0)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Boundary Walls" unique_id=702447390 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 17, 5, -9)
+dimensions = Vector3(15, 10, 1)
 
 [node name="Wall4" parent="Level Pieces/Boundary Walls" unique_id=1098475258 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -17, 5, 0)
-dimensions = Vector3(17, 10, 1)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -9, 5, 0)
+dimensions = Vector3(25, 10, 1)
+
+[node name="Wall7" parent="Level Pieces/Boundary Walls" unique_id=771456202 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4, 2, -27.5)
+dimensions = Vector3(20, 4, 1)
+
+[node name="Wall11" parent="Level Pieces/Boundary Walls" unique_id=860714066 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4, 2, -61.5)
+dimensions = Vector3(2, 4, 1)
+
+[node name="Wall8" parent="Level Pieces/Boundary Walls" unique_id=1779522122 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -54.999985, 2, -21.49998)
+dimensions = Vector3(32, 4, 1)
+
+[node name="Wall9" parent="Level Pieces/Boundary Walls" unique_id=119847054 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4, 2, 19)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall10" parent="Level Pieces/Boundary Walls" unique_id=2038167551 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9, 7, 14.5)
+dimensions = Vector3(4, 6, 1)
+
+[node name="Wall12" parent="Level Pieces/Boundary Walls" unique_id=568453186 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -6.5, 7, 17)
+dimensions = Vector3(4, 6, 1)
+
+[node name="Wall13" parent="Level Pieces/Boundary Walls" unique_id=932460683 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 7, -17)
+dimensions = Vector3(4, 6, 1)
+
+[node name="Wall14" parent="Level Pieces/Boundary Walls" unique_id=2104268500 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9, 7, -14.5)
+dimensions = Vector3(4, 6, 1)
 
 [node name="Room 1" type="Node3D" parent="Level Pieces" unique_id=731670175]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -9, 0, -44)
 
 [node name="Wall" parent="Level Pieces/Room 1" unique_id=742780214 instance=ExtResource("3_6phgx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
@@ -123,15 +183,15 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14,
 dimensions = Vector3(11, 4, 1)
 
 [node name="Wall4" parent="Level Pieces/Room 1" unique_id=217787989 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
-dimensions = Vector3(6, 4, 1)
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -5, 2, 2)
+dimensions = Vector3(7, 4, 1)
 
 [node name="Wall5" parent="Level Pieces/Room 1" unique_id=475963366 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
-dimensions = Vector3(3, 4, 1)
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -5, 2, -4.5)
+dimensions = Vector3(2, 4, 1)
 
 [node name="Wall6" parent="Level Pieces/Room 1" unique_id=472142477 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -5, 3.5, -2.5)
 dimensions = Vector3(2, 1, 1)
 
 [node name="Ceiling" parent="Level Pieces/Room 1" unique_id=1737428068 instance=ExtResource("2_6phgx")]
@@ -146,4 +206,1298 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
 
 [node name="Door" parent="Level Pieces/Room 1" unique_id=1857380350 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -3.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 1" unique_id=1472305607 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 2" type="Node3D" parent="Level Pieces" unique_id=2121417816]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 6)
+
+[node name="Wall" parent="Level Pieces/Room 2" unique_id=403772746 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 2" unique_id=2112111264 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 2" unique_id=1284521113 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 2" unique_id=1247723920 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 2, 8.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 2" unique_id=772297617 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, 8.5)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 2" unique_id=1401515882 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 3.5, 8.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Door" parent="Level Pieces/Room 2" unique_id=1126204107 instance=ExtResource("6_0f350")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 2" unique_id=295646327 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 3" type="Node3D" parent="Level Pieces" unique_id=660671934]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -6)
+
+[node name="Wall" parent="Level Pieces/Room 3" unique_id=1524301479 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 3" unique_id=1942611361 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 3" unique_id=1983768345 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 3" unique_id=572051289 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 3" unique_id=229259298 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 3" unique_id=1265234469 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture" parent="Level Pieces/Room 3" unique_id=163384660 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 3" unique_id=431232278 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
+
+[node name="Door" parent="Level Pieces/Room 3" unique_id=476321224 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 3" unique_id=1385261015 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 4" type="Node3D" parent="Level Pieces" unique_id=1191461748]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, 6)
+
+[node name="Wall" parent="Level Pieces/Room 4" unique_id=1557779947 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 4" unique_id=552736681 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 4" unique_id=1089620171 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 4" unique_id=654468149 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 4" unique_id=1710686106 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 4" unique_id=415835066 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture" parent="Level Pieces/Room 4" unique_id=199357692 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 4" unique_id=393774679 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
+
+[node name="Door" parent="Level Pieces/Room 4" unique_id=2003711323 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 4" unique_id=6584829 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 5" type="Node3D" parent="Level Pieces" unique_id=1536411999]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -6)
+
+[node name="Wall" parent="Level Pieces/Room 5" unique_id=1329599384 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 5" unique_id=1062076761 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 5" unique_id=69203765 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 5" unique_id=1910880268 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 5" unique_id=2033298115 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 5" unique_id=232916269 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 5" unique_id=837832670 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
+
+[node name="Door" parent="Level Pieces/Room 5" unique_id=2088810430 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 5" unique_id=759616935 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 6" type="Node3D" parent="Level Pieces" unique_id=1323675278]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0, 6)
+
+[node name="Wall" parent="Level Pieces/Room 6" unique_id=113422196 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 6" unique_id=1260141812 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 6" unique_id=871846004 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 6" unique_id=1590698854 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 6" unique_id=621408542 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 6" unique_id=1192669312 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture" parent="Level Pieces/Room 6" unique_id=177702444 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Door" parent="Level Pieces/Room 6" unique_id=1711693684 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 6" unique_id=545670515 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 7" type="Node3D" parent="Level Pieces" unique_id=1175222827]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0, -6)
+
+[node name="Wall" parent="Level Pieces/Room 7" unique_id=954277969 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 7" unique_id=1458398830 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 7" unique_id=194889178 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 7" unique_id=1439051407 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 7" unique_id=482295499 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 7" unique_id=2069989402 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture" parent="Level Pieces/Room 7" unique_id=959673938 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 7" unique_id=917360608 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
+
+[node name="Door" parent="Level Pieces/Room 7" unique_id=629569339 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 7" unique_id=1831122277 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 8" type="Node3D" parent="Level Pieces" unique_id=2108041417]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, 6)
+
+[node name="Wall" parent="Level Pieces/Room 8" unique_id=2119438384 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 8" unique_id=696470637 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 8" unique_id=808220257 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 8" unique_id=1837738789 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 8" unique_id=754545447 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 8" unique_id=1568723260 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Door" parent="Level Pieces/Room 8" unique_id=1584034716 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 8" unique_id=2003101820 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 9" type="Node3D" parent="Level Pieces" unique_id=312502061]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -6)
+
+[node name="Wall" parent="Level Pieces/Room 9" unique_id=1476350717 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 9" unique_id=1992362507 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 9" unique_id=578728069 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 9" unique_id=1131213531 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 9" unique_id=1376320131 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 9" unique_id=163447112 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 9" unique_id=1154823540 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
+
+[node name="Door" parent="Level Pieces/Room 9" unique_id=213995616 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 9" unique_id=1713662501 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 10" type="Node3D" parent="Level Pieces" unique_id=1311087377]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 23)
+
+[node name="Wall" parent="Level Pieces/Room 10" unique_id=1093912220 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 10" unique_id=1089507799 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 10" unique_id=775660520 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 10" unique_id=2033297979 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 10" unique_id=1399586179 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 10" unique_id=1601153060 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 10" unique_id=1461090958 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
+
+[node name="Door" parent="Level Pieces/Room 10" unique_id=18402643 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 10" unique_id=1355805724 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 11" type="Node3D" parent="Level Pieces" unique_id=2123110392]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, 23)
+
+[node name="Wall" parent="Level Pieces/Room 11" unique_id=1010386904 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 11" unique_id=905679439 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 11" unique_id=295703472 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 11" unique_id=592111914 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 11" unique_id=1149363547 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 11" unique_id=1842903127 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture" parent="Level Pieces/Room 11" unique_id=1693658297 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 11" unique_id=1991495624 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
+
+[node name="Door" parent="Level Pieces/Room 11" unique_id=1231873582 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 11" unique_id=1319571615 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 12" type="Node3D" parent="Level Pieces" unique_id=1171148263]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0, 23)
+
+[node name="Wall" parent="Level Pieces/Room 12" unique_id=1231489749 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 12" unique_id=1295507533 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 12" unique_id=9964908 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 12" unique_id=136787460 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 12" unique_id=826474371 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 12" unique_id=143974849 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Door" parent="Level Pieces/Room 12" unique_id=1162569534 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 12" unique_id=1399608320 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 13" type="Node3D" parent="Level Pieces" unique_id=754676469]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, 23)
+
+[node name="Wall" parent="Level Pieces/Room 13" unique_id=1171561129 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 13" unique_id=2099977498 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 13" unique_id=189818619 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 13" unique_id=1540087667 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 13" unique_id=945366701 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 13" unique_id=679334382 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture" parent="Level Pieces/Room 13" unique_id=1212586118 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 13" unique_id=194901160 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
+
+[node name="Door" parent="Level Pieces/Room 13" unique_id=1410695000 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 13" unique_id=1486104761 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 14" type="Node3D" parent="Level Pieces" unique_id=705482876]
+transform = Transform3D(-1, 0, -5.9604645e-08, 0, 1, 0, 5.9604645e-08, 0, -1, -9, 0, 27)
+
+[node name="Wall" parent="Level Pieces/Room 14" unique_id=759721245 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 14" unique_id=1522851009 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 14" unique_id=718670372 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 14" unique_id=954327178 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5.0000005, 2, 5)
+dimensions = Vector3(1, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 14" unique_id=1527762280 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -1.5)
+dimensions = Vector3(8, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 14" unique_id=451230038 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5.0000005, 3.5, 3.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture" parent="Level Pieces/Room 14" unique_id=891165635 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 14" unique_id=1465593733 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
+
+[node name="Door" parent="Level Pieces/Room 14" unique_id=744188725 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5.0000005, 0, 2.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 14" unique_id=1505421325 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 15" type="Node3D" parent="Level Pieces" unique_id=774368285]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -11, 0, 29)
+
+[node name="Wall" parent="Level Pieces/Room 15" unique_id=884039763 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 15" unique_id=379174713 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 15" unique_id=1190865739 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 15" unique_id=912029167 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 15" unique_id=567243243 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 15" unique_id=569211234 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture" parent="Level Pieces/Room 15" unique_id=1459028898 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 15" unique_id=350180288 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
+
+[node name="Door" parent="Level Pieces/Room 15" unique_id=1021731769 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 15" unique_id=56336225 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 16" type="Node3D" parent="Level Pieces" unique_id=1966889125]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -48, 0, 29)
+
+[node name="Wall" parent="Level Pieces/Room 16" unique_id=776945974 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 16" unique_id=1628395230 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 16" unique_id=25865729 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 16" unique_id=2038905657 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 16" unique_id=1890877339 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 16" unique_id=592229126 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture" parent="Level Pieces/Room 16" unique_id=210050534 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 16" unique_id=69028377 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
+
+[node name="Door" parent="Level Pieces/Room 16" unique_id=681482045 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 16" unique_id=1704013254 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 17" type="Node3D" parent="Level Pieces" unique_id=36766636]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -32, 0, 29)
+
+[node name="Wall" parent="Level Pieces/Room 17" unique_id=140642272 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 17" unique_id=2044042546 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 17" unique_id=1123771021 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 17" unique_id=524696567 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5.000002, 2, 4.5)
+dimensions = Vector3(2, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 17" unique_id=1065211764 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5.000002, 2, -1.9999981)
+dimensions = Vector3(7, 4, 1)
+
+[node name="Wall7" parent="Level Pieces/Room 17" unique_id=698806582 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5.000002, 2, -7.999998)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 17" unique_id=403264267 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5.000002, 3.5, 2.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture" parent="Level Pieces/Room 17" unique_id=1280656254 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Door" parent="Level Pieces/Room 17" unique_id=606782708 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5.000002, 0, 1.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 17" unique_id=1304153597 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 18" type="Node3D" parent="Level Pieces" unique_id=1940342467]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, 27)
+
+[node name="Wall" parent="Level Pieces/Room 18" unique_id=1665870880 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 18" unique_id=448826168 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 18" unique_id=2098133837 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 18" unique_id=898121386 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2)
+dimensions = Vector3(7, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 18" unique_id=519856625 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4.5)
+dimensions = Vector3(2, 4, 1)
+
+[node name="Wall7" parent="Level Pieces/Room 18" unique_id=226922385 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -7)
+dimensions = Vector3(1, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 18" unique_id=1438920227 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -2.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture" parent="Level Pieces/Room 18" unique_id=2071544078 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 18" unique_id=771555786 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
+
+[node name="Door" parent="Level Pieces/Room 18" unique_id=1449107710 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -3.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 18" unique_id=2068288164 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 19" type="Node3D" parent="Level Pieces" unique_id=1475554506]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, 13)
+
+[node name="Wall" parent="Level Pieces/Room 19" unique_id=1851648260 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 19" unique_id=425785220 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 19" unique_id=493816803 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 19" unique_id=2093666505 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 19" unique_id=1920039410 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -2.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall7" parent="Level Pieces/Room 19" unique_id=482989109 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -8.5)
+dimensions = Vector3(4, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 19" unique_id=1284710239 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, 1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 19" unique_id=25443863 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
+
+[node name="Door" parent="Level Pieces/Room 19" unique_id=1019596073 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, 0.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 19" unique_id=267698504 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 20" type="Node3D" parent="Level Pieces" unique_id=736680061]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -23)
+
+[node name="Wall" parent="Level Pieces/Room 20" unique_id=1123368986 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 20" unique_id=2082902846 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 20" unique_id=188690051 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 20" unique_id=942104817 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 20" unique_id=1711049680 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 20" unique_id=88014572 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture" parent="Level Pieces/Room 20" unique_id=1517580075 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 20" unique_id=920051640 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
+
+[node name="Door" parent="Level Pieces/Room 20" unique_id=458863924 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 20" unique_id=1788225247 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 21" type="Node3D" parent="Level Pieces" unique_id=1521734794]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -23)
+
+[node name="Wall" parent="Level Pieces/Room 21" unique_id=633523044 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 21" unique_id=2077024729 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 21" unique_id=2093687082 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 21" unique_id=443272070 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 21" unique_id=594678504 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 21" unique_id=1456922269 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture" parent="Level Pieces/Room 21" unique_id=431884124 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Door" parent="Level Pieces/Room 21" unique_id=185000251 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 21" unique_id=1685572707 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 22" type="Node3D" parent="Level Pieces" unique_id=1316782562]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0, -23)
+
+[node name="Wall" parent="Level Pieces/Room 22" unique_id=1985416130 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 22" unique_id=633774410 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 22" unique_id=854164239 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 22" unique_id=1701561331 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 22" unique_id=253280838 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 22" unique_id=577031275 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture" parent="Level Pieces/Room 22" unique_id=465846291 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 22" unique_id=1843998342 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
+
+[node name="Door" parent="Level Pieces/Room 22" unique_id=730173961 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 22" unique_id=398611150 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 23" type="Node3D" parent="Level Pieces" unique_id=276691268]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -23)
+
+[node name="Wall" parent="Level Pieces/Room 23" unique_id=1455518482 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 23" unique_id=1259970833 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 23" unique_id=918567028 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 23" unique_id=6706011 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 23" unique_id=68000214 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 23" unique_id=1039859578 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Door" parent="Level Pieces/Room 23" unique_id=2047162612 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 23" unique_id=2072491422 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 24" type="Node3D" parent="Level Pieces" unique_id=150954372]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -40)
+
+[node name="Wall" parent="Level Pieces/Room 24" unique_id=896816234 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 24" unique_id=579418261 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 24" unique_id=2067584665 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 24" unique_id=1031148632 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 24" unique_id=227676176 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 24" unique_id=993346252 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 24" unique_id=1909937784 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
+
+[node name="Door" parent="Level Pieces/Room 24" unique_id=1826994786 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 24" unique_id=1290555852 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 25" type="Node3D" parent="Level Pieces" unique_id=420782157]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -52)
+
+[node name="Wall" parent="Level Pieces/Room 25" unique_id=1874549545 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 25" unique_id=617514151 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 25" unique_id=518231192 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 25" unique_id=685610337 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 25" unique_id=1743243043 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 25" unique_id=1627723578 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture" parent="Level Pieces/Room 25" unique_id=1847385916 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 25" unique_id=571434853 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
+
+[node name="Door" parent="Level Pieces/Room 25" unique_id=903454200 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 25" unique_id=1733090911 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 26" type="Node3D" parent="Level Pieces" unique_id=87882884]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -40)
+
+[node name="Wall" parent="Level Pieces/Room 26" unique_id=1522547152 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 26" unique_id=350420190 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 26" unique_id=1027020659 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 26" unique_id=1043661270 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 26" unique_id=18027699 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 26" unique_id=467716431 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture" parent="Level Pieces/Room 26" unique_id=1679531746 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 26" unique_id=5289259 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
+
+[node name="Door" parent="Level Pieces/Room 26" unique_id=2138937056 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 26" unique_id=1221705047 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 27" type="Node3D" parent="Level Pieces" unique_id=1302856426]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -52)
+
+[node name="Wall" parent="Level Pieces/Room 27" unique_id=659650582 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 27" unique_id=796140549 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 27" unique_id=1866001450 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 27" unique_id=804621205 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 27" unique_id=1396814422 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 27" unique_id=79558354 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture" parent="Level Pieces/Room 27" unique_id=939848229 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 27" unique_id=173658115 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
+
+[node name="Door" parent="Level Pieces/Room 27" unique_id=870618194 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 27" unique_id=570537528 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 28" type="Node3D" parent="Level Pieces" unique_id=1754828431]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -11, 0, -58)
+
+[node name="Wall" parent="Level Pieces/Room 28" unique_id=2018556448 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 28" unique_id=386075677 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 28" unique_id=1308041168 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 28" unique_id=1131809499 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 28" unique_id=1620790657 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 28" unique_id=425598976 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Door" parent="Level Pieces/Room 28" unique_id=1142290407 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 28" unique_id=997989470 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 29" type="Node3D" parent="Level Pieces" unique_id=1417269332]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -24, 0, -58)
+
+[node name="Wall" parent="Level Pieces/Room 29" unique_id=1750567653 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 29" unique_id=254360755 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 29" unique_id=1939603717 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 29" unique_id=981353028 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 4.5)
+dimensions = Vector3(2, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 29" unique_id=43034846 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -2)
+dimensions = Vector3(7, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 29" unique_id=1408937371 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, 2.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Door" parent="Level Pieces/Room 29" unique_id=1826461661 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, 1.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 29" unique_id=351159253 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 30" type="Node3D" parent="Level Pieces" unique_id=1688732963]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -37, 0, -58)
+
+[node name="Wall" parent="Level Pieces/Room 30" unique_id=1310467268 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 30" unique_id=953083149 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 30" unique_id=1242590648 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 30" unique_id=1662990998 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 3)
+dimensions = Vector3(5, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 30" unique_id=1345295225 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -3.5)
+dimensions = Vector3(4, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 30" unique_id=392473500 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -0.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture" parent="Level Pieces/Room 30" unique_id=182947023 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 30" unique_id=382219504 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
+
+[node name="Door" parent="Level Pieces/Room 30" unique_id=783521258 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -1.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 30" unique_id=663135532 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 31" type="Node3D" parent="Level Pieces" unique_id=2015126927]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -50, 0, -58)
+
+[node name="Wall" parent="Level Pieces/Room 31" unique_id=1715011530 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 31" unique_id=1639797230 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 31" unique_id=1510025440 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 31" unique_id=417799193 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 31" unique_id=779389603 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -2.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 31" unique_id=958432893 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, 1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture" parent="Level Pieces/Room 31" unique_id=1251812161 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Door" parent="Level Pieces/Room 31" unique_id=1091116515 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, 0.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 31" unique_id=1093033573 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Room 33" type="Node3D" parent="Level Pieces" unique_id=824774491]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, -56)
+
+[node name="Wall2" parent="Level Pieces/Room 33" unique_id=350486729 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 33" unique_id=1264959110 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 6)
+dimensions = Vector3(23, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 33" unique_id=1132054607 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 33" unique_id=864885844 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture" parent="Level Pieces/Room 33" unique_id=919393458 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 33" unique_id=673326053 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
+
+[node name="Door" parent="Level Pieces/Room 33" unique_id=1436254490 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+
+[node name="Arcade Machine" parent="Level Pieces/Room 33" unique_id=781608522 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+
+[node name="Wall7" parent="Level Pieces/Room 33" unique_id=590687012 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 18)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall10" parent="Level Pieces/Room 33" unique_id=1024943117 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 15.5)
+dimensions = Vector3(4, 4, 1)
+
+[node name="Wall11" parent="Level Pieces/Room 33" unique_id=1100069854 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 5.5)
+dimensions = Vector3(12, 4, 1)
+
+[node name="Wall12" parent="Level Pieces/Room 33" unique_id=1115510119 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, 12.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Light Fixture3" parent="Level Pieces/Room 33" unique_id=1504372301 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 15)
+
+[node name="Door2" parent="Level Pieces/Room 33" unique_id=517169776 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, 11.5)
+
+[node name="Arcade Machine2" parent="Level Pieces/Room 33" unique_id=1405872207 instance=ExtResource("10_oqgf2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 16)
+
+[node name="Room 32" type="Node3D" parent="Level Pieces" unique_id=1833545928]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -39.5, 0, -38)
+
+[node name="Wall2" parent="Level Pieces/Room 32" unique_id=357178502 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -7.4999924)
+dimensions = Vector3(25, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 32" unique_id=1331806090 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9999847, 2, 10.500019)
+dimensions = Vector3(25, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 32" unique_id=691170483 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.000019, 2, 1.5000229)
+dimensions = Vector3(17, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 32" unique_id=2019514479 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -19.99998, 2, 1.5000305)
+dimensions = Vector3(17, 4, 1)
+
+[node name="Closet01" type="Node3D" parent="Level Pieces" unique_id=1325994696]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, 37)
+
+[node name="Wall8" parent="Level Pieces/Closet01" unique_id=1886052024 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2, 0)
+dimensions = Vector3(5, 4, 1)
+
+[node name="Wall9" parent="Level Pieces/Closet01" unique_id=1039978685 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 0)
+dimensions = Vector3(5, 4, 1)
+
+[node name="Wall10" parent="Level Pieces/Closet01" unique_id=863502539 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -2.5, 2, 3)
+dimensions = Vector3(4, 4, 1)
+
+[node name="Wall7" parent="Level Pieces/Closet01" unique_id=641659468 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -2.5, 3.5, -3)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Door2" parent="Level Pieces/Closet01" unique_id=32722688 instance=ExtResource("6_0f350")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, -3)
+
+[node name="Wall11" parent="Level Pieces/Closet01" unique_id=357631733 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 2, -3)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall12" parent="Level Pieces/Closet01" unique_id=668791971 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5, 2, -3)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Light Fixture3" parent="Level Pieces/Closet01" unique_id=452462826 instance=ExtResource("4_81xng")]
+transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, -2.5, 4, 0)
+
+[node name="Closet02" type="Node3D" parent="Level Pieces" unique_id=320162144]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -58, 0, 1)
+
+[node name="Wall8" parent="Level Pieces/Closet02" unique_id=1115011495 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2, 0)
+dimensions = Vector3(5, 4, 1)
+
+[node name="Wall9" parent="Level Pieces/Closet02" unique_id=1148786622 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 0)
+dimensions = Vector3(5, 4, 1)
+
+[node name="Wall10" parent="Level Pieces/Closet02" unique_id=1113370519 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -2.5, 2, 3)
+dimensions = Vector3(4, 4, 1)
+
+[node name="Wall7" parent="Level Pieces/Closet02" unique_id=1901239298 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -2.5, 3.5, -3)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Door2" parent="Level Pieces/Closet02" unique_id=1413420692 instance=ExtResource("6_0f350")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, -3)
+
+[node name="Wall11" parent="Level Pieces/Closet02" unique_id=1470618840 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 2, -3)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall12" parent="Level Pieces/Closet02" unique_id=1927891593 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5, 2, -3)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Closet03" type="Node3D" parent="Level Pieces" unique_id=1207664553]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -1, 0, -59)
+
+[node name="Wall8" parent="Level Pieces/Closet03" unique_id=549038337 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2, 0)
+dimensions = Vector3(5, 4, 1)
+
+[node name="Wall9" parent="Level Pieces/Closet03" unique_id=66030289 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 0)
+dimensions = Vector3(5, 4, 1)
+
+[node name="Wall10" parent="Level Pieces/Closet03" unique_id=1742527738 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -2.5, 2, 3)
+dimensions = Vector3(4, 4, 1)
+
+[node name="Wall7" parent="Level Pieces/Closet03" unique_id=99117012 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -2.5, 3.5, -3)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Door2" parent="Level Pieces/Closet03" unique_id=556386595 instance=ExtResource("6_0f350")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, -3)
+
+[node name="Wall11" parent="Level Pieces/Closet03" unique_id=1492278866 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 2, -3)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall12" parent="Level Pieces/Closet03" unique_id=1501129382 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5, 2, -3)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall13" parent="Level Pieces/Closet03" unique_id=1237155220 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -7.5, 2, -2.9999998)
+dimensions = Vector3(2, 4, 1)
