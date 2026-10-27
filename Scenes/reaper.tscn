@@ -2,17 +2,21 @@
 
 [ext_resource type="ArrayMesh" uid="uid://rlg0y3fguycd" path="res://Assets/Meshes/mesh_reaper.tres" id="1_1ws32"]
 [ext_resource type="Texture2D" uid="uid://bcuh0218jkdg1" path="res://Assets/Textures/reapertexture.png" id="1_03613"]
+[ext_resource type="Script" uid="uid://da6syouquecdd" path="res://Scripts/reaper.gd" id="1_dhqmi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dhqmi"]
 shading_mode = 0
 disable_ambient_light = true
+albedo_color = Color(0.58, 0.58, 0.58, 1)
 albedo_texture = ExtResource("1_03613")
+texture_filter = 0
 
 [node name="Reaper" type="Node3D" unique_id=1972070130]
+script = ExtResource("1_dhqmi")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=690383331]
-transform = Transform3D(1.2, 0, 0, 0, 1.6, 0, 0, 0, 1.2, 0, 2.6096845, 0)
+transform = Transform3D(-8.105699e-09, -3.2749148e-09, 0.2, -0.074921325, 0.18543679, 0, -0.18543679, -0.074921325, -8.742278e-09, 0, 2.059845, 0)
 material_override = SubResource("StandardMaterial3D_dhqmi")
-transparency = 0.01
+transparency = 0.1
 cast_shadow = 0
 mesh = ExtResource("1_1ws32")

@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bb8idh3a3nyek"]
+
+[ext_resource type="Script" uid="uid://clk0uq8lk5bok" path="res://Scripts/wall.gd" id="1_d155t"]
+[ext_resource type="Texture2D" uid="uid://cisyfu3dvphxo" path="res://Assets/Textures/walltexture.png" id="2_yjehn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yjehn"]
+albedo_texture = ExtResource("2_yjehn")
+uv1_scale = Vector3(2, 2, 2)
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_m8ojb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0dv0i"]
+
+[node name="Wall" type="StaticBody3D" unique_id=1933338827 node_paths=PackedStringArray("mesh_instance", "collision")]
+script = ExtResource("1_d155t")
+mesh_instance = NodePath("MeshInstance3D")
+collision = NodePath("CollisionShape3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1045463076]
+material_override = SubResource("StandardMaterial3D_yjehn")
+mesh = SubResource("BoxMesh_m8ojb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=261669814]
+shape = SubResource("BoxShape3D_0dv0i")

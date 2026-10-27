@@ -1,3 +1,149 @@
 [gd_scene format=3 uid="uid://5ncjop0qs11p"]
 
+[ext_resource type="PackedScene" uid="uid://degvixu3fftyt" path="res://Scenes/player.tscn" id="1_k5f4k"]
+[ext_resource type="Script" uid="uid://culeorik8nmlu" path="res://Scripts/game_manager.gd" id="1_oqgf2"]
+[ext_resource type="PackedScene" uid="uid://c0a672sdw34if" path="res://Scenes/floor.tscn" id="2_6phgx"]
+[ext_resource type="PackedScene" uid="uid://504pwk0xrnxr" path="res://Scenes/reaper.tscn" id="2_wqkje"]
+[ext_resource type="PackedScene" uid="uid://bb8idh3a3nyek" path="res://Scenes/wall.tscn" id="3_6phgx"]
+[ext_resource type="Script" uid="uid://wemsouvon5f2" path="res://Scripts/path_marker.gd" id="3_8c0lf"]
+[ext_resource type="PackedScene" uid="uid://b0iodptuv6jx2" path="res://Scenes/light_fixture.tscn" id="4_81xng"]
+[ext_resource type="Script" uid="uid://bl2333ck62u18" path="res://Scripts/path_network.gd" id="4_bvt00"]
+[ext_resource type="PackedScene" uid="uid://dpdii3tgy8nwl" path="res://Scenes/door.tscn" id="6_0f350"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6phgx"]
+sky_top_color = Color(0.52, 0.52, 0.52, 1)
+sky_horizon_color = Color(0.57, 0.25706998, 0.2223, 1)
+ground_horizon_color = Color(0.19414508, 0.18639508, 0.17739508, 1)
+energy_multiplier = 0.1
+
+[sub_resource type="Sky" id="Sky_81xng"]
+sky_material = SubResource("ProceduralSkyMaterial_6phgx")
+
+[sub_resource type="Environment" id="Environment_wqkje"]
+background_mode = 2
+sky = SubResource("Sky_81xng")
+ambient_light_color = Color(1, 1, 1, 1)
+glow_enabled = true
+
 [node name="Level" type="Node3D" unique_id=246325974]
+
+[node name="Game Manager" type="Node" parent="." unique_id=775940638 node_paths=PackedStringArray("reaper", "player")]
+script = ExtResource("1_oqgf2")
+debug_mode = true
+reaper = NodePath("../Reaper")
+player = NodePath("../Player")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=16588462]
+environment = SubResource("Environment_wqkje")
+
+[node name="Environment Light" type="DirectionalLight3D" parent="." unique_id=1383463927]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_energy = 0.0
+light_indirect_energy = 0.0
+shadow_enabled = true
+
+[node name="Player" parent="." unique_id=883750019 instance=ExtResource("1_k5f4k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8374123, 0)
+
+[node name="Reaper" parent="." unique_id=1972070130 node_paths=PackedStringArray("path_network", "player") instance=ExtResource("2_wqkje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 19)
+path_network = NodePath("../Path Network")
+player = NodePath("../Player")
+
+[node name="Path Network" type="Node3D" parent="." unique_id=1370443334 node_paths=PackedStringArray("starting_markers")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.5, 0, -2)
+script = ExtResource("4_bvt00")
+starting_markers = [NodePath("PathMarker02"), NodePath("PathMarker03")]
+
+[node name="PathMarker01" type="Marker3D" parent="Path Network" unique_id=1406960318 node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -1.4999998)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker02"), NodePath("../PathMarker04")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker02" type="Marker3D" parent="Path Network" unique_id=1301806782 node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 10.5)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker01"), NodePath("../PathMarker03")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker03" type="Marker3D" parent="Path Network" unique_id=1937049094 node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.000001, 0, 10.5)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker02"), NodePath(".")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker04" type="Marker3D" parent="Path Network" unique_id=1961264409 node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.000001, 0, -1.5000002)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker03"), NodePath("../PathMarker01")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="Level Pieces" type="Node3D" parent="." unique_id=1277743287]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.5)
+
+[node name="Floor" parent="Level Pieces" unique_id=1933338827 instance=ExtResource("2_6phgx")]
+dimensions = Vector2(33, 17)
+
+[node name="Ceiling" parent="Level Pieces" unique_id=1638297570 instance=ExtResource("2_6phgx")]
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 10, 0)
+dimensions = Vector2(33, 17)
+b_top = true
+
+[node name="Boundary Walls" type="Node3D" parent="Level Pieces" unique_id=54337689]
+
+[node name="Wall" parent="Level Pieces/Boundary Walls" unique_id=265251398 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 9)
+dimensions = Vector3(33, 10, 1)
+
+[node name="Wall2" parent="Level Pieces/Boundary Walls" unique_id=1772906807 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -9)
+dimensions = Vector3(33, 10, 1)
+
+[node name="Wall3" parent="Level Pieces/Boundary Walls" unique_id=1843521832 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 17, 5, 0)
+dimensions = Vector3(17, 10, 1)
+
+[node name="Wall4" parent="Level Pieces/Boundary Walls" unique_id=1098475258 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -17, 5, 0)
+dimensions = Vector3(17, 10, 1)
+
+[node name="Room 1" type="Node3D" parent="Level Pieces" unique_id=731670175]
+
+[node name="Wall" parent="Level Pieces/Room 1" unique_id=742780214 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Level Pieces/Room 1" unique_id=1093481461 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Level Pieces/Room 1" unique_id=398396058 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall4" parent="Level Pieces/Room 1" unique_id=217787989 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 1" unique_id=475963366 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 1" unique_id=472142477 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Ceiling" parent="Level Pieces/Room 1" unique_id=1737428068 instance=ExtResource("2_6phgx")]
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, -9.5, 4, 0)
+dimensions = Vector2(10, 13)
+b_top = true
+
+[node name="Light Fixture" parent="Level Pieces/Room 1" unique_id=258141496 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 1" unique_id=718557181 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
+
+[node name="Door" parent="Level Pieces/Room 1" unique_id=1857380350 instance=ExtResource("6_0f350")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)

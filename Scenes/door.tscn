@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://dpdii3tgy8nwl"]
+
+[ext_resource type="Script" uid="uid://b2fagm34ygttj" path="res://Scripts/door.gd" id="1_w6aom"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rw1l7"]
+albedo_color = Color(0.82139057, 0.6784501, 0.57176423, 1)
+metallic = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_5tmi2"]
+size = Vector3(2, 3, 0.05)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5tmi2"]
+size = Vector3(2, 3, 0.1)
+
+[node name="Door" type="StaticBody3D" unique_id=1126204107 node_paths=PackedStringArray("door_open_timer")]
+collision_layer = 3
+collision_mask = 0
+script = ExtResource("1_w6aom")
+door_open_timer = NodePath("Timer")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1306756971]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.5, 0)
+material_override = SubResource("StandardMaterial3D_rw1l7")
+mesh = SubResource("BoxMesh_5tmi2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1818376552]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.5, 0)
+shape = SubResource("BoxShape3D_5tmi2")
+
+[node name="Timer" type="Timer" parent="." unique_id=1973031325]
+wait_time = 1.5
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_door_open_timer_timeout"]

@@ -1,3 +1,71 @@
 [gd_scene format=3 uid="uid://degvixu3fftyt"]
 
+[ext_resource type="Script" uid="uid://bl0swwdo4wd45" path="res://Scripts/player.gd" id="1_v0iea"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5tmi2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5tmi2"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rni84"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v8csw"]
+bg_color = Color(0.3928167, 0.49, 0.14700001, 1)
+
 [node name="Player" type="CharacterBody3D" unique_id=883750019]
+script = ExtResource("1_v0iea")
+
+[node name="Collision" type="CollisionShape3D" parent="." unique_id=413856829]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0410116, 0)
+shape = SubResource("CapsuleShape3D_5tmi2")
+
+[node name="Head" type="Node3D" parent="." unique_id=1968598948]
+
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=1416343514]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6461607, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=792024313]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0249028, 0)
+light_energy = 0.2
+light_size = 1.0
+
+[node name="Interaction Area" type="Area3D" parent="." unique_id=534958698]
+collision_layer = 0
+collision_mask = 2
+
+[node name="Interaction Collision" type="CollisionShape3D" parent="Interaction Area" unique_id=1822834905]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1047853, -1.2475159)
+shape = SubResource("BoxShape3D_5tmi2")
+
+[node name="Player UI" type="Control" parent="." unique_id=1371948013]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Stamina Bar" type="ProgressBar" parent="Player UI" unique_id=1988128929]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -10.0
+offset_right = 60.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1, 0.32)
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_rni84")
+theme_override_styles/fill = SubResource("StyleBoxFlat_v8csw")
+value = 100.0
+show_percentage = false
+
+[connection signal="body_entered" from="Interaction Area" to="." method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="Interaction Area" to="." method="_on_interaction_area_body_exited"]

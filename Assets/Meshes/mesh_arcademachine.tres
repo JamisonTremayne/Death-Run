@@ -5,6 +5,7 @@ resource_name = "Material"
 cull_mode = 2
 albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 1)
 roughness = 0.5
+texture_filter = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_43q4k"]
 _surfaces = [{

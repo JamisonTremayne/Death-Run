@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dgqjefwtli0or"]
+
+[ext_resource type="Script" uid="uid://wemsouvon5f2" path="res://Scripts/path_marker.gd" id="1_d1ul5"]
+
+[node name="PathMarker" type="Marker3D" unique_id=1567092796]
+script = ExtResource("1_d1ul5")

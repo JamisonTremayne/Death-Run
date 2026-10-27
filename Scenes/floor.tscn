@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://c0a672sdw34if"]
+
+[ext_resource type="Script" uid="uid://cq4ddh0i84upg" path="res://Scripts/floor.gd" id="1_agfsv"]
+[ext_resource type="Texture2D" uid="uid://cn3i5qnqvum0g" path="res://Assets/Textures/floortexture.png" id="2_wjf51"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_agfsv"]
+albedo_texture = ExtResource("2_wjf51")
+uv1_scale = Vector3(1, 1, 10)
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_wjf51"]
+size = Vector2(1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1fqph"]
+size = Vector3(1, 0.1, 1)
+
+[node name="Floor" type="StaticBody3D" unique_id=1933338827 node_paths=PackedStringArray("mesh_instance", "collision")]
+script = ExtResource("1_agfsv")
+mesh_instance = NodePath("MeshInstance3D")
+collision = NodePath("CollisionShape3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1045463076]
+material_override = SubResource("StandardMaterial3D_agfsv")
+mesh = SubResource("PlaneMesh_wjf51")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=261669814]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+shape = SubResource("BoxShape3D_1fqph")
