@@ -2,6 +2,7 @@ class_name PathMarker
 extends Marker3D
 
 @export var connections: Array[PathMarker] = []
+@export var room_connections: Array[RoomMarker] = []
 
 func pick_random_connection(exclude: Array[PathMarker]) -> PathMarker:
 	var valid_markers: Array[PathMarker] = connections.duplicate(false)

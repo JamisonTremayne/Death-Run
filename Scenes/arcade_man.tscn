@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://chgtnmj0r3kd1"]
+
+[ext_resource type="Texture2D" uid="uid://d4io5p2rkau4h" path="res://Assets/Sprites/spritesheet_arcademan.png" id="1_eirel"]
+[ext_resource type="Script" uid="uid://cd3w4ijmj6ugr" path="res://Scripts/arcade_man.gd" id="1_rklae"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rklae"]
+atlas = ExtResource("1_eirel")
+region = Rect2(0, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qxltk"]
+atlas = ExtResource("1_eirel")
+region = Rect2(0, 12, 12, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5tmi2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rklae")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rklae")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rklae")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qxltk")
+}],
+"loop": 1,
+"name": &"move",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5tmi2"]
+radius = 8.0
+height = 20.0
+
+[node name="Arcade Man" type="CharacterBody2D" unique_id=1055295850 node_paths=PackedStringArray("sprite")]
+script = ExtResource("1_rklae")
+sprite = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1819026476]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_5tmi2")
+animation = &"move"
+autoplay = "move"
+frame_progress = 0.51335704
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1194938805]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_5tmi2")

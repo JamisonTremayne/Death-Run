@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://bafrc5r7yc024"]
+
+[ext_resource type="Theme" uid="uid://bpo8kha124nqk" path="res://Assets/Themes/theme_arcade.tres" id="1_n0stl"]
+[ext_resource type="Script" uid="uid://cckvm7rwn55bq" path="res://Scripts/countdown_screen.gd" id="2_4cp1u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5tmi2"]
+bg_color = Color(0.1, 0.08383334, 0.0029999972, 1)
+
+[node name="Countdown Screen" type="Control" unique_id=223301394 node_paths=PackedStringArray("info_label", "time_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_n0stl")
+script = ExtResource("2_4cp1u")
+info_label = NodePath("PanelContainer/CenterContainer/VBoxContainer/Info Label")
+time_label = NodePath("PanelContainer/CenterContainer/VBoxContainer/Time Label")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=640264366]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5tmi2")
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer" unique_id=552486675]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer" unique_id=1469544245]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Info Label" type="Label" parent="PanelContainer/CenterContainer/VBoxContainer" unique_id=2078874507]
+layout_mode = 2
+text = "What is going on?"
+horizontal_alignment = 1
+
+[node name="Time Label" type="Label" parent="PanelContainer/CenterContainer/VBoxContainer" unique_id=1504675136]
+layout_mode = 2
+text = "5s"
+horizontal_alignment = 1

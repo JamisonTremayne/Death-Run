@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://44smhk5aro77"]
+
+[ext_resource type="Script" uid="uid://cgvnm0q5lsfg8" path="res://Scripts/arcade_bomb_dodge.gd" id="1_r12tm"]
+[ext_resource type="PackedScene" uid="uid://chgtnmj0r3kd1" path="res://Scenes/arcade_man.tscn" id="2_o5fxh"]
+[ext_resource type="PackedScene" uid="uid://bafrc5r7yc024" path="res://Scenes/countdown_screen.tscn" id="2_un5i1"]
+[ext_resource type="PackedScene" uid="uid://c5g6kgc8y320g" path="res://Scenes/timer_display.tscn" id="3_sr8wj"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5tmi2"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_o5fxh"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0ihan"]
+
+[node name="Arcade - Bomb Dodge" type="Node2D" unique_id=457640200 node_paths=PackedStringArray("countdown_screen", "timer_display")]
+script = ExtResource("1_r12tm")
+countdown_screen = NodePath("CanvasLayer/Countdown Screen")
+timer_display = NodePath("CanvasLayer/Timer Display")
+
+[node name="Background" type="Polygon2D" parent="." unique_id=1347427682]
+modulate = Color(0.59, 0.5857716, 0.3363, 1)
+position = Vector2(-160, -90)
+polygon = PackedVector2Array(-100, -100, 420, -100, 420, 280, -100, 280)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2023594968]
+
+[node name="Timer Display" parent="CanvasLayer" unique_id=292359955 instance=ExtResource("3_sr8wj")]
+
+[node name="Countdown Screen" parent="CanvasLayer" unique_id=223301394 instance=ExtResource("2_un5i1")]
+
+[node name="Left Wall" type="StaticBody2D" parent="." unique_id=1172770314]
+position = Vector2(-160, -90)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left Wall" unique_id=1095425088]
+position = Vector2(0, 78)
+shape = SubResource("WorldBoundaryShape2D_5tmi2")
+
+[node name="Right Wall" type="StaticBody2D" parent="." unique_id=1547114330]
+position = Vector2(-160, -90)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right Wall" unique_id=1104377078]
+position = Vector2(321, 78)
+shape = SubResource("WorldBoundaryShape2D_o5fxh")
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=185373769]
+position = Vector2(-160, -90)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=591808738]
+position = Vector2(161, 153)
+shape = SubResource("WorldBoundaryShape2D_0ihan")
+
+[node name="Polygon2D" type="Polygon2D" parent="Floor" unique_id=1718395670]
+modulate = Color(0.22570926, 0.21047288, 0.032349207, 1)
+polygon = PackedVector2Array(0, 153, 320, 153, 320, 180, 0, 180)
+
+[node name="Arcade Man" parent="." unique_id=1055295850 instance=ExtResource("2_o5fxh")]
+position = Vector2(0, 23)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=65311970]

@@ -10,7 +10,7 @@ metallic = 1.0
 size = Vector3(2, 3, 0.05)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5tmi2"]
-size = Vector3(2, 3, 0.1)
+size = Vector3(2, 3, 0.2)
 
 [node name="Door" type="StaticBody3D" unique_id=1126204107 node_paths=PackedStringArray("door_open_timer")]
 collision_layer = 3

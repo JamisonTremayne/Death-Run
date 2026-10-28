@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://b0iodptuv6jx2"]
 
+[ext_resource type="Script" uid="uid://c0fao7n1x8ehg" path="res://Scripts/light_fixture.gd" id="1_slesj"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rw1l7"]
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
@@ -14,6 +16,7 @@ light_specular = 0.0
 light_cull_mask = 4294966783
 area_attenuation = 0.2
 area_size = Vector2(4, 1)
+script = ExtResource("1_slesj")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1297168869]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.05)

@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://c5g6kgc8y320g"]
+
+[ext_resource type="Script" uid="uid://wjxdbqrw7cro" path="res://Scripts/timer_display.gd" id="1_1fu8o"]
+[ext_resource type="Theme" uid="uid://bpo8kha124nqk" path="res://Assets/Themes/theme_arcade.tres" id="1_mlgiv"]
+
+[node name="Timer Display" type="Control" unique_id=292359955 node_paths=PackedStringArray("time_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_mlgiv")
+script = ExtResource("1_1fu8o")
+time_label = NodePath("Label")
+
+[node name="Label" type="Label" parent="." unique_id=1888968402]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 10.0
+offset_right = 20.0
+offset_bottom = 33.0
+grow_horizontal = 2
+text = "10s"
+horizontal_alignment = 1

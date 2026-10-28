@@ -9,30 +9,34 @@
 [ext_resource type="PackedScene" uid="uid://b0iodptuv6jx2" path="res://Scenes/light_fixture.tscn" id="4_81xng"]
 [ext_resource type="Script" uid="uid://bl2333ck62u18" path="res://Scripts/path_network.gd" id="4_bvt00"]
 [ext_resource type="PackedScene" uid="uid://dpdii3tgy8nwl" path="res://Scenes/door.tscn" id="6_0f350"]
-[ext_resource type="PackedScene" uid="uid://cvdiuifwvqj2y" path="res://Scenes/arcademachine.tscn" id="10_oqgf2"]
+[ext_resource type="Script" uid="uid://ba3q1skg6m7i7" path="res://Scripts/room_marker.gd" id="6_qxfql"]
+[ext_resource type="Script" uid="uid://b1flc5mli567c" path="res://Scripts/game_ui.gd" id="12_ha31o"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6phgx"]
 sky_top_color = Color(0.52, 0.52, 0.52, 1)
 sky_horizon_color = Color(0.57, 0.25706998, 0.2223, 1)
 ground_horizon_color = Color(0.19414508, 0.18639508, 0.17739508, 1)
-energy_multiplier = 0.1
+energy_multiplier = 5.0
 
 [sub_resource type="Sky" id="Sky_81xng"]
 sky_material = SubResource("ProceduralSkyMaterial_6phgx")
 
 [sub_resource type="Environment" id="Environment_wqkje"]
 background_mode = 2
+background_energy_multiplier = 0.76
 sky = SubResource("Sky_81xng")
 ambient_light_color = Color(1, 1, 1, 1)
 glow_enabled = true
 
 [node name="Level" type="Node3D" unique_id=246325974]
 
-[node name="Game Manager" type="Node" parent="." unique_id=775940638 node_paths=PackedStringArray("reaper", "player")]
+[node name="Game Manager" type="Node" parent="." unique_id=775940638 node_paths=PackedStringArray("reaper", "player", "game_ui", "arcade_spawn_points")]
 script = ExtResource("1_oqgf2")
 debug_mode = true
 reaper = NodePath("../Reaper")
 player = NodePath("../Player")
+game_ui = NodePath("../UI")
+arcade_spawn_points = NodePath("../Arcade Spawn Points")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=16588462]
 environment = SubResource("Environment_wqkje")
@@ -54,31 +58,360 @@ player = NodePath("../Player")
 [node name="Path Network" type="Node3D" parent="." unique_id=1370443334 node_paths=PackedStringArray("starting_markers")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.5, 0, -2)
 script = ExtResource("4_bvt00")
-starting_markers = [NodePath("PathMarker02"), NodePath("PathMarker03")]
+starting_markers = [NodePath("Path Markers/PathMarker01"), NodePath("Path Markers/PathMarker31"), NodePath("Path Markers/PathMarker30"), NodePath("Path Markers/PathMarker24"), NodePath("Path Markers/PathMarker05")]
 
-[node name="PathMarker01" type="Marker3D" parent="Path Network" unique_id=1406960318 node_paths=PackedStringArray("connections")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -1.4999998)
+[node name="Path Markers" type="Node3D" parent="Path Network" unique_id=2069061552]
+
+[node name="PathMarker01" type="Marker3D" parent="Path Network/Path Markers" unique_id=1406960318 node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.000004, 0, 47.5)
 script = ExtResource("3_8c0lf")
-connections = [NodePath("../PathMarker02"), NodePath("../PathMarker04")]
+connections = [NodePath("../PathMarker02"), NodePath("../PathMarker31")]
 metadata/_custom_type_script = "uid://wemsouvon5f2"
 
-[node name="PathMarker02" type="Marker3D" parent="Path Network" unique_id=1301806782 node_paths=PackedStringArray("connections")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 10.5)
+[node name="PathMarker02" type="Marker3D" parent="Path Network/Path Markers" unique_id=1057240250 node_paths=PackedStringArray("connections", "room_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.000004, 0, 44.5)
 script = ExtResource("3_8c0lf")
 connections = [NodePath("../PathMarker01"), NodePath("../PathMarker03")]
+room_connections = [NodePath("../../Room Markers/RoomMarker17")]
 metadata/_custom_type_script = "uid://wemsouvon5f2"
 
-[node name="PathMarker03" type="Marker3D" parent="Path Network" unique_id=1937049094 node_paths=PackedStringArray("connections")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.000001, 0, 10.5)
+[node name="PathMarker03" type="Marker3D" parent="Path Network/Path Markers" unique_id=592707718 node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, 24.5)
 script = ExtResource("3_8c0lf")
-connections = [NodePath("../PathMarker02"), NodePath(".")]
+connections = [NodePath("../PathMarker02"), NodePath("../PathMarker12"), NodePath("../PathMarker04")]
 metadata/_custom_type_script = "uid://wemsouvon5f2"
 
-[node name="PathMarker04" type="Marker3D" parent="Path Network" unique_id=1961264409 node_paths=PackedStringArray("connections")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.000001, 0, -1.5000002)
+[node name="PathMarker04" type="Marker3D" parent="Path Network/Path Markers" unique_id=474390253 node_paths=PackedStringArray("connections", "room_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.000002, 0, 24.499998)
 script = ExtResource("3_8c0lf")
-connections = [NodePath("../PathMarker03"), NodePath("../PathMarker01")]
+connections = [NodePath("../PathMarker03"), NodePath("../PathMarker05")]
+room_connections = [NodePath("../../Room Markers/RoomMarker18")]
 metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker05" type="Marker3D" parent="Path Network/Path Markers" unique_id=538783310 node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, 24.499998)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker04"), NodePath("../PathMarker06")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker06" type="Marker3D" parent="Path Network/Path Markers" unique_id=548420050 node_paths=PackedStringArray("connections", "room_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, 12.499998)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker05"), NodePath("../PathMarker07")]
+room_connections = [NodePath("../../Room Markers/RoomMarker24")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker07" type="Marker3D" parent="Path Network/Path Markers" unique_id=397346935 node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, 1.4999986)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker06"), NodePath("../PathMarker08")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker08" type="Marker3D" parent="Path Network/Path Markers" unique_id=427410382 node_paths=PackedStringArray("connections", "room_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, 1.499999)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker07"), NodePath("../PathMarker09")]
+room_connections = [NodePath("../../Room Markers/RoomMarker23")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker09" type="Marker3D" parent="Path Network/Path Markers" unique_id=1128341638 node_paths=PackedStringArray("connections", "room_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 1.499999)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker08"), NodePath("../PathMarker10")]
+room_connections = [NodePath("../../Room Markers/RoomMarker22")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker10" type="Marker3D" parent="Path Network/Path Markers" unique_id=1810900844 node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, 1.4999995)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker09"), NodePath("../PathMarker11"), NodePath("../PathMarker17")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker11" type="Marker3D" parent="Path Network/Path Markers" unique_id=1983320525 node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, 16.5)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker10"), NodePath("../PathMarker12"), NodePath("../PathMarker13")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker13" type="Marker3D" parent="Path Network/Path Markers" unique_id=1786746463 node_paths=PackedStringArray("connections", "room_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.000001, 0, 16.5)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker11"), NodePath("../PathMarker14")]
+room_connections = [NodePath("../../Room Markers/RoomMarker2")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker14" type="Marker3D" parent="Path Network/Path Markers" unique_id=1375460509 node_paths=PackedStringArray("connections", "room_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.000001, 0, 16.5)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker13"), NodePath("../PathMarker15")]
+room_connections = [NodePath("../../Room Markers/RoomMarker3")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker15" type="Marker3D" parent="Path Network/Path Markers" unique_id=2012311246 node_paths=PackedStringArray("connections", "room_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.999999, 0, 16.5)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker14"), NodePath("../PathMarker16")]
+room_connections = [NodePath("../../Room Markers/RoomMarker"), NodePath("../../Room Markers/RoomMarker4")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker16" type="Marker3D" parent="Path Network/Path Markers" unique_id=1228789249 node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.999999, 0, 16.5)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker15"), NodePath("../PathMarker17"), NodePath("../PathMarker28")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker17" type="Marker3D" parent="Path Network/Path Markers" unique_id=1490433305 node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 1.5000005)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker16"), NodePath("../PathMarker10"), NodePath("../PathMarker18")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker18" type="Marker3D" parent="Path Network/Path Markers" unique_id=1254286669 node_paths=PackedStringArray("connections", "room_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 1.500001)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker17"), NodePath("../PathMarker19")]
+room_connections = [NodePath("../../Room Markers/RoomMarker14")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker19" type="Marker3D" parent="Path Network/Path Markers" unique_id=1500139993 node_paths=PackedStringArray("connections", "room_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39, 0, 1.5000019)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker18"), NodePath("../PathMarker20")]
+room_connections = [NodePath("../../Room Markers/RoomMarker13")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker20" type="Marker3D" parent="Path Network/Path Markers" unique_id=1560147832 node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 0, 1.5000024)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker19"), NodePath("../PathMarker22"), NodePath("../PathMarker21")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker22" type="Marker3D" parent="Path Network/Path Markers" unique_id=318114795 node_paths=PackedStringArray("connections", "room_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 0, 8.500002)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker20"), NodePath("../PathMarker23")]
+room_connections = [NodePath("../../Room Markers/RoomMarker11")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker23" type="Marker3D" parent="Path Network/Path Markers" unique_id=66425097 node_paths=PackedStringArray("connections", "room_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 0, 23.500002)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker22"), NodePath("../PathMarker24")]
+room_connections = [NodePath("../../Room Markers/RoomMarker10")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker24" type="Marker3D" parent="Path Network/Path Markers" unique_id=1079942757 node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 0, 24.500002)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker23"), NodePath("../PathMarker25")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker25" type="Marker3D" parent="Path Network/Path Markers" unique_id=1336730752 node_paths=PackedStringArray("connections", "room_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41, 0, 24.500002)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker24"), NodePath("../PathMarker26")]
+room_connections = [NodePath("../../Room Markers/RoomMarker9")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker26" type="Marker3D" parent="Path Network/Path Markers" unique_id=1458819214 node_paths=PackedStringArray("connections", "room_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, 24.500002)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker25"), NodePath("../PathMarker27")]
+room_connections = [NodePath("../../Room Markers/RoomMarker15")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker27" type="Marker3D" parent="Path Network/Path Markers" unique_id=1282854239 node_paths=PackedStringArray("connections", "room_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.999998, 0, 24.500002)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker26"), NodePath("../PathMarker28")]
+room_connections = [NodePath("../../Room Markers/RoomMarker6")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker28" type="Marker3D" parent="Path Network/Path Markers" unique_id=1561124753 node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.999999, 0, 24.5)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker27"), NodePath("../PathMarker16"), NodePath("../PathMarker29")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker29" type="Marker3D" parent="Path Network/Path Markers" unique_id=1786222285 node_paths=PackedStringArray("connections", "room_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.999998, 0, 40.5)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker28"), NodePath("../PathMarker30")]
+room_connections = [NodePath("../../Room Markers/RoomMarker5")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker30" type="Marker3D" parent="Path Network/Path Markers" unique_id=892506186 node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.999998, 0, 47.5)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker29"), NodePath("../PathMarker31")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker31" type="Marker3D" parent="Path Network/Path Markers" unique_id=1231275656 node_paths=PackedStringArray("connections", "room_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.000002, 0, 47.5)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker30"), NodePath("../PathMarker01")]
+room_connections = [NodePath("../../Room Markers/RoomMarker16")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker21" type="Marker3D" parent="Path Network/Path Markers" unique_id=805302748 node_paths=PackedStringArray("connections", "room_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54, 0, 1.5000024)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker20"), null]
+room_connections = [NodePath("../../Room Markers/RoomMarker12")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker12" type="Marker3D" parent="Path Network/Path Markers" unique_id=42894244 node_paths=PackedStringArray("connections", "room_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, 18.5)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker11"), NodePath("../PathMarker03")]
+room_connections = [NodePath("../../Room Markers/RoomMarker19")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="Room Markers" type="Node3D" parent="Path Network" unique_id=2134781572]
+
+[node name="RoomMarker" type="Marker3D" parent="Path Network/Room Markers" unique_id=248719279 node_paths=PackedStringArray("path_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.999999, 0, 12.5)
+script = ExtResource("6_qxfql")
+path_connections = [NodePath("../../Path Markers/PathMarker15")]
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker2" type="Marker3D" parent="Path Network/Room Markers" unique_id=622981188 node_paths=PackedStringArray("path_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.000001, 0, 12.5)
+script = ExtResource("6_qxfql")
+path_connections = [NodePath("../../Path Markers/PathMarker13")]
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker3" type="Marker3D" parent="Path Network/Room Markers" unique_id=1024895858 node_paths=PackedStringArray("path_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.000001, 0, 20.5)
+script = ExtResource("6_qxfql")
+path_connections = [NodePath("../../Path Markers/PathMarker14")]
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker4" type="Marker3D" parent="Path Network/Room Markers" unique_id=1909159069 node_paths=PackedStringArray("path_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.999999, 0, 20.5)
+script = ExtResource("6_qxfql")
+path_connections = [NodePath("../../Path Markers/PathMarker15")]
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker5" type="Marker3D" parent="Path Network/Room Markers" unique_id=1364712414 node_paths=PackedStringArray("path_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.999998, 0, 40.5)
+script = ExtResource("6_qxfql")
+path_connections = [NodePath("../../Path Markers/PathMarker29")]
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker6" type="Marker3D" parent="Path Network/Room Markers" unique_id=1345898511 node_paths=PackedStringArray("path_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.999998, 0, 28.5)
+script = ExtResource("6_qxfql")
+path_connections = [NodePath("../../Path Markers/PathMarker27")]
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker7" type="Marker3D" parent="Path Network/Room Markers" unique_id=1592977760 node_paths=PackedStringArray("room_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31, 0, 31.5)
+script = ExtResource("6_qxfql")
+room_connections = [NodePath("../RoomMarker8")]
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker8" type="Marker3D" parent="Path Network/Room Markers" unique_id=236496427 node_paths=PackedStringArray("room_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, 31.5)
+script = ExtResource("6_qxfql")
+room_connections = [NodePath("../RoomMarker7")]
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker9" type="Marker3D" parent="Path Network/Room Markers" unique_id=971369602 node_paths=PackedStringArray("path_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41, 0, 28.5)
+script = ExtResource("6_qxfql")
+path_connections = [NodePath("../../Path Markers/PathMarker25")]
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker10" type="Marker3D" parent="Path Network/Room Markers" unique_id=168254445 node_paths=PackedStringArray("path_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52, 0, 23.500002)
+script = ExtResource("6_qxfql")
+path_connections = [NodePath("../../Path Markers/PathMarker23")]
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker11" type="Marker3D" parent="Path Network/Room Markers" unique_id=2045201023 node_paths=PackedStringArray("path_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52, 0, 8.500002)
+script = ExtResource("6_qxfql")
+path_connections = [NodePath("../../Path Markers/PathMarker22")]
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker12" type="Marker3D" parent="Path Network/Room Markers" unique_id=370590357 node_paths=PackedStringArray("path_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54, 0, -2.4999976)
+script = ExtResource("6_qxfql")
+path_connections = [NodePath("../../Path Markers/PathMarker21")]
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker13" type="Marker3D" parent="Path Network/Room Markers" unique_id=754303795 node_paths=PackedStringArray("path_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39, 0, -2.499998)
+script = ExtResource("6_qxfql")
+path_connections = [NodePath("../../Path Markers/PathMarker19")]
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker14" type="Marker3D" parent="Path Network/Room Markers" unique_id=1207411217 node_paths=PackedStringArray("path_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 5.500001)
+script = ExtResource("6_qxfql")
+path_connections = [NodePath("../../Path Markers/PathMarker18")]
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker15" type="Marker3D" parent="Path Network/Room Markers" unique_id=1796642852 node_paths=PackedStringArray("path_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, 20.500002)
+script = ExtResource("6_qxfql")
+path_connections = [NodePath("../../Path Markers/PathMarker26")]
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker16" type="Marker3D" parent="Path Network/Room Markers" unique_id=1047300908 node_paths=PackedStringArray("path_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0000021, 0, 51.5)
+script = ExtResource("6_qxfql")
+path_connections = [NodePath("../../Path Markers/PathMarker31")]
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker17" type="Marker3D" parent="Path Network/Room Markers" unique_id=2043337516 node_paths=PackedStringArray("path_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.000002, 0, 44.5)
+script = ExtResource("6_qxfql")
+path_connections = [NodePath("../../Path Markers/PathMarker02")]
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker18" type="Marker3D" parent="Path Network/Room Markers" unique_id=1826420168 node_paths=PackedStringArray("path_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.000002, 0, 28.5)
+script = ExtResource("6_qxfql")
+path_connections = [NodePath("../../Path Markers/PathMarker04")]
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker19" type="Marker3D" parent="Path Network/Room Markers" unique_id=1058220136 node_paths=PackedStringArray("path_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.000002, 0, 18.5)
+script = ExtResource("6_qxfql")
+path_connections = [NodePath("../../Path Markers/PathMarker12")]
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker20" type="Marker3D" parent="Path Network/Room Markers" unique_id=2082949488 node_paths=PackedStringArray("room_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.000002, 0, 14.499998)
+script = ExtResource("6_qxfql")
+room_connections = [NodePath("../RoomMarker21")]
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker21" type="Marker3D" parent="Path Network/Room Markers" unique_id=1411535805 node_paths=PackedStringArray("room_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.000002, 0, 11.499999)
+script = ExtResource("6_qxfql")
+room_connections = [NodePath("../RoomMarker20")]
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker22" type="Marker3D" parent="Path Network/Room Markers" unique_id=1511832311 node_paths=PackedStringArray("path_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.000002, 0, 5.499999)
+script = ExtResource("6_qxfql")
+path_connections = [NodePath("../../Path Markers/PathMarker09")]
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker23" type="Marker3D" parent="Path Network/Room Markers" unique_id=130915822 node_paths=PackedStringArray("path_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.000002, 0, -2.500001)
+script = ExtResource("6_qxfql")
+path_connections = [NodePath("../../Path Markers/PathMarker08")]
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker24" type="Marker3D" parent="Path Network/Room Markers" unique_id=1439947690 node_paths=PackedStringArray("path_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, 12.499998)
+script = ExtResource("6_qxfql")
+path_connections = [NodePath("../../Path Markers/PathMarker06")]
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
 
 [node name="Level Pieces" type="Node3D" parent="." unique_id=1277743287]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.5)
@@ -96,13 +429,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5, 0, -44.5)
 dimensions = Vector2(70, 56)
 
 [node name="High Ceiling 1" parent="Level Pieces" unique_id=1638297570 instance=ExtResource("2_6phgx")]
-transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 10, 0)
-dimensions = Vector2(33, 17)
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 4, 10, 0)
+visible = false
+dimensions = Vector2(27, 35)
 b_top = true
 
 [node name="Low Ceiling 1" parent="Level Pieces" unique_id=576428944 instance=ExtResource("2_6phgx")]
-transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, -37.5, 4, -1)
-dimensions = Vector2(57, 96)
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, -18, 4, -40)
+visible = false
+dimensions = Vector2(47, 45)
+b_top = true
+
+[node name="Low Ceiling 2" parent="Level Pieces" unique_id=277641165 instance=ExtResource("2_6phgx")]
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, -35.5, 4, 11.5)
+visible = false
+dimensions = Vector2(52, 58)
+b_top = true
+
+[node name="Low Ceiling 3" parent="Level Pieces" unique_id=1697509128 instance=ExtResource("2_6phgx")]
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, -2, 4, 26)
+visible = false
+dimensions = Vector2(15, 17)
 b_top = true
 
 [node name="Boundary Walls" type="Node3D" parent="Level Pieces" unique_id=54337689]
@@ -143,9 +490,33 @@ dimensions = Vector3(20, 4, 1)
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4, 2, -61.5)
 dimensions = Vector3(2, 4, 1)
 
+[node name="Wall19" parent="Level Pieces/Boundary Walls" unique_id=2096864262 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -6.5, 2, -62)
+dimensions = Vector3(4, 4, 1)
+
+[node name="Wall20" parent="Level Pieces/Boundary Walls" unique_id=2064014009 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -32, 2, -50.5)
+dimensions = Vector3(4, 4, 1)
+
+[node name="Wall21" parent="Level Pieces/Boundary Walls" unique_id=2092861667 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -32, 2, -18.5)
+dimensions = Vector3(4, 4, 1)
+
+[node name="Wall22" parent="Level Pieces/Boundary Walls" unique_id=2079238825 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 1.7484555e-07, 0, 1, 0, -1.7484555e-07, 0, 1, -43.5, 2, -17)
+dimensions = Vector3(22, 4, 1)
+
 [node name="Wall8" parent="Level Pieces/Boundary Walls" unique_id=1779522122 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -54.999985, 2, -21.49998)
-dimensions = Vector3(32, 4, 1)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -54.999985, 2, -10.999981)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall23" parent="Level Pieces/Boundary Walls" unique_id=1394623189 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -44.499985, 2, 6.000019)
+dimensions = Vector3(13, 4, 12)
+
+[node name="Wall18" parent="Level Pieces/Boundary Walls" unique_id=66156209 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -54.999985, 2, 9.500019)
+dimensions = Vector3(14, 4, 1)
 
 [node name="Wall9" parent="Level Pieces/Boundary Walls" unique_id=119847054 instance=ExtResource("3_6phgx")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4, 2, 19)
@@ -166,6 +537,18 @@ dimensions = Vector3(4, 6, 1)
 [node name="Wall14" parent="Level Pieces/Boundary Walls" unique_id=2104268500 instance=ExtResource("3_6phgx")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9, 7, -14.5)
 dimensions = Vector3(4, 6, 1)
+
+[node name="Wall15" parent="Level Pieces/Boundary Walls" unique_id=1659041784 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2, 34)
+dimensions = Vector3(9, 4, 1)
+
+[node name="Wall16" parent="Level Pieces/Boundary Walls" unique_id=1121231764 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 2, 34)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Wall17" parent="Level Pieces/Boundary Walls" unique_id=1978548288 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -32, 2, 31.5)
+dimensions = Vector3(4, 4, 1)
 
 [node name="Room 1" type="Node3D" parent="Level Pieces" unique_id=731670175]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -9, 0, -44)
@@ -208,11 +591,8 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5
 [node name="Door" parent="Level Pieces/Room 1" unique_id=1857380350 instance=ExtResource("6_0f350")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -3.5)
 
-[node name="Arcade Machine" parent="Level Pieces/Room 1" unique_id=1472305607 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
-
 [node name="Room 2" type="Node3D" parent="Level Pieces" unique_id=2121417816]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 6)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -24, 0, -6)
 
 [node name="Wall" parent="Level Pieces/Room 2" unique_id=403772746 instance=ExtResource("3_6phgx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
@@ -227,25 +607,28 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14,
 dimensions = Vector3(11, 4, 1)
 
 [node name="Wall4" parent="Level Pieces/Room 2" unique_id=1247723920 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 2, 8.5)
+transform = Transform3D(-4.371138e-08, 0, -1, 0, 1, 0, 1, 0, -4.371138e-08, -5, 2, -2.5000017)
 dimensions = Vector3(6, 4, 1)
 
 [node name="Wall5" parent="Level Pieces/Room 2" unique_id=772297617 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, 8.5)
+transform = Transform3D(-4.371138e-08, 0, -1, 0, 1, 0, 1, 0, -4.371138e-08, -5, 2, 4)
 dimensions = Vector3(3, 4, 1)
 
 [node name="Wall6" parent="Level Pieces/Room 2" unique_id=1401515882 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 3.5, 8.5)
+transform = Transform3D(-4.371138e-08, 0, -1, 0, 1, 0, 1, 0, -4.371138e-08, -5, 3.5, 1.4999986)
 dimensions = Vector3(2, 1, 1)
 
 [node name="Door" parent="Level Pieces/Room 2" unique_id=1126204107 instance=ExtResource("6_0f350")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, -5, 0, 2.5)
 
-[node name="Arcade Machine" parent="Level Pieces/Room 2" unique_id=295646327 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+[node name="Light Fixture" parent="Level Pieces/Room 2" unique_id=270352938 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 2" unique_id=246867762 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
 
 [node name="Room 3" type="Node3D" parent="Level Pieces" unique_id=660671934]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -6)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -24, 0, 6)
 
 [node name="Wall" parent="Level Pieces/Room 3" unique_id=1524301479 instance=ExtResource("3_6phgx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
@@ -280,11 +663,8 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5
 [node name="Door" parent="Level Pieces/Room 3" unique_id=476321224 instance=ExtResource("6_0f350")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
 
-[node name="Arcade Machine" parent="Level Pieces/Room 3" unique_id=1385261015 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
-
 [node name="Room 4" type="Node3D" parent="Level Pieces" unique_id=1191461748]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, 6)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -27, 0, -48)
 
 [node name="Wall" parent="Level Pieces/Room 4" unique_id=1557779947 instance=ExtResource("3_6phgx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
@@ -299,15 +679,15 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14,
 dimensions = Vector3(11, 4, 1)
 
 [node name="Wall4" parent="Level Pieces/Room 4" unique_id=654468149 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
-dimensions = Vector3(6, 4, 1)
-
-[node name="Wall5" parent="Level Pieces/Room 4" unique_id=1710686106 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 4)
 dimensions = Vector3(3, 4, 1)
 
+[node name="Wall5" parent="Level Pieces/Room 4" unique_id=1710686106 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -2.5)
+dimensions = Vector3(6, 4, 1)
+
 [node name="Wall6" parent="Level Pieces/Room 4" unique_id=415835066 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, 1.5)
 dimensions = Vector3(2, 1, 1)
 
 [node name="Light Fixture" parent="Level Pieces/Room 4" unique_id=199357692 instance=ExtResource("4_81xng")]
@@ -316,14 +696,11 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5
 [node name="Light Fixture2" parent="Level Pieces/Room 4" unique_id=393774679 instance=ExtResource("4_81xng")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
 
-[node name="Door" parent="Level Pieces/Room 4" unique_id=2003711323 instance=ExtResource("6_0f350")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
-
-[node name="Arcade Machine" parent="Level Pieces/Room 4" unique_id=6584829 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+[node name="Door" parent="Level Pieces/Room 4" unique_id=668732839 instance=ExtResource("6_0f350")]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -5, 0, 0.5)
 
 [node name="Room 5" type="Node3D" parent="Level Pieces" unique_id=1536411999]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -6)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -15, 0, -48)
 
 [node name="Wall" parent="Level Pieces/Room 5" unique_id=1329599384 instance=ExtResource("3_6phgx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
@@ -349,21 +726,21 @@ dimensions = Vector3(3, 4, 1)
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
 dimensions = Vector3(2, 1, 1)
 
-[node name="Light Fixture2" parent="Level Pieces/Room 5" unique_id=837832670 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
-
 [node name="Door" parent="Level Pieces/Room 5" unique_id=2088810430 instance=ExtResource("6_0f350")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
 
-[node name="Arcade Machine" parent="Level Pieces/Room 5" unique_id=759616935 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+[node name="Light Fixture" parent="Level Pieces/Room 5" unique_id=1877711555 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 5" unique_id=1001084459 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
 
 [node name="Room 6" type="Node3D" parent="Level Pieces" unique_id=1323675278]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 6)
 
 [node name="Wall" parent="Level Pieces/Room 6" unique_id=113422196 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
-dimensions = Vector3(10, 4, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.999998, 2, 5.9999995)
+dimensions = Vector3(15, 4, 1)
 
 [node name="Wall2" parent="Level Pieces/Room 6" unique_id=1260141812 instance=ExtResource("3_6phgx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
@@ -374,116 +751,144 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14,
 dimensions = Vector3(11, 4, 1)
 
 [node name="Wall4" parent="Level Pieces/Room 6" unique_id=1590698854 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2, 2.4999995)
 dimensions = Vector3(6, 4, 1)
 
 [node name="Wall5" parent="Level Pieces/Room 6" unique_id=621408542 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2, -4.0000005)
 dimensions = Vector3(3, 4, 1)
 
 [node name="Wall6" parent="Level Pieces/Room 6" unique_id=1192669312 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 3.5, -1.5000005)
 dimensions = Vector3(2, 1, 1)
 
-[node name="Light Fixture" parent="Level Pieces/Room 6" unique_id=177702444 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
-
 [node name="Door" parent="Level Pieces/Room 6" unique_id=1711693684 instance=ExtResource("6_0f350")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+transform = Transform3D(-4.371138e-08, 0, -1, 0, 1, 0, 1, 0, -4.371138e-08, 0, 0, -2.5000005)
 
-[node name="Arcade Machine" parent="Level Pieces/Room 6" unique_id=545670515 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+[node name="Light Fixture" parent="Level Pieces/Room 6" unique_id=2026164488 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -7, 4, 3)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 6" unique_id=489896459 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -7, 4, -3)
 
 [node name="Room 7" type="Node3D" parent="Level Pieces" unique_id=1175222827]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0, -6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -6)
 
 [node name="Wall" parent="Level Pieces/Room 7" unique_id=954277969 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
-dimensions = Vector3(10, 4, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2, 5.9999995)
+dimensions = Vector3(15, 4, 1)
 
 [node name="Wall2" parent="Level Pieces/Room 7" unique_id=1458398830 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
-dimensions = Vector3(10, 4, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.000002, 2, -6.0000005)
+dimensions = Vector3(15, 4, 1)
 
 [node name="Wall3" parent="Level Pieces/Room 7" unique_id=194889178 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -26, 2, 0)
 dimensions = Vector3(11, 4, 1)
 
 [node name="Wall4" parent="Level Pieces/Room 7" unique_id=1439051407 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2, 2.4999995)
 dimensions = Vector3(6, 4, 1)
 
 [node name="Wall5" parent="Level Pieces/Room 7" unique_id=482295499 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2, -3.9999995)
 dimensions = Vector3(3, 4, 1)
 
 [node name="Wall6" parent="Level Pieces/Room 7" unique_id=2069989402 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 3.5, -1.4999995)
 dimensions = Vector3(2, 1, 1)
 
-[node name="Light Fixture" parent="Level Pieces/Room 7" unique_id=959673938 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
-
-[node name="Light Fixture2" parent="Level Pieces/Room 7" unique_id=917360608 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
-
 [node name="Door" parent="Level Pieces/Room 7" unique_id=629569339 instance=ExtResource("6_0f350")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+transform = Transform3D(-4.371138e-08, 0, -1, 0, 1, 0, 1, 0, -4.371138e-08, 0, 0, -2.4999995)
 
-[node name="Arcade Machine" parent="Level Pieces/Room 7" unique_id=1831122277 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+[node name="Wall7" parent="Level Pieces/Room 7" unique_id=598751276 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -17.5, 2, -6)
+dimensions = Vector3(6, 4, 1)
+
+[node name="Wall8" parent="Level Pieces/Room 7" unique_id=1760620598 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -24.5, 2, -6)
+dimensions = Vector3(4, 4, 1)
+
+[node name="Wall9" parent="Level Pieces/Room 7" unique_id=330508748 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -21.5, 3.5, -6)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Door2" parent="Level Pieces/Room 7" unique_id=1265953895 instance=ExtResource("6_0f350")]
+transform = Transform3D(1, 0, 7.1054274e-15, 0, 1, 0, -7.1054274e-15, 0, 1, -22.5, 0, -6)
+
+[node name="Light Fixture3" parent="Level Pieces/Room 7" unique_id=1723237644 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -20, 4, 3)
+
+[node name="Light Fixture4" parent="Level Pieces/Room 7" unique_id=463427875 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -20, 4, -3)
+
+[node name="Light Fixture5" parent="Level Pieces/Room 7" unique_id=542090315 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -7, 4, 3)
+
+[node name="Light Fixture6" parent="Level Pieces/Room 7" unique_id=1170968410 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -7, 4, -3)
 
 [node name="Room 8" type="Node3D" parent="Level Pieces" unique_id=2108041417]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0, -27)
 
 [node name="Wall" parent="Level Pieces/Room 8" unique_id=2119438384 instance=ExtResource("3_6phgx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
 dimensions = Vector3(10, 4, 1)
 
-[node name="Wall2" parent="Level Pieces/Room 8" unique_id=696470637 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
-dimensions = Vector3(10, 4, 1)
-
 [node name="Wall3" parent="Level Pieces/Room 8" unique_id=808220257 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
-dimensions = Vector3(11, 4, 1)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, -1)
+dimensions = Vector3(13, 4, 1)
 
 [node name="Wall4" parent="Level Pieces/Room 8" unique_id=1837738789 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
-dimensions = Vector3(6, 4, 1)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 3.5)
+dimensions = Vector3(4, 4, 1)
 
 [node name="Wall5" parent="Level Pieces/Room 8" unique_id=754545447 instance=ExtResource("3_6phgx")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
-dimensions = Vector3(3, 4, 1)
+dimensions = Vector3(7, 4, 1)
 
 [node name="Wall6" parent="Level Pieces/Room 8" unique_id=1568723260 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, 0.5)
 dimensions = Vector3(2, 1, 1)
 
 [node name="Door" parent="Level Pieces/Room 8" unique_id=1584034716 instance=ExtResource("6_0f350")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -0.5)
 
-[node name="Arcade Machine" parent="Level Pieces/Room 8" unique_id=2003101820 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+[node name="Wall7" parent="Level Pieces/Room 8" unique_id=1675613594 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, -1.4901161e-08, 0, 1, 0, 1.4901161e-08, 0, 1, -12.5, 2, -8)
+dimensions = Vector3(4, 4, 1)
+
+[node name="Wall8" parent="Level Pieces/Room 8" unique_id=965396929 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, -1.4901161e-08, 0, 1, 0, 1.4901161e-08, 0, 1, -6.5, 2, -8)
+dimensions = Vector3(4, 4, 1)
+
+[node name="Wall9" parent="Level Pieces/Room 8" unique_id=1592258125 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, -1.4901161e-08, 0, 1, 0, 1.4901161e-08, 0, 1, -9.5, 3.5, -8)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Door2" parent="Level Pieces/Room 8" unique_id=361773647 instance=ExtResource("6_0f350")]
+transform = Transform3D(-0.99999994, 0, 5.9604645e-08, 0, 1, 0, -5.9604645e-08, 0, -0.99999994, -8.5, 0, -8)
+
+[node name="Light Fixture" parent="Level Pieces/Room 8" unique_id=712073781 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 8" unique_id=1117895381 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
 
 [node name="Room 9" type="Node3D" parent="Level Pieces" unique_id=312502061]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -6)
-
-[node name="Wall" parent="Level Pieces/Room 9" unique_id=1476350717 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
-dimensions = Vector3(10, 4, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0, -42)
 
 [node name="Wall2" parent="Level Pieces/Room 9" unique_id=1992362507 instance=ExtResource("3_6phgx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
 dimensions = Vector3(10, 4, 1)
 
 [node name="Wall3" parent="Level Pieces/Room 9" unique_id=578728069 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
-dimensions = Vector3(11, 4, 1)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0.5)
+dimensions = Vector3(12, 4, 1)
 
 [node name="Wall4" parent="Level Pieces/Room 9" unique_id=1131213531 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
-dimensions = Vector3(6, 4, 1)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 3)
+dimensions = Vector3(7, 4, 1)
 
 [node name="Wall5" parent="Level Pieces/Room 9" unique_id=1376320131 instance=ExtResource("3_6phgx")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
@@ -493,14 +898,14 @@ dimensions = Vector3(3, 4, 1)
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
 dimensions = Vector3(2, 1, 1)
 
-[node name="Light Fixture2" parent="Level Pieces/Room 9" unique_id=1154823540 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
-
 [node name="Door" parent="Level Pieces/Room 9" unique_id=213995616 instance=ExtResource("6_0f350")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
 
-[node name="Arcade Machine" parent="Level Pieces/Room 9" unique_id=1713662501 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+[node name="Light Fixture" parent="Level Pieces/Room 9" unique_id=1192476168 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 9" unique_id=1674753385 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
 
 [node name="Room 10" type="Node3D" parent="Level Pieces" unique_id=1311087377]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 23)
@@ -512,10 +917,6 @@ dimensions = Vector3(10, 4, 1)
 [node name="Wall2" parent="Level Pieces/Room 10" unique_id=1089507799 instance=ExtResource("3_6phgx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
 dimensions = Vector3(10, 4, 1)
-
-[node name="Wall3" parent="Level Pieces/Room 10" unique_id=775660520 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
-dimensions = Vector3(11, 4, 1)
 
 [node name="Wall4" parent="Level Pieces/Room 10" unique_id=2033297979 instance=ExtResource("3_6phgx")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
@@ -529,24 +930,20 @@ dimensions = Vector3(3, 4, 1)
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
 dimensions = Vector3(2, 1, 1)
 
-[node name="Light Fixture2" parent="Level Pieces/Room 10" unique_id=1461090958 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
-
 [node name="Door" parent="Level Pieces/Room 10" unique_id=18402643 instance=ExtResource("6_0f350")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
 
-[node name="Arcade Machine" parent="Level Pieces/Room 10" unique_id=1355805724 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+[node name="Light Fixture" parent="Level Pieces/Room 10" unique_id=868743058 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 10" unique_id=1479061864 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
 
 [node name="Room 11" type="Node3D" parent="Level Pieces" unique_id=2123110392]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, 23)
 
 [node name="Wall" parent="Level Pieces/Room 11" unique_id=1010386904 instance=ExtResource("3_6phgx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall2" parent="Level Pieces/Room 11" unique_id=905679439 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
 dimensions = Vector3(10, 4, 1)
 
 [node name="Wall3" parent="Level Pieces/Room 11" unique_id=295703472 instance=ExtResource("3_6phgx")]
@@ -574,8 +971,20 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5
 [node name="Door" parent="Level Pieces/Room 11" unique_id=1231873582 instance=ExtResource("6_0f350")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
 
-[node name="Arcade Machine" parent="Level Pieces/Room 11" unique_id=1319571615 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+[node name="Wall7" parent="Level Pieces/Room 11" unique_id=1256289424 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -7.5, 2, -6)
+dimensions = Vector3(4, 4, 1)
+
+[node name="Wall8" parent="Level Pieces/Room 11" unique_id=640963152 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -13, 2, -6)
+dimensions = Vector3(3, 4, 1)
+
+[node name="Wall9" parent="Level Pieces/Room 11" unique_id=964131526 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -10.5, 3.5, -6)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Door2" parent="Level Pieces/Room 11" unique_id=1466722284 instance=ExtResource("6_0f350")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5, 0, -6)
 
 [node name="Room 12" type="Node3D" parent="Level Pieces" unique_id=1171148263]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0, 23)
@@ -607,11 +1016,14 @@ dimensions = Vector3(2, 1, 1)
 [node name="Door" parent="Level Pieces/Room 12" unique_id=1162569534 instance=ExtResource("6_0f350")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
 
-[node name="Arcade Machine" parent="Level Pieces/Room 12" unique_id=1399608320 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
+[node name="Light Fixture" parent="Level Pieces/Room 12" unique_id=230653493 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 12" unique_id=904898719 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
 
 [node name="Room 13" type="Node3D" parent="Level Pieces" unique_id=754676469]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, 23)
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -48, 0, 12)
 
 [node name="Wall" parent="Level Pieces/Room 13" unique_id=1171561129 instance=ExtResource("3_6phgx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
@@ -645,9 +1057,6 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5
 
 [node name="Door" parent="Level Pieces/Room 13" unique_id=1410695000 instance=ExtResource("6_0f350")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
-
-[node name="Arcade Machine" parent="Level Pieces/Room 13" unique_id=1486104761 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
 
 [node name="Room 14" type="Node3D" parent="Level Pieces" unique_id=705482876]
 transform = Transform3D(-1, 0, -5.9604645e-08, 0, 1, 0, 5.9604645e-08, 0, -1, -9, 0, 27)
@@ -685,728 +1094,8 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5
 [node name="Door" parent="Level Pieces/Room 14" unique_id=744188725 instance=ExtResource("6_0f350")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5.0000005, 0, 2.5)
 
-[node name="Arcade Machine" parent="Level Pieces/Room 14" unique_id=1505421325 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
-
-[node name="Room 15" type="Node3D" parent="Level Pieces" unique_id=774368285]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -11, 0, 29)
-
-[node name="Wall" parent="Level Pieces/Room 15" unique_id=884039763 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall2" parent="Level Pieces/Room 15" unique_id=379174713 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall3" parent="Level Pieces/Room 15" unique_id=1190865739 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
-dimensions = Vector3(11, 4, 1)
-
-[node name="Wall4" parent="Level Pieces/Room 15" unique_id=912029167 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
-dimensions = Vector3(6, 4, 1)
-
-[node name="Wall5" parent="Level Pieces/Room 15" unique_id=567243243 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
-dimensions = Vector3(3, 4, 1)
-
-[node name="Wall6" parent="Level Pieces/Room 15" unique_id=569211234 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
-dimensions = Vector3(2, 1, 1)
-
-[node name="Light Fixture" parent="Level Pieces/Room 15" unique_id=1459028898 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
-
-[node name="Light Fixture2" parent="Level Pieces/Room 15" unique_id=350180288 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
-
-[node name="Door" parent="Level Pieces/Room 15" unique_id=1021731769 instance=ExtResource("6_0f350")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
-
-[node name="Arcade Machine" parent="Level Pieces/Room 15" unique_id=56336225 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
-
-[node name="Room 16" type="Node3D" parent="Level Pieces" unique_id=1966889125]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -48, 0, 29)
-
-[node name="Wall" parent="Level Pieces/Room 16" unique_id=776945974 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall2" parent="Level Pieces/Room 16" unique_id=1628395230 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall3" parent="Level Pieces/Room 16" unique_id=25865729 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
-dimensions = Vector3(11, 4, 1)
-
-[node name="Wall4" parent="Level Pieces/Room 16" unique_id=2038905657 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
-dimensions = Vector3(6, 4, 1)
-
-[node name="Wall5" parent="Level Pieces/Room 16" unique_id=1890877339 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
-dimensions = Vector3(3, 4, 1)
-
-[node name="Wall6" parent="Level Pieces/Room 16" unique_id=592229126 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
-dimensions = Vector3(2, 1, 1)
-
-[node name="Light Fixture" parent="Level Pieces/Room 16" unique_id=210050534 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
-
-[node name="Light Fixture2" parent="Level Pieces/Room 16" unique_id=69028377 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
-
-[node name="Door" parent="Level Pieces/Room 16" unique_id=681482045 instance=ExtResource("6_0f350")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
-
-[node name="Arcade Machine" parent="Level Pieces/Room 16" unique_id=1704013254 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
-
-[node name="Room 17" type="Node3D" parent="Level Pieces" unique_id=36766636]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -32, 0, 29)
-
-[node name="Wall" parent="Level Pieces/Room 17" unique_id=140642272 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall2" parent="Level Pieces/Room 17" unique_id=2044042546 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall3" parent="Level Pieces/Room 17" unique_id=1123771021 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
-dimensions = Vector3(11, 4, 1)
-
-[node name="Wall4" parent="Level Pieces/Room 17" unique_id=524696567 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5.000002, 2, 4.5)
-dimensions = Vector3(2, 4, 1)
-
-[node name="Wall5" parent="Level Pieces/Room 17" unique_id=1065211764 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5.000002, 2, -1.9999981)
-dimensions = Vector3(7, 4, 1)
-
-[node name="Wall7" parent="Level Pieces/Room 17" unique_id=698806582 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5.000002, 2, -7.999998)
-dimensions = Vector3(3, 4, 1)
-
-[node name="Wall6" parent="Level Pieces/Room 17" unique_id=403264267 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5.000002, 3.5, 2.5)
-dimensions = Vector3(2, 1, 1)
-
-[node name="Light Fixture" parent="Level Pieces/Room 17" unique_id=1280656254 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
-
-[node name="Door" parent="Level Pieces/Room 17" unique_id=606782708 instance=ExtResource("6_0f350")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5.000002, 0, 1.5)
-
-[node name="Arcade Machine" parent="Level Pieces/Room 17" unique_id=1304153597 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
-
-[node name="Room 18" type="Node3D" parent="Level Pieces" unique_id=1940342467]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, 27)
-
-[node name="Wall" parent="Level Pieces/Room 18" unique_id=1665870880 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall2" parent="Level Pieces/Room 18" unique_id=448826168 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall3" parent="Level Pieces/Room 18" unique_id=2098133837 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
-dimensions = Vector3(11, 4, 1)
-
-[node name="Wall4" parent="Level Pieces/Room 18" unique_id=898121386 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2)
-dimensions = Vector3(7, 4, 1)
-
-[node name="Wall5" parent="Level Pieces/Room 18" unique_id=519856625 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4.5)
-dimensions = Vector3(2, 4, 1)
-
-[node name="Wall7" parent="Level Pieces/Room 18" unique_id=226922385 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -7)
-dimensions = Vector3(1, 4, 1)
-
-[node name="Wall6" parent="Level Pieces/Room 18" unique_id=1438920227 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -2.5)
-dimensions = Vector3(2, 1, 1)
-
-[node name="Light Fixture" parent="Level Pieces/Room 18" unique_id=2071544078 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
-
-[node name="Light Fixture2" parent="Level Pieces/Room 18" unique_id=771555786 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
-
-[node name="Door" parent="Level Pieces/Room 18" unique_id=1449107710 instance=ExtResource("6_0f350")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -3.5)
-
-[node name="Arcade Machine" parent="Level Pieces/Room 18" unique_id=2068288164 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
-
-[node name="Room 19" type="Node3D" parent="Level Pieces" unique_id=1475554506]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, 13)
-
-[node name="Wall" parent="Level Pieces/Room 19" unique_id=1851648260 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall2" parent="Level Pieces/Room 19" unique_id=425785220 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall3" parent="Level Pieces/Room 19" unique_id=493816803 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
-dimensions = Vector3(11, 4, 1)
-
-[node name="Wall4" parent="Level Pieces/Room 19" unique_id=2093666505 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 4)
-dimensions = Vector3(3, 4, 1)
-
-[node name="Wall5" parent="Level Pieces/Room 19" unique_id=1920039410 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -2.5)
-dimensions = Vector3(6, 4, 1)
-
-[node name="Wall7" parent="Level Pieces/Room 19" unique_id=482989109 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -8.5)
-dimensions = Vector3(4, 4, 1)
-
-[node name="Wall6" parent="Level Pieces/Room 19" unique_id=1284710239 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, 1.5)
-dimensions = Vector3(2, 1, 1)
-
-[node name="Light Fixture2" parent="Level Pieces/Room 19" unique_id=25443863 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
-
-[node name="Door" parent="Level Pieces/Room 19" unique_id=1019596073 instance=ExtResource("6_0f350")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, 0.5)
-
-[node name="Arcade Machine" parent="Level Pieces/Room 19" unique_id=267698504 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
-
-[node name="Room 20" type="Node3D" parent="Level Pieces" unique_id=736680061]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -23)
-
-[node name="Wall" parent="Level Pieces/Room 20" unique_id=1123368986 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall2" parent="Level Pieces/Room 20" unique_id=2082902846 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall3" parent="Level Pieces/Room 20" unique_id=188690051 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
-dimensions = Vector3(11, 4, 1)
-
-[node name="Wall4" parent="Level Pieces/Room 20" unique_id=942104817 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
-dimensions = Vector3(6, 4, 1)
-
-[node name="Wall5" parent="Level Pieces/Room 20" unique_id=1711049680 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
-dimensions = Vector3(3, 4, 1)
-
-[node name="Wall6" parent="Level Pieces/Room 20" unique_id=88014572 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
-dimensions = Vector3(2, 1, 1)
-
-[node name="Light Fixture" parent="Level Pieces/Room 20" unique_id=1517580075 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
-
-[node name="Light Fixture2" parent="Level Pieces/Room 20" unique_id=920051640 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
-
-[node name="Door" parent="Level Pieces/Room 20" unique_id=458863924 instance=ExtResource("6_0f350")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
-
-[node name="Arcade Machine" parent="Level Pieces/Room 20" unique_id=1788225247 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
-
-[node name="Room 21" type="Node3D" parent="Level Pieces" unique_id=1521734794]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -23)
-
-[node name="Wall" parent="Level Pieces/Room 21" unique_id=633523044 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall2" parent="Level Pieces/Room 21" unique_id=2077024729 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall3" parent="Level Pieces/Room 21" unique_id=2093687082 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
-dimensions = Vector3(11, 4, 1)
-
-[node name="Wall4" parent="Level Pieces/Room 21" unique_id=443272070 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
-dimensions = Vector3(6, 4, 1)
-
-[node name="Wall5" parent="Level Pieces/Room 21" unique_id=594678504 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
-dimensions = Vector3(3, 4, 1)
-
-[node name="Wall6" parent="Level Pieces/Room 21" unique_id=1456922269 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
-dimensions = Vector3(2, 1, 1)
-
-[node name="Light Fixture" parent="Level Pieces/Room 21" unique_id=431884124 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
-
-[node name="Door" parent="Level Pieces/Room 21" unique_id=185000251 instance=ExtResource("6_0f350")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
-
-[node name="Arcade Machine" parent="Level Pieces/Room 21" unique_id=1685572707 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
-
-[node name="Room 22" type="Node3D" parent="Level Pieces" unique_id=1316782562]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0, -23)
-
-[node name="Wall" parent="Level Pieces/Room 22" unique_id=1985416130 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall2" parent="Level Pieces/Room 22" unique_id=633774410 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall3" parent="Level Pieces/Room 22" unique_id=854164239 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
-dimensions = Vector3(11, 4, 1)
-
-[node name="Wall4" parent="Level Pieces/Room 22" unique_id=1701561331 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
-dimensions = Vector3(6, 4, 1)
-
-[node name="Wall5" parent="Level Pieces/Room 22" unique_id=253280838 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
-dimensions = Vector3(3, 4, 1)
-
-[node name="Wall6" parent="Level Pieces/Room 22" unique_id=577031275 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
-dimensions = Vector3(2, 1, 1)
-
-[node name="Light Fixture" parent="Level Pieces/Room 22" unique_id=465846291 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
-
-[node name="Light Fixture2" parent="Level Pieces/Room 22" unique_id=1843998342 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
-
-[node name="Door" parent="Level Pieces/Room 22" unique_id=730173961 instance=ExtResource("6_0f350")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
-
-[node name="Arcade Machine" parent="Level Pieces/Room 22" unique_id=398611150 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
-
-[node name="Room 23" type="Node3D" parent="Level Pieces" unique_id=276691268]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -23)
-
-[node name="Wall" parent="Level Pieces/Room 23" unique_id=1455518482 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall2" parent="Level Pieces/Room 23" unique_id=1259970833 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall3" parent="Level Pieces/Room 23" unique_id=918567028 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
-dimensions = Vector3(11, 4, 1)
-
-[node name="Wall4" parent="Level Pieces/Room 23" unique_id=6706011 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
-dimensions = Vector3(6, 4, 1)
-
-[node name="Wall5" parent="Level Pieces/Room 23" unique_id=68000214 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
-dimensions = Vector3(3, 4, 1)
-
-[node name="Wall6" parent="Level Pieces/Room 23" unique_id=1039859578 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
-dimensions = Vector3(2, 1, 1)
-
-[node name="Door" parent="Level Pieces/Room 23" unique_id=2047162612 instance=ExtResource("6_0f350")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
-
-[node name="Arcade Machine" parent="Level Pieces/Room 23" unique_id=2072491422 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
-
-[node name="Room 24" type="Node3D" parent="Level Pieces" unique_id=150954372]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -40)
-
-[node name="Wall" parent="Level Pieces/Room 24" unique_id=896816234 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall2" parent="Level Pieces/Room 24" unique_id=579418261 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall3" parent="Level Pieces/Room 24" unique_id=2067584665 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
-dimensions = Vector3(11, 4, 1)
-
-[node name="Wall4" parent="Level Pieces/Room 24" unique_id=1031148632 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
-dimensions = Vector3(6, 4, 1)
-
-[node name="Wall5" parent="Level Pieces/Room 24" unique_id=227676176 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
-dimensions = Vector3(3, 4, 1)
-
-[node name="Wall6" parent="Level Pieces/Room 24" unique_id=993346252 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
-dimensions = Vector3(2, 1, 1)
-
-[node name="Light Fixture2" parent="Level Pieces/Room 24" unique_id=1909937784 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
-
-[node name="Door" parent="Level Pieces/Room 24" unique_id=1826994786 instance=ExtResource("6_0f350")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
-
-[node name="Arcade Machine" parent="Level Pieces/Room 24" unique_id=1290555852 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
-
-[node name="Room 25" type="Node3D" parent="Level Pieces" unique_id=420782157]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -52)
-
-[node name="Wall" parent="Level Pieces/Room 25" unique_id=1874549545 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall2" parent="Level Pieces/Room 25" unique_id=617514151 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall3" parent="Level Pieces/Room 25" unique_id=518231192 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
-dimensions = Vector3(11, 4, 1)
-
-[node name="Wall4" parent="Level Pieces/Room 25" unique_id=685610337 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
-dimensions = Vector3(6, 4, 1)
-
-[node name="Wall5" parent="Level Pieces/Room 25" unique_id=1743243043 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
-dimensions = Vector3(3, 4, 1)
-
-[node name="Wall6" parent="Level Pieces/Room 25" unique_id=1627723578 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
-dimensions = Vector3(2, 1, 1)
-
-[node name="Light Fixture" parent="Level Pieces/Room 25" unique_id=1847385916 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
-
-[node name="Light Fixture2" parent="Level Pieces/Room 25" unique_id=571434853 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
-
-[node name="Door" parent="Level Pieces/Room 25" unique_id=903454200 instance=ExtResource("6_0f350")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
-
-[node name="Arcade Machine" parent="Level Pieces/Room 25" unique_id=1733090911 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
-
-[node name="Room 26" type="Node3D" parent="Level Pieces" unique_id=87882884]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -40)
-
-[node name="Wall" parent="Level Pieces/Room 26" unique_id=1522547152 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall2" parent="Level Pieces/Room 26" unique_id=350420190 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall3" parent="Level Pieces/Room 26" unique_id=1027020659 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
-dimensions = Vector3(11, 4, 1)
-
-[node name="Wall4" parent="Level Pieces/Room 26" unique_id=1043661270 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
-dimensions = Vector3(6, 4, 1)
-
-[node name="Wall5" parent="Level Pieces/Room 26" unique_id=18027699 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
-dimensions = Vector3(3, 4, 1)
-
-[node name="Wall6" parent="Level Pieces/Room 26" unique_id=467716431 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
-dimensions = Vector3(2, 1, 1)
-
-[node name="Light Fixture" parent="Level Pieces/Room 26" unique_id=1679531746 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
-
-[node name="Light Fixture2" parent="Level Pieces/Room 26" unique_id=5289259 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
-
-[node name="Door" parent="Level Pieces/Room 26" unique_id=2138937056 instance=ExtResource("6_0f350")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
-
-[node name="Arcade Machine" parent="Level Pieces/Room 26" unique_id=1221705047 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
-
-[node name="Room 27" type="Node3D" parent="Level Pieces" unique_id=1302856426]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -52)
-
-[node name="Wall" parent="Level Pieces/Room 27" unique_id=659650582 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall2" parent="Level Pieces/Room 27" unique_id=796140549 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall3" parent="Level Pieces/Room 27" unique_id=1866001450 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
-dimensions = Vector3(11, 4, 1)
-
-[node name="Wall4" parent="Level Pieces/Room 27" unique_id=804621205 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
-dimensions = Vector3(6, 4, 1)
-
-[node name="Wall5" parent="Level Pieces/Room 27" unique_id=1396814422 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
-dimensions = Vector3(3, 4, 1)
-
-[node name="Wall6" parent="Level Pieces/Room 27" unique_id=79558354 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
-dimensions = Vector3(2, 1, 1)
-
-[node name="Light Fixture" parent="Level Pieces/Room 27" unique_id=939848229 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
-
-[node name="Light Fixture2" parent="Level Pieces/Room 27" unique_id=173658115 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
-
-[node name="Door" parent="Level Pieces/Room 27" unique_id=870618194 instance=ExtResource("6_0f350")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
-
-[node name="Arcade Machine" parent="Level Pieces/Room 27" unique_id=570537528 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
-
-[node name="Room 28" type="Node3D" parent="Level Pieces" unique_id=1754828431]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -11, 0, -58)
-
-[node name="Wall" parent="Level Pieces/Room 28" unique_id=2018556448 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall2" parent="Level Pieces/Room 28" unique_id=386075677 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall3" parent="Level Pieces/Room 28" unique_id=1308041168 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
-dimensions = Vector3(11, 4, 1)
-
-[node name="Wall4" parent="Level Pieces/Room 28" unique_id=1131809499 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 2.5)
-dimensions = Vector3(6, 4, 1)
-
-[node name="Wall5" parent="Level Pieces/Room 28" unique_id=1620790657 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
-dimensions = Vector3(3, 4, 1)
-
-[node name="Wall6" parent="Level Pieces/Room 28" unique_id=425598976 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
-dimensions = Vector3(2, 1, 1)
-
-[node name="Door" parent="Level Pieces/Room 28" unique_id=1142290407 instance=ExtResource("6_0f350")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
-
-[node name="Arcade Machine" parent="Level Pieces/Room 28" unique_id=997989470 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
-
-[node name="Room 29" type="Node3D" parent="Level Pieces" unique_id=1417269332]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -24, 0, -58)
-
-[node name="Wall" parent="Level Pieces/Room 29" unique_id=1750567653 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall2" parent="Level Pieces/Room 29" unique_id=254360755 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall3" parent="Level Pieces/Room 29" unique_id=1939603717 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
-dimensions = Vector3(11, 4, 1)
-
-[node name="Wall4" parent="Level Pieces/Room 29" unique_id=981353028 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 4.5)
-dimensions = Vector3(2, 4, 1)
-
-[node name="Wall5" parent="Level Pieces/Room 29" unique_id=43034846 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -2)
-dimensions = Vector3(7, 4, 1)
-
-[node name="Wall6" parent="Level Pieces/Room 29" unique_id=1408937371 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, 2.5)
-dimensions = Vector3(2, 1, 1)
-
-[node name="Door" parent="Level Pieces/Room 29" unique_id=1826461661 instance=ExtResource("6_0f350")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, 1.5)
-
-[node name="Arcade Machine" parent="Level Pieces/Room 29" unique_id=351159253 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
-
-[node name="Room 30" type="Node3D" parent="Level Pieces" unique_id=1688732963]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -37, 0, -58)
-
-[node name="Wall" parent="Level Pieces/Room 30" unique_id=1310467268 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall2" parent="Level Pieces/Room 30" unique_id=953083149 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall3" parent="Level Pieces/Room 30" unique_id=1242590648 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
-dimensions = Vector3(11, 4, 1)
-
-[node name="Wall4" parent="Level Pieces/Room 30" unique_id=1662990998 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 3)
-dimensions = Vector3(5, 4, 1)
-
-[node name="Wall5" parent="Level Pieces/Room 30" unique_id=1345295225 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -3.5)
-dimensions = Vector3(4, 4, 1)
-
-[node name="Wall6" parent="Level Pieces/Room 30" unique_id=392473500 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -0.5)
-dimensions = Vector3(2, 1, 1)
-
-[node name="Light Fixture" parent="Level Pieces/Room 30" unique_id=182947023 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
-
-[node name="Light Fixture2" parent="Level Pieces/Room 30" unique_id=382219504 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
-
-[node name="Door" parent="Level Pieces/Room 30" unique_id=783521258 instance=ExtResource("6_0f350")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -1.5)
-
-[node name="Arcade Machine" parent="Level Pieces/Room 30" unique_id=663135532 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
-
-[node name="Room 31" type="Node3D" parent="Level Pieces" unique_id=2015126927]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -50, 0, -58)
-
-[node name="Wall" parent="Level Pieces/Room 31" unique_id=1715011530 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall2" parent="Level Pieces/Room 31" unique_id=1639797230 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall3" parent="Level Pieces/Room 31" unique_id=1510025440 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
-dimensions = Vector3(11, 4, 1)
-
-[node name="Wall4" parent="Level Pieces/Room 31" unique_id=417799193 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 4)
-dimensions = Vector3(3, 4, 1)
-
-[node name="Wall5" parent="Level Pieces/Room 31" unique_id=779389603 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -2.5)
-dimensions = Vector3(6, 4, 1)
-
-[node name="Wall6" parent="Level Pieces/Room 31" unique_id=958432893 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, 1.5)
-dimensions = Vector3(2, 1, 1)
-
-[node name="Light Fixture" parent="Level Pieces/Room 31" unique_id=1251812161 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
-
-[node name="Door" parent="Level Pieces/Room 31" unique_id=1091116515 instance=ExtResource("6_0f350")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, 0.5)
-
-[node name="Arcade Machine" parent="Level Pieces/Room 31" unique_id=1093033573 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
-
-[node name="Room 33" type="Node3D" parent="Level Pieces" unique_id=824774491]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, -56)
-
-[node name="Wall2" parent="Level Pieces/Room 33" unique_id=350486729 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, -6)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall3" parent="Level Pieces/Room 33" unique_id=1264959110 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 6)
-dimensions = Vector3(23, 4, 1)
-
-[node name="Wall5" parent="Level Pieces/Room 33" unique_id=1132054607 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, -4)
-dimensions = Vector3(3, 4, 1)
-
-[node name="Wall6" parent="Level Pieces/Room 33" unique_id=864885844 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, -1.5)
-dimensions = Vector3(2, 1, 1)
-
-[node name="Light Fixture" parent="Level Pieces/Room 33" unique_id=919393458 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 3)
-
-[node name="Light Fixture2" parent="Level Pieces/Room 33" unique_id=673326053 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
-
-[node name="Door" parent="Level Pieces/Room 33" unique_id=1436254490 instance=ExtResource("6_0f350")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
-
-[node name="Arcade Machine" parent="Level Pieces/Room 33" unique_id=781608522 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 4)
-
-[node name="Wall7" parent="Level Pieces/Room 33" unique_id=590687012 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 18)
-dimensions = Vector3(10, 4, 1)
-
-[node name="Wall10" parent="Level Pieces/Room 33" unique_id=1024943117 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 15.5)
-dimensions = Vector3(4, 4, 1)
-
-[node name="Wall11" parent="Level Pieces/Room 33" unique_id=1100069854 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 2, 5.5)
-dimensions = Vector3(12, 4, 1)
-
-[node name="Wall12" parent="Level Pieces/Room 33" unique_id=1115510119 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 3.5, 12.5)
-dimensions = Vector3(2, 1, 1)
-
-[node name="Light Fixture3" parent="Level Pieces/Room 33" unique_id=1504372301 instance=ExtResource("4_81xng")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, 15)
-
-[node name="Door2" parent="Level Pieces/Room 33" unique_id=517169776 instance=ExtResource("6_0f350")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, 11.5)
-
-[node name="Arcade Machine2" parent="Level Pieces/Room 33" unique_id=1405872207 instance=ExtResource("10_oqgf2")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 0, 16)
-
-[node name="Room 32" type="Node3D" parent="Level Pieces" unique_id=1833545928]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -39.5, 0, -38)
-
-[node name="Wall2" parent="Level Pieces/Room 32" unique_id=357178502 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -7.4999924)
-dimensions = Vector3(25, 4, 1)
-
-[node name="Wall3" parent="Level Pieces/Room 32" unique_id=1331806090 instance=ExtResource("3_6phgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9999847, 2, 10.500019)
-dimensions = Vector3(25, 4, 1)
-
-[node name="Wall4" parent="Level Pieces/Room 32" unique_id=691170483 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.000019, 2, 1.5000229)
-dimensions = Vector3(17, 4, 1)
-
-[node name="Wall5" parent="Level Pieces/Room 32" unique_id=2019514479 instance=ExtResource("3_6phgx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -19.99998, 2, 1.5000305)
-dimensions = Vector3(17, 4, 1)
-
 [node name="Closet01" type="Node3D" parent="Level Pieces" unique_id=1325994696]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, 37)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 37)
 
 [node name="Wall8" parent="Level Pieces/Closet01" unique_id=1886052024 instance=ExtResource("3_6phgx")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2, 0)
@@ -1468,6 +1157,9 @@ dimensions = Vector3(3, 4, 1)
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5, 2, -3)
 dimensions = Vector3(3, 4, 1)
 
+[node name="Light Fixture3" parent="Level Pieces/Closet02" unique_id=1583985800 instance=ExtResource("4_81xng")]
+transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, -2.5, 4, 0)
+
 [node name="Closet03" type="Node3D" parent="Level Pieces" unique_id=1207664553]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -1, 0, -59)
 
@@ -1501,3 +1193,287 @@ dimensions = Vector3(3, 4, 1)
 [node name="Wall13" parent="Level Pieces/Closet03" unique_id=1237155220 instance=ExtResource("3_6phgx")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -7.5, 2, -2.9999998)
 dimensions = Vector3(2, 4, 1)
+
+[node name="Light Fixture3" parent="Level Pieces/Closet03" unique_id=834846073 instance=ExtResource("4_81xng")]
+transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, -2.5, 4, 0)
+
+[node name="Room 32" type="Node3D" parent="Level Pieces" unique_id=1833545928]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -16.5, 0, -21)
+
+[node name="Wall4" parent="Level Pieces/Room 32" unique_id=691170483 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.000019, 2, 1.5000229)
+dimensions = Vector3(17, 4, 1)
+
+[node name="Wall5" parent="Level Pieces/Room 32" unique_id=2019514479 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -26.99998, 2, 1.5000324)
+dimensions = Vector3(17, 4, 1)
+
+[node name="Wall6" parent="Level Pieces/Room 32" unique_id=1272957303 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 2, 10.5)
+dimensions = Vector3(13, 4, 1)
+
+[node name="Wall7" parent="Level Pieces/Room 32" unique_id=2079774478 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 10.5)
+dimensions = Vector3(17, 4, 1)
+
+[node name="Wall8" parent="Level Pieces/Room 32" unique_id=1783719347 instance=ExtResource("3_6phgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 3.5, 10.5)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Door" parent="Level Pieces/Room 32" unique_id=775503333 instance=ExtResource("6_0f350")]
+transform = Transform3D(-1, 0, 8.742277e-08, 0, 1, 0, -8.742277e-08, 0, -1, -12.5, 0, 10.5)
+
+[node name="Wall9" parent="Level Pieces/Room 32" unique_id=684505047 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2, 2, -7.499998)
+dimensions = Vector3(5, 4, 1)
+
+[node name="Wall10" parent="Level Pieces/Room 32" unique_id=1934918210 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -15, 2, -7.499999)
+dimensions = Vector3(25, 4, 1)
+
+[node name="Wall11" parent="Level Pieces/Room 32" unique_id=622302438 instance=ExtResource("3_6phgx")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -1.5, 3.5, -7.499999)
+dimensions = Vector3(2, 1, 1)
+
+[node name="Door2" parent="Level Pieces/Room 32" unique_id=2109990067 instance=ExtResource("6_0f350")]
+transform = Transform3D(1, 0, 7.1054274e-15, 0, 1, 0, -7.1054274e-15, 0, 1, -2.5, 0, -7.499999)
+
+[node name="Light Fixture" parent="Level Pieces/Room 32" unique_id=680519592 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -11.499996, 4, 6.0000057)
+
+[node name="Light Fixture2" parent="Level Pieces/Room 32" unique_id=545691343 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -11.5, 4, -2.999999)
+
+[node name="Light Fixture3" parent="Level Pieces/Room 32" unique_id=227118903 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -2.4999943, 4, 6.0000076)
+
+[node name="Light Fixture4" parent="Level Pieces/Room 32" unique_id=579142558 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -2.5, 4, -2.999999)
+
+[node name="Light Fixture5" parent="Level Pieces/Room 32" unique_id=606194156 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -20.999992, 4, 6.0000095)
+
+[node name="Light Fixture6" parent="Level Pieces/Room 32" unique_id=159075017 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -21, 4, -2.9999971)
+
+[node name="Hall Lights" type="Node3D" parent="Level Pieces" unique_id=1274501564]
+visible = false
+
+[node name="Light Fixture15" parent="Level Pieces/Hall Lights" unique_id=759098425 instance=ExtResource("4_81xng")]
+transform = Transform3D(1.3113416e-07, 1, 4.371139e-08, 0, -4.371139e-08, 1, 1, -1.3113416e-07, -5.732056e-15, -6.5, 4, 24.5)
+
+[node name="Light Fixture16" parent="Level Pieces/Hall Lights" unique_id=672549538 instance=ExtResource("4_81xng")]
+transform = Transform3D(-1, 8.742277e-08, 3.8213705e-15, 0, -4.371139e-08, 1, 8.742277e-08, 1, 4.371139e-08, -13.5, 4, 31.5)
+
+[node name="Light Fixture17" parent="Level Pieces/Hall Lights" unique_id=688633395 instance=ExtResource("4_81xng")]
+transform = Transform3D(-1, 8.742277e-08, 3.8213705e-15, 0, -4.371139e-08, 1, 8.742277e-08, 1, 4.371139e-08, -23, 4, 31.5)
+
+[node name="Light Fixture18" parent="Level Pieces/Hall Lights" unique_id=1771244680 instance=ExtResource("4_81xng")]
+transform = Transform3D(-4.371138e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371138e-08, 1.9106853e-15, -29.5, 4, 27)
+
+[node name="Light Fixture43" parent="Level Pieces/Hall Lights" unique_id=559790421 instance=ExtResource("4_81xng")]
+transform = Transform3D(-4.371138e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371138e-08, 1.9106853e-15, -29.5, 4, 20)
+
+[node name="Light Fixture19" parent="Level Pieces/Hall Lights" unique_id=1596156321 instance=ExtResource("4_81xng")]
+transform = Transform3D(-1, 8.742277e-08, 3.8213705e-15, 0, -4.371139e-08, 1, 8.742277e-08, 1, 4.371139e-08, -47.5, 4, 14.5)
+
+[node name="Light Fixture39" parent="Level Pieces/Hall Lights" unique_id=2101389791 instance=ExtResource("4_81xng")]
+transform = Transform3D(-1, 8.742277e-08, 3.8213705e-15, 0, -4.371139e-08, 1, 8.742277e-08, 1, 4.371139e-08, -38, 4, 14.5)
+
+[node name="Light Fixture40" parent="Level Pieces/Hall Lights" unique_id=1207911480 instance=ExtResource("4_81xng")]
+transform = Transform3D(-1, 8.742277e-08, 3.8213705e-15, 0, -4.371139e-08, 1, 8.742277e-08, 1, 4.371139e-08, -29.5, 4, 14.5)
+
+[node name="Light Fixture41" parent="Level Pieces/Hall Lights" unique_id=457786690 instance=ExtResource("4_81xng")]
+transform = Transform3D(-1, 8.742277e-08, 3.8213705e-15, 0, -4.371139e-08, 1, 8.742277e-08, 1, 4.371139e-08, -21, 4, 14.5)
+
+[node name="Light Fixture42" parent="Level Pieces/Hall Lights" unique_id=626630653 instance=ExtResource("4_81xng")]
+transform = Transform3D(-1, 8.742277e-08, 3.8213705e-15, 0, -4.371139e-08, 1, 8.742277e-08, 1, 4.371139e-08, -13, 4, 14.5)
+
+[node name="Light Fixture20" parent="Level Pieces/Hall Lights" unique_id=309121805 instance=ExtResource("4_81xng")]
+transform = Transform3D(-4.371138e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371138e-08, 1.9106853e-15, -52.5, 4, 8)
+
+[node name="Light Fixture44" parent="Level Pieces/Hall Lights" unique_id=226846140 instance=ExtResource("4_81xng")]
+transform = Transform3D(-4.371138e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371138e-08, 1.9106853e-15, -52.5, 4, 0)
+
+[node name="Light Fixture21" parent="Level Pieces/Hall Lights" unique_id=799421716 instance=ExtResource("4_81xng")]
+transform = Transform3D(-4.371138e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371138e-08, 1.9106853e-15, -52.5, 4, -10)
+
+[node name="Light Fixture22" parent="Level Pieces/Hall Lights" unique_id=1374012120 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 7.1054274e-15, 3.105881e-22, 0, -4.371139e-08, 1, 7.1054274e-15, -1, -4.371139e-08, -45, 4, -14.5)
+
+[node name="Light Fixture34" parent="Level Pieces/Hall Lights" unique_id=2109482125 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 7.1054274e-15, 3.105881e-22, 0, -4.371139e-08, 1, 7.1054274e-15, -1, -4.371139e-08, -34.5, 4, -14.5)
+
+[node name="Light Fixture35" parent="Level Pieces/Hall Lights" unique_id=1216945257 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 7.1054274e-15, 3.105881e-22, 0, -4.371139e-08, 1, 7.1054274e-15, -1, -4.371139e-08, -25, 4, -14.5)
+
+[node name="Light Fixture36" parent="Level Pieces/Hall Lights" unique_id=1642908642 instance=ExtResource("4_81xng")]
+transform = Transform3D(1, 7.1054274e-15, 3.105881e-22, 0, -4.371139e-08, 1, 7.1054274e-15, -1, -4.371139e-08, -15.5, 4, -14.5)
+
+[node name="Light Fixture23" parent="Level Pieces/Hall Lights" unique_id=2079829335 instance=ExtResource("4_81xng")]
+transform = Transform3D(-4.3711395e-08, 1, 4.371139e-08, 0, -4.371139e-08, 1, 1, 4.3711395e-08, 1.9106857e-15, -22, 4, -8.5)
+
+[node name="Light Fixture24" parent="Level Pieces/Hall Lights" unique_id=1491475292 instance=ExtResource("4_81xng")]
+transform = Transform3D(-4.3711395e-08, 1, 4.371139e-08, 0, -4.371139e-08, 1, 1, 4.3711395e-08, 1.9106857e-15, -22, 4, -0.5)
+
+[node name="Light Fixture25" parent="Level Pieces/Hall Lights" unique_id=1303374885 instance=ExtResource("4_81xng")]
+transform = Transform3D(-4.3711395e-08, 1, 4.371139e-08, 0, -4.371139e-08, 1, 1, 4.3711395e-08, 1.9106857e-15, -22, 4, 7.5)
+
+[node name="Light Fixture26" parent="Level Pieces/Hall Lights" unique_id=1153820532 instance=ExtResource("4_81xng")]
+transform = Transform3D(-4.3711395e-08, 1, 4.371139e-08, 0, -4.371139e-08, 1, 1, 4.3711395e-08, 1.9106857e-15, -29.5, 4, -20)
+
+[node name="Light Fixture37" parent="Level Pieces/Hall Lights" unique_id=894850833 instance=ExtResource("4_81xng")]
+transform = Transform3D(-4.3711395e-08, 1, 4.371139e-08, 0, -4.371139e-08, 1, 1, 4.3711395e-08, 1.9106857e-15, -29.5, 4, -28.5)
+
+[node name="Light Fixture38" parent="Level Pieces/Hall Lights" unique_id=201018983 instance=ExtResource("4_81xng")]
+transform = Transform3D(-4.3711395e-08, 1, 4.371139e-08, 0, -4.371139e-08, 1, 1, 4.3711395e-08, 1.9106857e-15, -29.5, 4, -36.5)
+
+[node name="Light Fixture27" parent="Level Pieces/Hall Lights" unique_id=1422489269 instance=ExtResource("4_81xng")]
+transform = Transform3D(-4.3711395e-08, 1, 4.371139e-08, 0, -4.371139e-08, 1, 1, 4.3711395e-08, 1.9106857e-15, -29.5, 4, -44.5)
+
+[node name="Light Fixture28" parent="Level Pieces/Hall Lights" unique_id=529044188 instance=ExtResource("4_81xng")]
+transform = Transform3D(-1, -8.7422784e-08, -3.8213714e-15, 0, -4.371139e-08, 1, -8.7422784e-08, 1, 4.371139e-08, -14, 4, -50.5)
+
+[node name="Light Fixture29" parent="Level Pieces/Hall Lights" unique_id=249870229 instance=ExtResource("4_81xng")]
+transform = Transform3D(-1, -8.7422784e-08, -3.8213714e-15, 0, -4.371139e-08, 1, -8.7422784e-08, 1, 4.371139e-08, -24, 4, -50.5)
+
+[node name="Light Fixture30" parent="Level Pieces/Hall Lights" unique_id=578236104 instance=ExtResource("4_81xng")]
+transform = Transform3D(1.3113417e-07, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, -1.3113417e-07, -5.7320566e-15, -6.5, 4, -44.5)
+
+[node name="Light Fixture31" parent="Level Pieces/Hall Lights" unique_id=865319415 instance=ExtResource("4_81xng")]
+transform = Transform3D(1.3113417e-07, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, -1.3113417e-07, -5.7320566e-15, -6.5, 4, -55.5)
+
+[node name="Light Fixture32" parent="Level Pieces/Hall Lights" unique_id=1912612405 instance=ExtResource("4_81xng")]
+transform = Transform3D(1.3113417e-07, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, -1.3113417e-07, -5.7320566e-15, -6.5, 4, -34.5)
+
+[node name="Light Fixture33" parent="Level Pieces/Hall Lights" unique_id=1526899977 instance=ExtResource("4_81xng")]
+transform = Transform3D(1.3113417e-07, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, -1.3113417e-07, -5.7320566e-15, -6.5, 4, -23)
+
+[node name="Main Room Lights" type="Node3D" parent="Level Pieces/Hall Lights" unique_id=569974320]
+
+[node name="Light Fixture3" parent="Level Pieces/Hall Lights/Main Room Lights" unique_id=665906811 instance=ExtResource("4_81xng")]
+transform = Transform3D(-1, 8.742278e-08, 3.821371e-15, 0, -4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, -2.5, 10, 11.5)
+area_range = 12.0
+can_randomize = false
+
+[node name="Light Fixture4" parent="Level Pieces/Hall Lights/Main Room Lights" unique_id=1646106579 instance=ExtResource("4_81xng")]
+transform = Transform3D(-1, 8.742278e-08, 3.821371e-15, 0, -4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, -2.5, 10, 8)
+area_range = 12.0
+can_randomize = false
+
+[node name="Light Fixture5" parent="Level Pieces/Hall Lights/Main Room Lights" unique_id=2130121818 instance=ExtResource("4_81xng")]
+transform = Transform3D(-1, 8.742278e-08, 3.821371e-15, 0, -4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, -2.5, 10, 4.5)
+area_range = 12.0
+can_randomize = false
+
+[node name="Light Fixture6" parent="Level Pieces/Hall Lights/Main Room Lights" unique_id=661433685 instance=ExtResource("4_81xng")]
+transform = Transform3D(-1, 8.742278e-08, 3.821371e-15, 0, -4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, 9.5, 10, 11.5)
+area_range = 12.0
+can_randomize = false
+
+[node name="Light Fixture7" parent="Level Pieces/Hall Lights/Main Room Lights" unique_id=531225006 instance=ExtResource("4_81xng")]
+transform = Transform3D(-1, 8.742278e-08, 3.821371e-15, 0, -4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, 9.5, 10, 8)
+area_range = 12.0
+can_randomize = false
+
+[node name="Light Fixture8" parent="Level Pieces/Hall Lights/Main Room Lights" unique_id=739565349 instance=ExtResource("4_81xng")]
+transform = Transform3D(-1, 8.742278e-08, 3.821371e-15, 0, -4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, 9.5, 10, 4.5)
+area_range = 12.0
+can_randomize = false
+
+[node name="Light Fixture9" parent="Level Pieces/Hall Lights/Main Room Lights" unique_id=1547023062 instance=ExtResource("4_81xng")]
+transform = Transform3D(-1, 8.742278e-08, 3.821371e-15, 0, -4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, -2.5, 10, -5)
+area_range = 12.0
+can_randomize = false
+
+[node name="Light Fixture10" parent="Level Pieces/Hall Lights/Main Room Lights" unique_id=1461460371 instance=ExtResource("4_81xng")]
+transform = Transform3D(-1, 8.742278e-08, 3.821371e-15, 0, -4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, -2.5, 10, -8.5)
+area_range = 12.0
+can_randomize = false
+
+[node name="Light Fixture11" parent="Level Pieces/Hall Lights/Main Room Lights" unique_id=1037679284 instance=ExtResource("4_81xng")]
+transform = Transform3D(-1, 8.742278e-08, 3.821371e-15, 0, -4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, -2.5, 10, -12)
+area_range = 12.0
+can_randomize = false
+
+[node name="Light Fixture12" parent="Level Pieces/Hall Lights/Main Room Lights" unique_id=805248873 instance=ExtResource("4_81xng")]
+transform = Transform3D(-1, 8.742278e-08, 3.821371e-15, 0, -4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, 9.5, 10, -5)
+area_range = 12.0
+can_randomize = false
+
+[node name="Light Fixture13" parent="Level Pieces/Hall Lights/Main Room Lights" unique_id=253062326 instance=ExtResource("4_81xng")]
+transform = Transform3D(-1, 8.742278e-08, 3.821371e-15, 0, -4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, 9.5, 10, -8.5)
+area_range = 12.0
+can_randomize = false
+
+[node name="Light Fixture14" parent="Level Pieces/Hall Lights/Main Room Lights" unique_id=451866617 instance=ExtResource("4_81xng")]
+transform = Transform3D(-1, 8.742278e-08, 3.821371e-15, 0, -4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, 9.5, 10, -12)
+area_range = 12.0
+can_randomize = false
+
+[node name="Arcade Spawn Points" type="Node3D" parent="." unique_id=1050600164]
+
+[node name="Machine Marker 1" type="Marker3D" parent="Arcade Spawn Points" unique_id=1185279659]
+transform = Transform3D(-0.86602545, 0, 0.50000006, 0, 1, 0, -0.50000006, 0, -0.86602545, 3.5, 0, 31.5)
+
+[node name="Machine Marker 2" type="Marker3D" parent="Arcade Spawn Points" unique_id=146675024]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -15.5, 0, 27.5)
+
+[node name="Machine Marker 3" type="Marker3D" parent="Arcade Spawn Points" unique_id=1036209275]
+transform = Transform3D(-0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, -0.70710677, -19.5, 0, 27.5)
+
+[node name="Machine Marker 4" type="Marker3D" parent="Arcade Spawn Points" unique_id=437481185]
+transform = Transform3D(0.49999997, 0, 0.86602545, 0, 1, 0, -0.86602545, 0, 0.49999997, -38.5, 0, 27.5)
+
+[node name="Machine Marker 5" type="Marker3D" parent="Arcade Spawn Points" unique_id=965785588]
+transform = Transform3D(-0.9659259, 0, 0.25881895, 0, 1, 0, -0.25881895, 0, -0.9659259, -43.5, 0, 24.5)
+
+[node name="Machine Marker 6" type="Marker3D" parent="Arcade Spawn Points" unique_id=1988994532]
+transform = Transform3D(0.9659258, 0, 0.25881916, 0, 1, 0, -0.25881916, 0, 0.9659258, -35.5, 0, 10.5)
+
+[node name="Machine Marker 7" type="Marker3D" parent="Arcade Spawn Points" unique_id=1136132260]
+transform = Transform3D(-0.49999994, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, -0.49999994, -12, 0, 3)
+
+[node name="Machine Marker 8" type="Marker3D" parent="Arcade Spawn Points" unique_id=1056327214]
+transform = Transform3D(-0.86602545, 0, 0.49999997, 0, 1, 0, -0.49999997, 0, -0.86602545, -11.5, 0, -1.5)
+
+[node name="Machine Marker 9" type="Marker3D" parent="Arcade Spawn Points" unique_id=90563192]
+transform = Transform3D(-1.5893256e-08, 0, 1, 0, 1, 0, -1, 0, -1.5893256e-08, -31, 0, -1)
+
+[node name="Machine Marker 10" type="Marker3D" parent="Arcade Spawn Points" unique_id=374078793]
+transform = Transform3D(-0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, -0.70710677, -38.5, 0, -1.5)
+
+[node name="Machine Marker 11" type="Marker3D" parent="Arcade Spawn Points" unique_id=767557280]
+transform = Transform3D(0.70710677, 0, 0.70710695, 0, 1, 0, -0.70710695, 0, 0.70710677, -38.5, 0, -22.5)
+
+[node name="Machine Marker 12" type="Marker3D" parent="Arcade Spawn Points" unique_id=402570262]
+transform = Transform3D(0.7071069, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.7071069, -38.5, 0, -45.5)
+
+[node name="Machine Marker 13" type="Marker3D" parent="Arcade Spawn Points" unique_id=1485955961]
+transform = Transform3D(-0.5000002, 0, 0.8660254, 0, 1, 0, -0.8660254, 0, -0.5000002, -22.5, 0, -54.5)
+
+[node name="Machine Marker 14" type="Marker3D" parent="Arcade Spawn Points" unique_id=1639905723]
+transform = Transform3D(0.5000001, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, 0.5000001, -18.5, 0, -59.5)
+
+[node name="Machine Marker 15" type="Marker3D" parent="Arcade Spawn Points" unique_id=2053650254]
+transform = Transform3D(-1.0000001, 0, -2.682209e-07, 0, 1, 0, 2.682209e-07, 0, -1.0000001, 4, 0, -45)
+
+[node name="UI" type="Control" parent="." unique_id=1883121469 node_paths=PackedStringArray("machine_label")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("12_ha31o")
+machine_label = NodePath("HBoxContainer/Label")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI" unique_id=1226855675]
+layout_mode = 1
+offset_left = 13.0
+offset_top = 1.0
+offset_right = 53.0
+offset_bottom = 41.0
+
+[node name="Label" type="Label" parent="UI/HBoxContainer" unique_id=322967870]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.81, 0.11339999, 0.11339999, 1)
+text = "0 / 7"

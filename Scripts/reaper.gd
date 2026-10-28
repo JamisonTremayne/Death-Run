@@ -29,16 +29,19 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	#print("Next Marker: ", next_path_marker)
+	#print("Last Marker: ", last_path_marker)
 	var move_speed: float = BASE_MOVE_SPEED + (anger_level * ANGER_SPEED_MULTIPLIER)
 	var rotation_speed: float = deg_to_rad(BASE_ROTATION_SPEED + (anger_level * ANGER_ROTATION_MULTIPLIER))
-	var jitter := jitter_value
-	jitter_count += 1
-	if jitter_count >= jitter_value:
-		jitter_count = 0
-		jitter_value = randi_range(0, JITTER_SCALE * anger_level)
+	#var jitter := jitter_value
+	#jitter_count += 1
+	#if jitter_count >= jitter_value:
+		#jitter_count = 0
+		#jitter_value = randi_range(0, JITTER_SCALE * anger_level)
 	if current_state == STATE.WANDERING:
-		if !next_path_marker:
+		if !next_path_marker and !last_path_marker:
 			return
+		elif !next_path_marker and last_path_marker:
+			next_path_marker = last_path_marker
 		var dir: Vector3 = global_position.direction_to(next_path_marker.global_position)
 		dir.y = 0.0
 		var target_rotation := atan2(-dir.x, -dir.z)
@@ -46,15 +49,15 @@ func _physics_process(delta: float) -> void:
 		#print("Rotation: ", rotation.y, " ,", target_rotation)
 		if absf(angle_difference(rotation.y, target_rotation)) < PI / 4:
 			#print("Moving: ", global_position)
-			if jitter_count == 0:
-				var step := move_speed * delta * maxf(jitter, 1.0)
-				if global_position.distance_to(next_path_marker.global_position) < step:
-					global_position = next_path_marker.global_position
-					wander()
-				else:
-					global_position += dir * step
-		else:
-			jitter_count -= 1
+			#if jitter_count == 0:
+			var step := move_speed * delta #* maxf(jitter, 1.0)
+			if global_position.distance_to(next_path_marker.global_position) < step:
+				global_position = next_path_marker.global_position
+				wander()
+			else:
+				global_position += dir * step
+		#else:
+			#jitter_count -= 1
 
 func wander() -> void:
 	var current_marker: PathMarker = next_path_marker
@@ -62,7 +65,7 @@ func wander() -> void:
 	if last_path_marker:
 		random_marker = current_marker.pick_random_connection([last_path_marker])
 	if !random_marker:
-		random_marker = current_marker.pick_random_connection([last_path_marker])
+		random_marker = current_marker.pick_random_connection([])
 	last_path_marker = current_marker
 	next_path_marker = random_marker
 	#print("Last: ", last_path_marker.name)

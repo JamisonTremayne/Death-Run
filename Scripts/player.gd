@@ -11,6 +11,7 @@ const JUMP_VELOCITY := 4.5
 const SENSITIVITY := 0.008
 const CAMERA_PITCH_MAX := 75.0
 const CAMERA_PITCH_MIN := -75.0
+const CAMERA_DEFAULT_POS := Vector3(0.0, 1.646, 0.0)
 
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera3D
@@ -20,6 +21,11 @@ var stamina_regen_timer : Timer
 var current_stamina : float = MAX_STAMINA
 var b_sprinting : bool = false
 var b_regening_stamina : bool = false
+
+var b_godmode: bool = false
+var b_immortal: bool = false
+var b_canmove: bool = true
+var b_canlook: bool = true
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -35,15 +41,15 @@ func _ready() -> void:
 	stamina_bar.value = current_stamina
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and b_canlook:
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotation.x = clampf(camera.rotation.x, deg_to_rad(CAMERA_PITCH_MIN), deg_to_rad(CAMERA_PITCH_MAX))
-	elif event.is_action_pressed("sprint"):
+	elif event.is_action_pressed("sprint") and b_canmove:
 		try_start_sprint()
 	elif event.is_action_released("sprint"):
 		stop_sprint()
-	elif event.is_action_pressed("interact"):
+	elif event.is_action_pressed("interact") and b_canmove:
 		#print("interacting: ", current_interactable)
 		if current_interactable:
 			current_interactable.interact()
@@ -58,9 +64,14 @@ func _physics_process(delta: float) -> void:
 		#velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
+	
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction := (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	var speed := SPRINT_SPEED if b_sprinting else SPEED
+	if b_godmode:
+		speed *= 10.0
+		var flight_dir := Input.get_axis("godmode_down", "godmode_up")
+		velocity.y = flight_dir * speed
 	if direction:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
@@ -80,7 +91,8 @@ func _physics_process(delta: float) -> void:
 		if current_stamina == MAX_STAMINA:
 			b_regening_stamina = false
 	
-	move_and_slide()
+	if b_canmove:
+		move_and_slide()
 
 func try_start_sprint() -> void:
 	if current_stamina > 0:
