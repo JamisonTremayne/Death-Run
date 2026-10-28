@@ -46,6 +46,7 @@ radius = 8.0
 height = 20.0
 
 [node name="Arcade Man" type="CharacterBody2D" unique_id=1055295850 node_paths=PackedStringArray("sprite")]
+collision_layer = 2
 script = ExtResource("1_rklae")
 sprite = NodePath("AnimatedSprite2D")
 

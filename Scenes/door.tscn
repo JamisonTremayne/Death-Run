@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dpdii3tgy8nwl"]
 
 [ext_resource type="Script" uid="uid://b2fagm34ygttj" path="res://Scripts/door.gd" id="1_w6aom"]
+[ext_resource type="AudioStream" uid="uid://t1phai4p5ind" path="res://Assets/Audio/Sound Effects/sfx_bell.mp3" id="2_p0e35"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rw1l7"]
 albedo_color = Color(0.82139057, 0.6784501, 0.57176423, 1)
@@ -30,5 +31,10 @@ shape = SubResource("BoxShape3D_5tmi2")
 [node name="Timer" type="Timer" parent="." unique_id=1973031325]
 wait_time = 1.5
 one_shot = true
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="." unique_id=1509228434]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+stream = ExtResource("2_p0e35")
+volume_db = 5.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_door_open_timer_timeout"]

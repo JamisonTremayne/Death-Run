@@ -17,6 +17,11 @@ script = ExtResource("1_dhqmi")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=690383331]
 transform = Transform3D(-8.105699e-09, -3.2749148e-09, 0.2, -0.074921325, 0.18543679, 0, -0.18543679, -0.074921325, -8.742278e-09, 0, 2.059845, 0)
 material_override = SubResource("StandardMaterial3D_dhqmi")
-transparency = 0.1
+transparency = 0.05
 cast_shadow = 0
 mesh = ExtResource("1_1ws32")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=2037177880]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9250288, 0)
+light_volumetric_fog_energy = 16.0
+light_negative = true

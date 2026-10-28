@@ -3,6 +3,7 @@ extends Interactable
 
 @export var door_open_timer: Timer
 @onready var collision: CollisionShape3D = $CollisionShape3D
+@onready var audio: AudioStreamPlayer3D = $Audio
 var b_open : bool = false
 
 func interact() -> void:
@@ -14,6 +15,7 @@ func interact() -> void:
 	collision.disabled = true
 	b_open = true
 	door_open_timer.start()
+	audio.play()
 
 func _on_door_open_timer_timeout() -> void:
 	rotate_y(-PI / 2)

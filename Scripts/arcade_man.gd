@@ -1,5 +1,5 @@
+class_name ArcadeMan
 extends CharacterBody2D
-
 
 const SPEED = 150.0
 const JUMP_VELOCITY = -280.0

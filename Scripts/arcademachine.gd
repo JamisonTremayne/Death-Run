@@ -10,7 +10,11 @@ const ARCADETEXTURE_05 = preload("uid://d3e6co7fnpqx2")
 @onready var machine_mesh: MeshInstance3D = $"Machine Mesh"
 @onready var screen_mesh: MeshInstance3D = $"Screen Mesh"
 @onready var textures: Array[Texture] = [ARCADETEXTURE_01, ARCADETEXTURE_02, ARCADETEXTURE_03, ARCADETEXTURE_04, ARCADETEXTURE_05]
+@onready var audio: AudioStreamPlayer3D = $Audio
+## This variable keeps track of the game on the machine in case the player pauses it and leaves.
+var arcade_game: ArcadeGame = null 
 var active: bool = true
+var using: bool = false
 
 signal machine_completed
 
@@ -28,17 +32,27 @@ func _ready() -> void:
 	machine_completed.connect(Global.game_manager._on_machine_completed)
 
 func interact() -> void:
-	if !active:
+	if !active || using:
 		return
 	var player: Player = Global.game_manager.player
 	player.b_canmove = false
 	player.b_canlook = false
+	using = true
 	await _player_enter_animation()
+	if !arcade_game:
+		arcade_game = Global.game_manager.start_arcade_game()
+		arcade_game.game_exited.connect(leave_machine)
+		arcade_game.game_complete.connect(complete)
+		arcade_game.died.connect(arcade_die)
+	else:
+		arcade_game.resume_game()
+	
+func leave_machine() -> void:
+	var player: Player = Global.game_manager.player
 	await _player_exit_animation()
 	player.b_canmove = true
 	player.b_canlook = true
-	
-	#complete()
+	using = false
 
 func _player_enter_animation() -> void:
 	var player: Player = Global.game_manager.player
@@ -76,3 +90,8 @@ func complete() -> void:
 	screen_mesh.visible = false
 	active = false
 	machine_completed.emit()
+
+func arcade_die() -> void:
+	if Global.game_manager:
+		Global.game_manager.increment_anger()
+	audio.play()

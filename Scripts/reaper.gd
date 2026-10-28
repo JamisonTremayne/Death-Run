@@ -11,6 +11,7 @@ const JITTER_SCALE := 2
 enum STATE { WANDERING, INVESTIGATING, CHASING }
 @export var path_network: PathNetwork
 @export var player: Player
+@onready var shadow_light: OmniLight3D = $OmniLight3D
 var last_path_marker: PathMarker = null
 var next_path_marker: PathMarker = null
 var anger_level: int = 0
@@ -77,3 +78,8 @@ func start() -> void:
 	last_path_marker = starting_marker
 	next_path_marker = starting_marker
 	wander()
+
+func update_anger() -> void:
+	shadow_light.omni_range = 3.0 + (2.0 * anger_level)
+	shadow_light.light_energy = 0.5 + (0.5 * anger_level)
+	shadow_light.light_size = 0.25 * anger_level

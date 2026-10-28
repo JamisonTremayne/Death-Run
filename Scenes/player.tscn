@@ -37,6 +37,7 @@ shape = SubResource("BoxShape3D_5tmi2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0249028, 0)
 light_energy = 0.2
 light_size = 1.0
+omni_range = 10.0
 
 [node name="Player UI" type="Control" parent="." unique_id=1371948013]
 layout_mode = 3

@@ -1,0 +1,6 @@
+[gd_resource type="Theme" format=3 uid="uid://ciwcyq3eque7s"]
+
+[ext_resource type="FontFile" uid="uid://dnh1y4l1pswa6" path="res://Assets/Fonts/wolves.ttf" id="1_4g4af"]
+
+[resource]
+Label/fonts/font = ExtResource("1_4g4af")
