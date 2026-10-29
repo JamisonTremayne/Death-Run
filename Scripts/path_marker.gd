@@ -4,7 +4,7 @@ extends Marker3D
 @export var connections: Array[PathMarker] = []
 @export var room_connections: Array[RoomMarker] = []
 
-func pick_random_connection(exclude: Array[PathMarker]) -> PathMarker:
+func pick_random_connection(exclude: Array[Marker3D]) -> PathMarker:
 	var valid_markers: Array[PathMarker] = connections.duplicate(false)
 	for marker in connections:
 		if marker in exclude:

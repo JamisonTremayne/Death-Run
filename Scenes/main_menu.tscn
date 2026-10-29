@@ -1,0 +1,411 @@
+[gd_scene format=4 uid="uid://clil80mjt55s8"]
+
+[ext_resource type="PackedScene" uid="uid://bb8idh3a3nyek" path="res://Scenes/wall.tscn" id="1_1ehe0"]
+[ext_resource type="Script" uid="uid://b3f0sg1qpca17" path="res://Scripts/main_menu.gd" id="1_cp0ys"]
+[ext_resource type="PackedScene" uid="uid://c0a672sdw34if" path="res://Scenes/floor.tscn" id="2_ce3w2"]
+[ext_resource type="PackedScene" uid="uid://b0iodptuv6jx2" path="res://Scenes/light_fixture.tscn" id="3_n45e2"]
+[ext_resource type="Texture2D" uid="uid://boq0g3bcfq8kd" path="res://Assets/Textures/arcadetexture01.png" id="4_ce3w2"]
+[ext_resource type="Texture2D" uid="uid://c03i7hbrd6phu" path="res://Assets/Textures/arcadetexture02.png" id="5_n45e2"]
+[ext_resource type="Theme" uid="uid://ciwcyq3eque7s" path="res://Assets/Themes/theme_spooky.tres" id="6_opfnp"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1ehe0"]
+sky_top_color = Color(0.52, 0.52, 0.52, 1)
+sky_horizon_color = Color(0.57, 0.25706998, 0.2223, 1)
+ground_horizon_color = Color(0.19414508, 0.18639508, 0.17739508, 1)
+energy_multiplier = 0.2
+
+[sub_resource type="Sky" id="Sky_81xng"]
+sky_material = SubResource("ProceduralSkyMaterial_1ehe0")
+
+[sub_resource type="Environment" id="Environment_ce3w2"]
+background_mode = 2
+background_energy_multiplier = 0.1
+sky = SubResource("Sky_81xng")
+ambient_light_color = Color(1, 1, 1, 1)
+glow_enabled = true
+fog_light_color = Color(0.085, 0.09075, 0.1, 1)
+volumetric_fog_enabled = true
+volumetric_fog_albedo = Color(0.44, 0.38866666, 0.32999998, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n45e2"]
+albedo_texture = ExtResource("4_ce3w2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cu02a"]
+resource_name = "Material"
+cull_mode = 2
+albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 1)
+roughness = 0.5
+texture_filter = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_43q4k"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1.1318023, 2.6441953, 3.192897, 2.2636046),
+"format": 34896613377,
+"index_count": 276,
+"index_data": PackedByteArray("HAAdAB4AHQAfAB4AIAAcAB4AHgAfACEAHgAhACAAIAAhAAIAFAACACEAIAACACIAIgACABQAIgAjACAAIAAjABwAFAAhABMAEwAhAB8AIgAUACQAJAAUABMAIgAlACMAJQAiACQAIwAmABwAJQAnACMAIwAnACYAJQAkACgAJAATABIAKAAkABIAKAAAACUAJQAAACcAKAAVAAAAGAAVACgAKAASABgAAAAVABcAAAAXACcAGAAXABUAJwAXAAcAJwAHACYADgAXABgADgAHABcAGAAaAA4ABwApACYAHAAmACkAGAAbABoAEgAbABgAGwAZABoADgAaABkAEgAWABsAGwAWABkAEAAZABYAEAAWABIADgAZABAAHAApACoAHAAqAB0AKgApAAMABQADACkABwAFACkABQAEAAMACAAHAA4ACAAFAAcAKwAEAAUAKwAFAAgALAADAAQAKgADACwALAAEACsAKgAsAC0AKwAtACwAKgAtAB0ACQArAAgAKwAuAC0ACQAuACsALgABAC0ALQAvAB0ALQABAC8AHQAvAB8ALgAGAAEALwABAAYACQAGAC4ALwAGAAoAHwAvAAoACQAKAAYAHwAKABEAEwAfABEAEgATABEAEgARABAAEAARAAoAEAAKAAkACQAMABAAEAAMAA8AEAAPAA4ACQALAAwACAALAAkADAANAA8ADgAPAA0ADAALAA0ADgANAAgACAANAAsA"),
+"lods": [0.039856736, PackedByteArray("AAABAAIAAAADAAEABAABAAMABQADAAAABQAEAAMABAAGAAEABwAFAAAABAAFAAgACAAFAAcACQAGAAQACQAEAAgAAQAGAAoACQAKAAYAAgABAAoACAALAAkACQALAAwACAANAAsADAALAA0ADgANAAgACAAHAA4ADAANAA8ADgAPAA0ACQAMABAAEAAMAA8AEAAKAAkAEAAPAA4AEAARAAoAAgAKABEAEgARABAAEwACABEAEgATABEAFAACABMAAgAUABUAFQAUABMAFQATABIAAAACABUAEAAWABIAAAAVABcAAAAXAAcADgAHABcAGAAXABUADgAXABgAFQASABgADgAZABAAEAAZABYAGAAaAA4ADgAaABkAEgAbABgAEgAWABsAGAAbABoAGwAWABkAGwAZABoA")],
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 48,
+"vertex_data": PackedByteArray("AAAAAAAAAAANAff///8AAAAAAAD//wAADQH//wAAAAAFOPL/AAAAAJEj4NwAAAAABTj6////AAA2rVqgAAAAAJEj4NznDgAAkSPo3BfxAACRI+jc//8AANUgR9bX4wAA55hBoNfjAADTIEPWJxwAADatWqDnDgAA55hBoCccAAA2rVqgF/EAADatWqD//wAAoMGhghfxAACgwaGC//8AAKDBAAD//wAAoMEAAAAAAAD//6GCF/EAAKDBoYIAAAAAoMGhgucOAAAk6B6eF/EAACToHp7nDgAA//+hgucOAACNAFqg5w4AAAQB5dwX8QAAjQBaoBfxAACNAFqg//8AAHMAoYIX8QAAcwChgv//AAAAAAAAF/EAAHMAoYLnDgAAoMEAABfxAAAAAAAA5w4AAI0AWqAAAAAAcwChggAAAACgwQAA5w4AAAQB7NwAAAAABAHs3OcOAAAFOPL/5w4AAA0B///nDgAADQH3/xfxAAAFOPr/F/EAAAQB5dz//wAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_opfnp"]
+resource_name = "ArcadeMachine_Cube"
+_surfaces = [{
+"aabb": AABB(-1, -1, -1.1318023, 2.6441953, 3.192897, 2.2636046),
+"attribute_data": PackedByteArray("NlGx+3IEa49yBLH7NlFoj1uOgkJbjkaPL9KCQi/SRo+z5UaPjPtzS7Plc0uM+0aPcpix+55UsftymG/ES5HdtxRhQJ7QUWuPEWVqj5LlgkJQ0kaPUNKCQpLlRo8T3GSz5eqx+xDcOPcQ3LH76OrsrhPc7K5F2V63Q9k/86eB+kY5joJCOY76RqeBgkJlSkaPp4H6RqeBzoqngUaPp4GCQmVKgkIK67H7q/bdt6v2sfsK6923nzX6RkNKzoqfNc6KQ0r6RoIu80qCLtWGrRDVJHIFYEJyBI0srRB/Oc8QjSwKHX85Ch3VJM8RYEKFVLH7WZix+1mYb8Qykd23+mBDnrZRaI/4ZG2PZwXOioIu1YafNc6KcgTVhnmZ0zY81ZgMW9WoNluZxAyfNfpGcgTzSmcF+kaCLvNKZwX6Rp81gkKfNfpGZwWCQp81zopnBUaPZwXOip81Ro85js6Kp4FGj6eBzoo5jkaPvkzdt+oIQZ7qCN23cgTdt3IEQZ6+TD6eNlE+njZR3be+TD6evkxojzZRPp7qCGuP6ghBnnIEQZ7qCG/Evkzdt+oI3bdyBN23cgRvxOoIsfu+TG/ENlHdt75Msfs2UW/EW476Ri/Szoov0vpGW47OisdUb8TQVN23+VRBnlDS+kaS5fpGkuX6RlDSzopQ0vpGkuXOihPcZLPl6jj3ENw49+jqZLNlSs6KZUr6Rq1Ub8S2VN234FQ+nhDcOPcT3GSznzXOip81+kbl6jj36Opks5LlzopQ0s6K"),
+"format": 34896613399,
+"index_count": 276,
+"index_data": PackedByteArray("WgBbAFwAWwBdAFwAWwBeAF0AWgBfAFsAWgBgAF8AWgBhAGAAYgADAGMAYgBkAAMAYgBjAGUAYgBlAGYAZQBnAGYAZQABAGcAaABpAGoAagBrAGwAagBsAGgAaABsAAIAaAACAG0AaABuAGkAbQBuAGgAbgBvAGkAbQBwAG4AbgBxAG8AcABxAG4AcAAAAHEAcgBzAHQAdAAEAHIAdAAGAAQAcgB1AHMAdQAHAHMAdQAFAAcACAAJAAoACAALAAkADAB2AA4ADAANAHYADgB2AHcADgB3AA8AdwAQAA8AdwB4ABAAeAASABAAeAARABIAeQATAHoAeQAVABMAewB8AH0AewB+AHwAfwCAAIEAfwCCAIAAHwAgACEAHwAiACAAgwAkACUAJQAjAIMAJQAmACMAgwCEACQAhAAnACQAhAAoACcAKQAqACsAKQAsACoALQAuAC8ALQAwAC4AMwA0ADUAMwA2ADQANwA4ADkANwA6ADgAOwA9AIUAOwA8AD0AhQA9AD4AhQA+AIYAPgCHAIYAPgA/AIcAPwBAAIcAPwBBAEAAQgBDAEQAQgBFAEMARgBHAEgARgBJAEcAiAAdAIkAiAAeAB0ASgBLAEwASgBNAEsAigAxAIsAigAyADEAjAAaABkAjAAYABoATgBPAFAATgBRAE8AFwAbAI0AFwAcABsAUgBTAFQAUgBVAFMAjgAUAI8AjgAWABQAVgBXAFgAVgBZAFcA"),
+"lods": [0.039856736, PackedByteArray("AAABAAIAAAADAAEABAAFAAYABQAHAAYACAAJAAoACAALAAkADAANAA4ADgANAA8ADQAQAA8ADQARABAAEQASABAAEwAUABUAEwAWABQAFwAYABkAGAAaABkAFwAbABgAFwAcABsAGQAdABcAGQAeAB0AHwAgACEAHwAiACAAIwAkACUAJQAmACMAIwAnACQAIwAoACcAKQAqACsAKQAsACoALQAuAC8ALQAwAC4ALwAxAC0ALwAyADEAMwA0ADUAMwA2ADQANwA4ADkANwA6ADgAOwA8AD0AOwA9AD4APgA/ADsAPwBAADsAPwBBAEAAQgBDAEQAQgBFAEMARgBHAEgARgBJAEcASgBLAEwASgBNAEsATgBPAFAATgBRAE8AUgBTAFQAUgBVAFMAVgBXAFgAVgBZAFcA")],
+"material": SubResource("StandardMaterial3D_cu02a"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 144,
+"vertex_data": PackedByteArray("AAAAAAAAFQANAff///8GAAAAAAD//xUADQH//wAABgAAAAAAAAD/PwAAAAD///8/oMEAAAAA/z+gwQAA////P6DBoYIX8f8///+hgucO/z+gwaGC5w7/P///oYIX8f8/oMEAAP//AIAAAAAA//8AgKDBoYL//wCANq1aoP//AICRI+jc//8AgA0B9////wCABTj6////AIAFOPL/AAD/vw0B9/////+/DQH//wAA/78FOPr/////v5Ej6NwX8avLBTjy/wAAq8uRI+Dc5w6ry5Ej4NwAAKvLBTj6////q8uRI+jc//+ry9UgR9bX4w3O0yBD1iccDc6gwaGCF/Fh4jatWqD//2HiNq1aoBfxYeKgwaGC//9h4qDBAAAAAFTVoMGhghfxVNWgwaGC5w5U1aDBoYIAAFTVoMGhgv//VNWgwQAA//9U1f//oYLnDjrlJOgenhfxOuUk6B6e5w465f//oYIX8TrlNq1aoOcOBMAk6B6eF/EEwDatWqAX8QTAJOgenucOBMDnmEGgJxz/v+eYQaDX4/+/Nq1aoBfxIb7//6GCF/EhvqDBoYIX8SG+JOgenhfxIb6gwaGC5w4AACToHp7nDgAANq1aoOcOAAD//6GC5w4AAAAAAAAAAAAAoMEAAAAAAACgwaGCAAAAADatWqAAAAAAkSPg3AAAAAANAf//AAAAAAU48v8AAAAAkSPo3BfxjdznmEGg1+OT3DatWqAX8ZTc1SBH1tfjjdznmEGg1+O2ytMgQ9YnHLbK55hBoCcctsrVIEfW1+O2yjatWqDnDnmp0yBD1iccY6mRI+Dc5w5hqeeYQaAnHH2pkSPg3OcOYMI2rVqgAABgwjatWqDnDmDCkSPg3AAAYMI2rVqgF/FhwpEj6Nz//2HCkSPo3BfxYcI2rVqg//9hwjatWqDnDmHioMGhggAAYeKgwaGC5w5h4jatWqAAAGHijQBaoOcOLgAEAeXcF/EuAI0AWqAX8S4AjQBaoP//LgAEAeXc//8uAAQB7NznDi4ABAHs3AAALgCNAFqgAAAuAAQB7NznDgYADQH//+cOBgAEAezcAAAGAA0B9/8X8QYABAHl3BfxBgAEAeXc//8GAHMAoYIX8RUAjQBaoOcOFQCNAFqgF/EVAI0AWqD//xUAcwChgv//FQAAAAAAF/EVAHMAoYLnDhUAjQBaoAAAFQAAAAAA5w4VAHMAoYIAABUAAAAAAOcO/z+gwQAAF/H/P6DBAADnDv8/AAAAABfx/z9zAKGC//8AgI0AWqD//wCABAHl3P//AIANAf//5w7/vwU48v/nDv+/BTjy/+cO/78NAff/F/H/vw0B///nDv+/BTj6/xfx/7+RI+jcF/GqywU48v/nDqrLkSPg3OcOqssFOPr/F/Gqy6DBAADnDlTVoMEAABfxVNVzAKGCAAAAAI0AWqAAAAAABAHs3AAAAACRI+Dc5w4NzpEj6NwX8Q3ONq1aoBfx/782rVqg5w7/vwU48v/nDqvLBTj6/xfxq8sFOPr/F/H/vw0B9/8X8f+/5//zP/j//D/n//M/+P/8PwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9//3////9/////f////3////9/////f////3///97/73/6/wmA3v/vf/r/CYCeI8I4niPCOJ4jwjieI8I4niPCOJ4jwjioJa40qCWuNJQx1RyUMdUclDHVHJQx1RyqKqoqqiqqKqoqqiqqKqoqqiqqKqoqqirwMh4a8DIeGvAyHhrwMh4aY/oxfWP6MX1j+jF9Y/oxfaL/uYCi/7mA/////////////////////3bBiL52wYi+dsGIvnbBiL7///9/////f////3////9//v//f/7//3/+//9/MN1uaEvdqWhM3axoLd1paJHF4SKRxeEikcXhIpHF4iIsyPJtQsi+bUTIum0pyPptcNW4anDVuGpw1bhqcNW4am7Vt2pu1bdqbtW3am7Vt2qUMdUclDHVHJQx1RyUMdUcy//mP8v/5j/L/+Y/y//mP8v/5j/L/+Y/y//mP8v/5j/4//w/+P/8P/j//D/4//w/+P/8P/j//D/n//M/5//zP+f/8z/n//M/5//zP+f/8z/n//M/5//zP+f/8z/n//M/AAD/fwAA/38AAP9/AAD/f/9/////f////3///97/73/e/+9/8f/4f/H/+H/x//h/8f/4f54jwTieI8E4niPBOJ4jwTiqKqoqqiqqKv///3////9/////f6glrjSoJa40ov+5gKL/uYCeI8I4niPCOPr/CYD6/wmA")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_43q4k")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cp0ys"]
+albedo_color = Color(0.8847513, 0.8541946, 0.2051704, 1)
+emission_enabled = true
+emission = Color(0.8434308, 0.87199277, 0.29167822, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_yhxw7"]
+size = Vector2(0.9, 0.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_opfnp"]
+albedo_texture = ExtResource("5_n45e2")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cp0ys"]
+
+[sub_resource type="FontFile" id="FontFile_5tmi2"]
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/2/0/ascent = 0.0
+cache/0/2/0/descent = 0.0
+cache/0/2/0/underline_position = 0.0
+cache/0/2/0/underline_thickness = 0.0
+cache/0/2/0/scale = 1.0
+cache/0/6/0/ascent = 0.0
+cache/0/6/0/descent = 0.0
+cache/0/6/0/underline_position = 0.0
+cache/0/6/0/underline_thickness = 0.0
+cache/0/6/0/scale = 1.0
+
+[node name="Root" type="Node" unique_id=1930904718]
+
+[node name="Main Menu" type="Node3D" parent="." unique_id=1166050223 node_paths=PackedStringArray("main_menu", "htp_menu", "play_menu")]
+script = ExtResource("1_cp0ys")
+main_menu = NodePath("UI/CenterContainer/Main Menu")
+htp_menu = NodePath("UI/CenterContainer/HTP Menu")
+play_menu = NodePath("UI/CenterContainer/Play Menu")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Main Menu" unique_id=1714747261]
+environment = SubResource("Environment_ce3w2")
+
+[node name="Room 1" type="Node3D" parent="Main Menu" unique_id=692814009]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -12.022, 0, 0)
+
+[node name="Wall" parent="Main Menu/Room 1" unique_id=1933338827 instance=ExtResource("1_1ehe0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall2" parent="Main Menu/Room 1" unique_id=1143620147 instance=ExtResource("1_1ehe0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 0)
+dimensions = Vector3(10, 4, 1)
+
+[node name="Wall3" parent="Main Menu/Room 1" unique_id=611863539 instance=ExtResource("1_1ehe0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
+dimensions = Vector3(11, 4, 1)
+
+[node name="Ceiling" parent="Main Menu/Room 1" unique_id=1544349712 instance=ExtResource("2_ce3w2")]
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, -9.5, 4, 0)
+visible = false
+dimensions = Vector2(10, 13)
+b_top = true
+
+[node name="Light Fixture" parent="Main Menu/Room 1" unique_id=258141496 instance=ExtResource("3_n45e2")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -11.639956, 4, 2.461374)
+can_randomize = false
+state = 2
+
+[node name="Machine Mesh" type="MeshInstance3D" parent="Main Menu/Room 1" unique_id=591138931]
+transform = Transform3D(0.44231233, 0, 0.23315185, 0, 0.5, 0, -0.23315185, 0, 0.44231233, -12.46596, 0.5000001, 4.708741)
+material_override = SubResource("StandardMaterial3D_n45e2")
+mesh = SubResource("ArrayMesh_opfnp")
+
+[node name="Screen Mesh" type="MeshInstance3D" parent="Main Menu/Room 1" unique_id=814364101]
+transform = Transform3D(0.4663037, 0.7781955, 0.42068133, 8.075563e-08, -0.47554773, 0.8796898, 0.88462454, -0.41020265, -0.22174977, -12.479967, 1.1698697, 4.7161245)
+material_override = SubResource("StandardMaterial3D_cp0ys")
+mesh = SubResource("QuadMesh_yhxw7")
+
+[node name="Machine Mesh2" type="MeshInstance3D" parent="Main Menu/Room 1" unique_id=919200193]
+transform = Transform3D(0.2114522, 0, -0.45308712, 0, 0.5, 0, 0.45308712, 0, 0.2114522, -10.9912405, 0.5000001, 1.6466395)
+material_override = SubResource("StandardMaterial3D_opfnp")
+mesh = SubResource("ArrayMesh_opfnp")
+
+[node name="Screen Mesh2" type="MeshInstance3D" parent="Main Menu/Room 1" unique_id=1693367929]
+transform = Transform3D(-0.90617424, 0.3720246, 0.2011113, 7.594852e-08, -0.47554767, 0.8796898, 0.42290437, 0.79715246, 0.4309292, -10.997937, 1.1698697, 1.632291)
+material_override = SubResource("StandardMaterial3D_cp0ys")
+mesh = SubResource("QuadMesh_yhxw7")
+
+[node name="Floor" parent="Main Menu" unique_id=93573318 instance=ExtResource("2_ce3w2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+dimensions = Vector2(25, 25)
+
+[node name="Floor2" parent="Main Menu" unique_id=1202752440 instance=ExtResource("2_ce3w2")]
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, -3, 4, 0)
+dimensions = Vector2(25, 25)
+b_top = true
+
+[node name="Camera3D" type="Camera3D" parent="Main Menu" unique_id=625865821]
+transform = Transform3D(-0.6273179, -0.051552415, -0.77705514, 0, 0.99780655, -0.066197805, 0.7787633, -0.041527063, -0.62594193, -2.9358912, 1.2887155, -5.1625)
+
+[node name="UI" type="Control" parent="Main Menu" unique_id=1469877171]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_opfnp")
+metadata/_edit_use_anchors_ = true
+
+[node name="CenterContainer" type="CenterContainer" parent="Main Menu/UI" unique_id=316417300]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Main Menu" type="VBoxContainer" parent="Main Menu/UI/CenterContainer" unique_id=528870257]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Label" type="Label" parent="Main Menu/UI/CenterContainer/Main Menu" unique_id=390176873]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.7815, 0.31, 1)
+theme_override_constants/outline_size = 4
+text = "Abandoned Arcade Simulator"
+horizontal_alignment = 1
+
+[node name="Play Button" type="Button" parent="Main Menu/UI/CenterContainer/Main Menu" unique_id=942405803]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 8
+text = "PLAY GAME"
+
+[node name="HTP Button" type="Button" parent="Main Menu/UI/CenterContainer/Main Menu" unique_id=2134103495]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 8
+text = "HOW TO PLAY"
+
+[node name="Quit Button" type="Button" parent="Main Menu/UI/CenterContainer/Main Menu" unique_id=1689643935]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 8
+text = "QUIT"
+
+[node name="Play Menu" type="VBoxContainer" parent="Main Menu/UI/CenterContainer" unique_id=1773409061]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Main Menu/UI/CenterContainer/Play Menu" unique_id=2104648645]
+layout_mode = 2
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer" unique_id=1846761936]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_cp0ys")
+
+[node name="Easy Mode" type="Button" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer" unique_id=1042986689]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer" unique_id=1390039625]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer/MarginContainer" unique_id=993951751]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=2028488371]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.13966668, 1, 0.110000014, 1)
+text = "EASY"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=597511122]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.81, 0.81, 0.81, 1)
+theme_override_fonts/font = SubResource("FontFile_5tmi2")
+theme_override_font_sizes/font_size = 6
+text = "Play 5 Games
+Games are easier
+The arcade is brighter"
+horizontal_alignment = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer" unique_id=1245696095]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_cp0ys")
+
+[node name="Normal Mode" type="Button" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer2" unique_id=1609497822]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer2" unique_id=1947050407]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer2/MarginContainer" unique_id=1162296032]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" unique_id=1235987888]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9000279, 0.85352874, 0, 1)
+text = "NORMAL"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" unique_id=1133735041]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.81, 0.81, 0.81, 1)
+theme_override_fonts/font = SubResource("FontFile_5tmi2")
+theme_override_font_sizes/font_size = 6
+text = "Play 7 Games
+Games are normal
+"
+horizontal_alignment = 1
+
+[node name="PanelContainer3" type="PanelContainer" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer" unique_id=820184140]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_cp0ys")
+
+[node name="Hard Mode" type="Button" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer3" unique_id=1012580338]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer3" unique_id=1908959734]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer3/MarginContainer" unique_id=1104444177]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer3/MarginContainer/VBoxContainer" unique_id=1990201742]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.13499998, 0, 1)
+text = "HARD"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer3/MarginContainer/VBoxContainer" unique_id=1405051396]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.81, 0.81, 0.81, 1)
+theme_override_fonts/font = SubResource("FontFile_5tmi2")
+theme_override_font_sizes/font_size = 6
+text = "Play 10 Games
+Games are harder
+The arcade is darker"
+horizontal_alignment = 1
+
+[node name="Back Button" type="Button" parent="Main Menu/UI/CenterContainer/Play Menu" unique_id=193472347]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 8
+text = "BACK"
+
+[node name="HTP Menu" type="VBoxContainer" parent="Main Menu/UI/CenterContainer" unique_id=2063620208]
+visible = false
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Main Menu/UI/CenterContainer/HTP Menu" unique_id=865897421]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Main Menu/UI/CenterContainer/HTP Menu/PanelContainer" unique_id=1328976912]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main Menu/UI/CenterContainer/HTP Menu/PanelContainer/MarginContainer" unique_id=81105147]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Main Menu/UI/CenterContainer/HTP Menu/PanelContainer/MarginContainer/VBoxContainer" unique_id=233271356]
+layout_mode = 2
+text = "How To PLAY"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Main Menu/UI/CenterContainer/HTP Menu/PanelContainer/MarginContainer/VBoxContainer" unique_id=1949239744]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.81, 0.81, 0.81, 1)
+theme_override_fonts/font = SubResource("FontFile_5tmi2")
+theme_override_font_sizes/font_size = 6
+text = "- Play games and then escape.
+- Don't let it see you
+- Don't let it hear you
+- Don't let it get you
+- Running makes a soft sound
+- Opening doors makes a louder sound
+- IT ALWAYS HEARS YOU DIE
+- Dying makes it angry
+- Don't die"
+
+[node name="Back Button" type="Button" parent="Main Menu/UI/CenterContainer/HTP Menu" unique_id=237407528]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 8
+text = "BACK"
+
+[connection signal="pressed" from="Main Menu/UI/CenterContainer/Main Menu/Play Button" to="Main Menu" method="_on_play_button_pressed"]
+[connection signal="pressed" from="Main Menu/UI/CenterContainer/Main Menu/HTP Button" to="Main Menu" method="_on_htp_button_pressed"]
+[connection signal="pressed" from="Main Menu/UI/CenterContainer/Main Menu/Quit Button" to="Main Menu" method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer/Easy Mode" to="Main Menu" method="_on_easy_mode_pressed"]
+[connection signal="pressed" from="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer2/Normal Mode" to="Main Menu" method="_on_normal_mode_pressed"]
+[connection signal="pressed" from="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer3/Hard Mode" to="Main Menu" method="_on_hard_mode_pressed"]
+[connection signal="pressed" from="Main Menu/UI/CenterContainer/Play Menu/Back Button" to="Main Menu" method="_on_back_button_pressed"]
+[connection signal="pressed" from="Main Menu/UI/CenterContainer/HTP Menu/Back Button" to="Main Menu" method="_on_back_button_pressed"]

@@ -16,6 +16,7 @@ const CAMERA_DEFAULT_POS := Vector3(0.0, 1.646, 0.0)
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera3D
 @onready var stamina_bar: ProgressBar = $"Player UI/Stamina Bar"
+@onready var interaction_indicators: Control = $"Player UI/Interaction Indicators"
 var current_interactable : Interactable = null
 var stamina_regen_timer : Timer
 var current_stamina : float = MAX_STAMINA
@@ -75,6 +76,10 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
+		if b_sprinting:
+			Global.game_manager.make_noise(global_position, 12.5)
+		else:
+			Global.game_manager.make_noise(global_position, 2.0)
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
@@ -113,8 +118,16 @@ func _on_interaction_area_body_entered(body: Node3D) -> void:
 	if !interactable:
 		return
 	current_interactable = interactable
+	_update_indicator()
 
 func _on_interaction_area_body_exited(body: Node3D) -> void:
 	var interactable: Interactable = body as Interactable
 	if interactable == current_interactable:
 		current_interactable = null
+	_update_indicator()
+
+func _update_indicator() -> void:
+	if current_interactable:
+		interaction_indicators.visible = true
+	else:
+		interaction_indicators.visible = false

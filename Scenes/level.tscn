@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dpdii3tgy8nwl" path="res://Scenes/door.tscn" id="6_0f350"]
 [ext_resource type="Script" uid="uid://ba3q1skg6m7i7" path="res://Scripts/room_marker.gd" id="6_qxfql"]
 [ext_resource type="Theme" uid="uid://ciwcyq3eque7s" path="res://Assets/Themes/theme_spooky.tres" id="11_ha31o"]
+[ext_resource type="PackedScene" uid="uid://b0klf0ywa3wbt" path="res://Scenes/room_area.tscn" id="11_pa6b8"]
 [ext_resource type="Script" uid="uid://b1flc5mli567c" path="res://Scripts/game_ui.gd" id="12_ha31o"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6phgx"]
@@ -19,22 +20,25 @@ sky_horizon_color = Color(0.57, 0.25706998, 0.2223, 1)
 ground_horizon_color = Color(0.19414508, 0.18639508, 0.17739508, 1)
 energy_multiplier = 0.5
 
-[sub_resource type="Sky" id="Sky_81xng"]
+[sub_resource type="Sky" id="Sky_pa6b8"]
 sky_material = SubResource("ProceduralSkyMaterial_6phgx")
 
 [sub_resource type="Environment" id="Environment_wqkje"]
 background_mode = 2
 background_energy_multiplier = 0.2
-sky = SubResource("Sky_81xng")
+sky = SubResource("Sky_pa6b8")
 ambient_light_color = Color(1, 1, 1, 1)
 glow_enabled = true
 fog_light_color = Color(0.085, 0.09075, 0.1, 1)
 volumetric_fog_enabled = true
 volumetric_fog_albedo = Color(0.44, 0.38866666, 0.32999998, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_5tmi2"]
+size = Vector3(5, 5, 5)
+
 [node name="Level" type="Node3D" unique_id=246325974]
 
-[node name="Game Manager" type="Node" parent="." unique_id=775940638 node_paths=PackedStringArray("reaper", "player", "game_ui", "arcade_spawn_points", "minigame_layer")]
+[node name="Game Manager" type="Node" parent="." unique_id=775940638 node_paths=PackedStringArray("reaper", "player", "game_ui", "arcade_spawn_points", "minigame_layer", "exit_door")]
 script = ExtResource("1_oqgf2")
 debug_mode = true
 reaper = NodePath("../Reaper")
@@ -42,15 +46,10 @@ player = NodePath("../Player")
 game_ui = NodePath("../UI")
 arcade_spawn_points = NodePath("../Arcade Spawn Points")
 minigame_layer = NodePath("../Mini Game Layer")
+exit_door = NodePath("../Level Pieces/Boundary Walls/Final Door Piece")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=16588462]
 environment = SubResource("Environment_wqkje")
-
-[node name="Environment Light" type="DirectionalLight3D" parent="." unique_id=1383463927]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
-light_energy = 0.0
-light_indirect_energy = 0.0
-shadow_enabled = true
 
 [node name="Player" parent="." unique_id=883750019 instance=ExtResource("1_k5f4k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8374123, 0)
@@ -60,10 +59,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 19)
 path_network = NodePath("../Path Network")
 player = NodePath("../Player")
 
-[node name="Path Network" type="Node3D" parent="." unique_id=1370443334 node_paths=PackedStringArray("starting_markers")]
+[node name="Path Network" type="Node3D" parent="." unique_id=1370443334 node_paths=PackedStringArray("starting_markers", "path_markers", "room_markers")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.5, 0, -2)
 script = ExtResource("4_bvt00")
 starting_markers = [NodePath("Path Markers/PathMarker01"), NodePath("Path Markers/PathMarker31"), NodePath("Path Markers/PathMarker30"), NodePath("Path Markers/PathMarker24"), NodePath("Path Markers/PathMarker05")]
+path_markers = NodePath("Path Markers")
+room_markers = NodePath("Room Markers")
 
 [node name="Path Markers" type="Node3D" parent="Path Network" unique_id=2069061552]
 
@@ -126,10 +127,11 @@ connections = [NodePath("../PathMarker08"), NodePath("../PathMarker10")]
 room_connections = [NodePath("../../Room Markers/RoomMarker22")]
 metadata/_custom_type_script = "uid://wemsouvon5f2"
 
-[node name="PathMarker10" type="Marker3D" parent="Path Network/Path Markers" unique_id=1810900844 node_paths=PackedStringArray("connections")]
+[node name="PathMarker10" type="Marker3D" parent="Path Network/Path Markers" unique_id=1810900844 node_paths=PackedStringArray("connections", "room_connections")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, 1.4999995)
 script = ExtResource("3_8c0lf")
-connections = [NodePath("../PathMarker09"), NodePath("../PathMarker11"), NodePath("../PathMarker17")]
+connections = [NodePath("../PathMarker09"), NodePath("../PathMarker11"), NodePath("../PathMarker32")]
+room_connections = [NodePath("../../Room Markers/RoomMarker27")]
 metadata/_custom_type_script = "uid://wemsouvon5f2"
 
 [node name="PathMarker11" type="Marker3D" parent="Path Network/Path Markers" unique_id=1983320525 node_paths=PackedStringArray("connections")]
@@ -165,10 +167,18 @@ script = ExtResource("3_8c0lf")
 connections = [NodePath("../PathMarker15"), NodePath("../PathMarker17"), NodePath("../PathMarker28")]
 metadata/_custom_type_script = "uid://wemsouvon5f2"
 
-[node name="PathMarker17" type="Marker3D" parent="Path Network/Path Markers" unique_id=1490433305 node_paths=PackedStringArray("connections")]
+[node name="PathMarker17" type="Marker3D" parent="Path Network/Path Markers" unique_id=1490433305 node_paths=PackedStringArray("connections", "room_connections")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 1.5000005)
 script = ExtResource("3_8c0lf")
-connections = [NodePath("../PathMarker16"), NodePath("../PathMarker10"), NodePath("../PathMarker18")]
+connections = [NodePath("../PathMarker16"), NodePath("../PathMarker32"), NodePath("../PathMarker18")]
+room_connections = [NodePath("../../Room Markers/RoomMarker25")]
+metadata/_custom_type_script = "uid://wemsouvon5f2"
+
+[node name="PathMarker32" type="Marker3D" parent="Path Network/Path Markers" unique_id=528356331 node_paths=PackedStringArray("connections", "room_connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1.5)
+script = ExtResource("3_8c0lf")
+connections = [NodePath("../PathMarker17"), NodePath("../PathMarker10")]
+room_connections = [NodePath("../../Room Markers/RoomMarker26")]
 metadata/_custom_type_script = "uid://wemsouvon5f2"
 
 [node name="PathMarker18" type="Marker3D" parent="Path Network/Path Markers" unique_id=1254286669 node_paths=PackedStringArray("connections", "room_connections")]
@@ -261,7 +271,7 @@ metadata/_custom_type_script = "uid://wemsouvon5f2"
 [node name="PathMarker21" type="Marker3D" parent="Path Network/Path Markers" unique_id=805302748 node_paths=PackedStringArray("connections", "room_connections")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54, 0, 1.5000024)
 script = ExtResource("3_8c0lf")
-connections = [NodePath("../PathMarker20"), null]
+connections = [NodePath("../PathMarker20")]
 room_connections = [NodePath("../../Room Markers/RoomMarker12")]
 metadata/_custom_type_script = "uid://wemsouvon5f2"
 
@@ -274,148 +284,193 @@ metadata/_custom_type_script = "uid://wemsouvon5f2"
 
 [node name="Room Markers" type="Node3D" parent="Path Network" unique_id=2134781572]
 
-[node name="RoomMarker" type="Marker3D" parent="Path Network/Room Markers" unique_id=248719279 node_paths=PackedStringArray("path_connections")]
+[node name="RoomMarker" type="Marker3D" parent="Path Network/Room Markers" unique_id=248719279 node_paths=PackedStringArray("path_connections", "room_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.999999, 0, 12.5)
 script = ExtResource("6_qxfql")
 path_connections = [NodePath("../../Path Markers/PathMarker15")]
+room_area = NodePath("../../../Level Pieces/Rooms/Room 2/Room Area")
 metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
 
-[node name="RoomMarker2" type="Marker3D" parent="Path Network/Room Markers" unique_id=622981188 node_paths=PackedStringArray("path_connections")]
+[node name="RoomMarker2" type="Marker3D" parent="Path Network/Room Markers" unique_id=622981188 node_paths=PackedStringArray("path_connections", "room_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.000001, 0, 12.5)
 script = ExtResource("6_qxfql")
 path_connections = [NodePath("../../Path Markers/PathMarker13")]
+room_area = NodePath("../../../Level Pieces/Rooms/Room 3/Room Area")
 metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
 
-[node name="RoomMarker3" type="Marker3D" parent="Path Network/Room Markers" unique_id=1024895858 node_paths=PackedStringArray("path_connections")]
+[node name="RoomMarker3" type="Marker3D" parent="Path Network/Room Markers" unique_id=1024895858 node_paths=PackedStringArray("path_connections", "room_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.000001, 0, 20.5)
 script = ExtResource("6_qxfql")
 path_connections = [NodePath("../../Path Markers/PathMarker14")]
+room_area = NodePath("../../../Level Pieces/Rooms/Room 6/Room Area")
 metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
 
-[node name="RoomMarker4" type="Marker3D" parent="Path Network/Room Markers" unique_id=1909159069 node_paths=PackedStringArray("path_connections")]
+[node name="RoomMarker4" type="Marker3D" parent="Path Network/Room Markers" unique_id=1909159069 node_paths=PackedStringArray("path_connections", "room_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.999999, 0, 20.5)
 script = ExtResource("6_qxfql")
 path_connections = [NodePath("../../Path Markers/PathMarker15")]
+room_area = NodePath("../../../Level Pieces/Rooms/Room 7/Room Area")
 metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
 
-[node name="RoomMarker5" type="Marker3D" parent="Path Network/Room Markers" unique_id=1364712414 node_paths=PackedStringArray("path_connections")]
+[node name="RoomMarker5" type="Marker3D" parent="Path Network/Room Markers" unique_id=1364712414 node_paths=PackedStringArray("path_connections", "room_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.999998, 0, 40.5)
 script = ExtResource("6_qxfql")
 path_connections = [NodePath("../../Path Markers/PathMarker29")]
+room_area = NodePath("../../../Level Pieces/Rooms/Room 7/Room Area")
 metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
 
-[node name="RoomMarker6" type="Marker3D" parent="Path Network/Room Markers" unique_id=1345898511 node_paths=PackedStringArray("path_connections")]
+[node name="RoomMarker6" type="Marker3D" parent="Path Network/Room Markers" unique_id=1345898511 node_paths=PackedStringArray("path_connections", "room_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.999998, 0, 28.5)
 script = ExtResource("6_qxfql")
 path_connections = [NodePath("../../Path Markers/PathMarker27")]
+room_area = NodePath("../../../Level Pieces/Rooms/Room 8/Room Area")
 metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
 
-[node name="RoomMarker7" type="Marker3D" parent="Path Network/Room Markers" unique_id=1592977760 node_paths=PackedStringArray("room_connections")]
+[node name="RoomMarker7" type="Marker3D" parent="Path Network/Room Markers" unique_id=1592977760 node_paths=PackedStringArray("room_connections", "room_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31, 0, 31.5)
 script = ExtResource("6_qxfql")
 room_connections = [NodePath("../RoomMarker8")]
+room_area = NodePath("../../../Level Pieces/Rooms/Room 8/Room Area")
 metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
 
-[node name="RoomMarker8" type="Marker3D" parent="Path Network/Room Markers" unique_id=236496427 node_paths=PackedStringArray("room_connections")]
+[node name="RoomMarker8" type="Marker3D" parent="Path Network/Room Markers" unique_id=236496427 node_paths=PackedStringArray("room_connections", "room_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, 31.5)
 script = ExtResource("6_qxfql")
 room_connections = [NodePath("../RoomMarker7")]
+room_area = NodePath("../../../Level Pieces/Rooms/Room 9/Room Area")
 metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
 
-[node name="RoomMarker9" type="Marker3D" parent="Path Network/Room Markers" unique_id=971369602 node_paths=PackedStringArray("path_connections")]
+[node name="RoomMarker9" type="Marker3D" parent="Path Network/Room Markers" unique_id=971369602 node_paths=PackedStringArray("path_connections", "room_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41, 0, 28.5)
 script = ExtResource("6_qxfql")
 path_connections = [NodePath("../../Path Markers/PathMarker25")]
+room_area = NodePath("../../../Level Pieces/Rooms/Room 9/Room Area")
 metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
 
-[node name="RoomMarker10" type="Marker3D" parent="Path Network/Room Markers" unique_id=168254445 node_paths=PackedStringArray("path_connections")]
+[node name="RoomMarker10" type="Marker3D" parent="Path Network/Room Markers" unique_id=168254445 node_paths=PackedStringArray("path_connections", "room_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52, 0, 23.500002)
 script = ExtResource("6_qxfql")
 path_connections = [NodePath("../../Path Markers/PathMarker23")]
+room_area = NodePath("../../../Level Pieces/Rooms/Room 4/Room Area")
 metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
 
-[node name="RoomMarker11" type="Marker3D" parent="Path Network/Room Markers" unique_id=2045201023 node_paths=PackedStringArray("path_connections")]
+[node name="RoomMarker11" type="Marker3D" parent="Path Network/Room Markers" unique_id=2045201023 node_paths=PackedStringArray("path_connections", "room_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52, 0, 8.500002)
 script = ExtResource("6_qxfql")
 path_connections = [NodePath("../../Path Markers/PathMarker22")]
+room_area = NodePath("../../../Level Pieces/Rooms/Room 5/Room Area")
 metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
 
-[node name="RoomMarker12" type="Marker3D" parent="Path Network/Room Markers" unique_id=370590357 node_paths=PackedStringArray("path_connections")]
+[node name="RoomMarker12" type="Marker3D" parent="Path Network/Room Markers" unique_id=370590357 node_paths=PackedStringArray("path_connections", "room_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54, 0, -2.4999976)
 script = ExtResource("6_qxfql")
 path_connections = [NodePath("../../Path Markers/PathMarker21")]
+room_area = NodePath("../../../Level Pieces/Rooms/Closet03/Room Area")
 metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
 
-[node name="RoomMarker13" type="Marker3D" parent="Path Network/Room Markers" unique_id=754303795 node_paths=PackedStringArray("path_connections")]
+[node name="RoomMarker13" type="Marker3D" parent="Path Network/Room Markers" unique_id=754303795 node_paths=PackedStringArray("path_connections", "room_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39, 0, -2.499998)
 script = ExtResource("6_qxfql")
 path_connections = [NodePath("../../Path Markers/PathMarker19")]
+room_area = NodePath("../../../Level Pieces/Rooms/Room 1/Room Area")
 metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
 
-[node name="RoomMarker14" type="Marker3D" parent="Path Network/Room Markers" unique_id=1207411217 node_paths=PackedStringArray("path_connections")]
+[node name="RoomMarker14" type="Marker3D" parent="Path Network/Room Markers" unique_id=1207411217 node_paths=PackedStringArray("path_connections", "room_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 5.500001)
 script = ExtResource("6_qxfql")
 path_connections = [NodePath("../../Path Markers/PathMarker18")]
+room_area = NodePath("../../../Level Pieces/Rooms/Room 32/Room Area")
 metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
 
-[node name="RoomMarker15" type="Marker3D" parent="Path Network/Room Markers" unique_id=1796642852 node_paths=PackedStringArray("path_connections")]
+[node name="RoomMarker15" type="Marker3D" parent="Path Network/Room Markers" unique_id=1796642852 node_paths=PackedStringArray("path_connections", "room_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, 20.500002)
 script = ExtResource("6_qxfql")
 path_connections = [NodePath("../../Path Markers/PathMarker26")]
+room_area = NodePath("../../../Level Pieces/Rooms/Room 32/Room Area")
 metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
 
-[node name="RoomMarker16" type="Marker3D" parent="Path Network/Room Markers" unique_id=1047300908 node_paths=PackedStringArray("path_connections")]
+[node name="RoomMarker16" type="Marker3D" parent="Path Network/Room Markers" unique_id=1047300908 node_paths=PackedStringArray("path_connections", "room_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0000021, 0, 51.5)
 script = ExtResource("6_qxfql")
 path_connections = [NodePath("../../Path Markers/PathMarker31")]
+room_area = NodePath("../../../Level Pieces/Rooms/Closet02/Room Area")
 metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
 
-[node name="RoomMarker17" type="Marker3D" parent="Path Network/Room Markers" unique_id=2043337516 node_paths=PackedStringArray("path_connections")]
+[node name="RoomMarker17" type="Marker3D" parent="Path Network/Room Markers" unique_id=2043337516 node_paths=PackedStringArray("path_connections", "room_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.000002, 0, 44.5)
 script = ExtResource("6_qxfql")
 path_connections = [NodePath("../../Path Markers/PathMarker02")]
+room_area = NodePath("../../../Level Pieces/Rooms/Room 13/Room Area")
 metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
 
-[node name="RoomMarker18" type="Marker3D" parent="Path Network/Room Markers" unique_id=1826420168 node_paths=PackedStringArray("path_connections")]
+[node name="RoomMarker18" type="Marker3D" parent="Path Network/Room Markers" unique_id=1826420168 node_paths=PackedStringArray("path_connections", "room_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.000002, 0, 28.5)
 script = ExtResource("6_qxfql")
 path_connections = [NodePath("../../Path Markers/PathMarker04")]
+room_area = NodePath("../../../Level Pieces/Rooms/Room 12/Room Area")
 metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
 
-[node name="RoomMarker19" type="Marker3D" parent="Path Network/Room Markers" unique_id=1058220136 node_paths=PackedStringArray("path_connections")]
+[node name="RoomMarker19" type="Marker3D" parent="Path Network/Room Markers" unique_id=1058220136 node_paths=PackedStringArray("path_connections", "room_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.000002, 0, 18.5)
 script = ExtResource("6_qxfql")
 path_connections = [NodePath("../../Path Markers/PathMarker12")]
+room_area = NodePath("../../../Level Pieces/Rooms/Room 11/Room Area")
 metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
 
-[node name="RoomMarker20" type="Marker3D" parent="Path Network/Room Markers" unique_id=2082949488 node_paths=PackedStringArray("room_connections")]
+[node name="RoomMarker20" type="Marker3D" parent="Path Network/Room Markers" unique_id=2082949488 node_paths=PackedStringArray("room_connections", "room_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.000002, 0, 14.499998)
 script = ExtResource("6_qxfql")
 room_connections = [NodePath("../RoomMarker21")]
+room_area = NodePath("../../../Level Pieces/Rooms/Room 11/Room Area")
 metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
 
-[node name="RoomMarker21" type="Marker3D" parent="Path Network/Room Markers" unique_id=1411535805 node_paths=PackedStringArray("room_connections")]
+[node name="RoomMarker21" type="Marker3D" parent="Path Network/Room Markers" unique_id=1411535805 node_paths=PackedStringArray("room_connections", "room_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.000002, 0, 11.499999)
 script = ExtResource("6_qxfql")
 room_connections = [NodePath("../RoomMarker20")]
+room_area = NodePath("../../../Level Pieces/Rooms/Room 10/Room Area")
 metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
 
-[node name="RoomMarker22" type="Marker3D" parent="Path Network/Room Markers" unique_id=1511832311 node_paths=PackedStringArray("path_connections")]
+[node name="RoomMarker22" type="Marker3D" parent="Path Network/Room Markers" unique_id=1511832311 node_paths=PackedStringArray("path_connections", "room_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.000002, 0, 5.499999)
 script = ExtResource("6_qxfql")
 path_connections = [NodePath("../../Path Markers/PathMarker09")]
+room_area = NodePath("../../../Level Pieces/Rooms/Room 10/Room Area")
 metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
 
-[node name="RoomMarker23" type="Marker3D" parent="Path Network/Room Markers" unique_id=130915822 node_paths=PackedStringArray("path_connections")]
+[node name="RoomMarker23" type="Marker3D" parent="Path Network/Room Markers" unique_id=130915822 node_paths=PackedStringArray("path_connections", "room_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.000002, 0, -2.500001)
 script = ExtResource("6_qxfql")
 path_connections = [NodePath("../../Path Markers/PathMarker08")]
+room_area = NodePath("../../../Level Pieces/Rooms/Room 14/Room Area")
 metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
 
-[node name="RoomMarker24" type="Marker3D" parent="Path Network/Room Markers" unique_id=1439947690 node_paths=PackedStringArray("path_connections")]
+[node name="RoomMarker24" type="Marker3D" parent="Path Network/Room Markers" unique_id=1439947690 node_paths=PackedStringArray("path_connections", "room_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, 12.499998)
 script = ExtResource("6_qxfql")
 path_connections = [NodePath("../../Path Markers/PathMarker06")]
+room_area = NodePath("../../../Level Pieces/Rooms/Closet01/Room Area")
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker25" type="Marker3D" parent="Path Network/Room Markers" unique_id=2126120872 node_paths=PackedStringArray("path_connections", "room_area")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -1.499999)
+script = ExtResource("6_qxfql")
+path_connections = [NodePath("../../Path Markers/PathMarker17")]
+room_area = NodePath("../../../Level Pieces/Boundary Walls/Room Area")
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker26" type="Marker3D" parent="Path Network/Room Markers" unique_id=206204609 node_paths=PackedStringArray("path_connections", "room_area")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9999999, 0, -1.4999995)
+script = ExtResource("6_qxfql")
+path_connections = [NodePath("../../Path Markers/PathMarker32")]
+room_area = NodePath("../../../Level Pieces/Boundary Walls/Room Area")
+metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
+
+[node name="RoomMarker27" type="Marker3D" parent="Path Network/Room Markers" unique_id=2001082855 node_paths=PackedStringArray("path_connections", "room_area")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, -1.5000002)
+script = ExtResource("6_qxfql")
+path_connections = [NodePath("../../Path Markers/PathMarker10")]
+room_area = NodePath("../../../Level Pieces/Boundary Walls/Room Area")
 metadata/_custom_type_script = "uid://ba3q1skg6m7i7"
 
 [node name="Level Pieces" type="Node3D" parent="." unique_id=1277743287]
@@ -554,6 +609,18 @@ dimensions = Vector3(11, 4, 1)
 [node name="Wall17" parent="Level Pieces/Boundary Walls" unique_id=1978548288 instance=ExtResource("3_6phgx")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -32, 2, 31.5)
 dimensions = Vector3(4, 4, 1)
+
+[node name="Room Area" parent="Level Pieces/Boundary Walls" unique_id=380682507 node_paths=PackedStringArray("room_markers") instance=ExtResource("11_pa6b8")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 6.5, 3, 7.6293945e-06)
+room_markers = [NodePath("../../../Path Network/Room Markers/RoomMarker25"), NodePath("../../../Path Network/Room Markers/RoomMarker26"), NodePath("../../../Path Network/Room Markers/RoomMarker27")]
+area_size = Vector3(35, 12, 22)
+
+[node name="Escape Area" type="Area3D" parent="Level Pieces/Boundary Walls" unique_id=882463594]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Pieces/Boundary Walls/Escape Area" unique_id=371792996]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 3, 0)
+shape = SubResource("BoxShape3D_5tmi2")
+debug_color = Color(0.14999998, 1, 0, 1)
 
 [node name="Hall Lights" type="Node3D" parent="Level Pieces" unique_id=1274501564]
 
@@ -740,6 +807,7 @@ dimensions = Vector3(2, 1, 1)
 
 [node name="Ceiling" parent="Level Pieces/Rooms/Room 1" unique_id=1737428068 instance=ExtResource("2_6phgx")]
 transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, -9.5, 4, 0)
+visible = false
 dimensions = Vector2(10, 13)
 b_top = true
 
@@ -751,6 +819,10 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5
 
 [node name="Door" parent="Level Pieces/Rooms/Room 1" unique_id=1857380350 instance=ExtResource("6_0f350")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -3.5)
+
+[node name="Room Area" parent="Level Pieces/Rooms/Room 1" unique_id=408541739 node_paths=PackedStringArray("room_markers") instance=ExtResource("11_pa6b8")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -9.5, 3, 0)
+room_markers = [NodePath("../../../../Path Network/Room Markers/RoomMarker13")]
 
 [node name="Room 2" type="Node3D" parent="Level Pieces/Rooms" unique_id=2121417816]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -24, 0, -6)
@@ -788,6 +860,10 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5
 [node name="Light Fixture2" parent="Level Pieces/Rooms/Room 2" unique_id=246867762 instance=ExtResource("4_81xng")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
 
+[node name="Room Area" parent="Level Pieces/Rooms/Room 2" unique_id=1453760582 node_paths=PackedStringArray("room_markers") instance=ExtResource("11_pa6b8")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -9.5, 3, 0)
+room_markers = [NodePath("../../../../Path Network/Room Markers/RoomMarker")]
+
 [node name="Room 3" type="Node3D" parent="Level Pieces/Rooms" unique_id=660671934]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -24, 0, 6)
 
@@ -823,6 +899,10 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5
 
 [node name="Door" parent="Level Pieces/Rooms/Room 3" unique_id=476321224 instance=ExtResource("6_0f350")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
+
+[node name="Room Area" parent="Level Pieces/Rooms/Room 3" unique_id=1935516611 node_paths=PackedStringArray("room_markers") instance=ExtResource("11_pa6b8")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -9.5, 3, 0)
+room_markers = [NodePath("../../../../Path Network/Room Markers/RoomMarker2")]
 
 [node name="Room 4" type="Node3D" parent="Level Pieces/Rooms" unique_id=1191461748]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -27, 0, -48)
@@ -860,6 +940,10 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5
 [node name="Door" parent="Level Pieces/Rooms/Room 4" unique_id=668732839 instance=ExtResource("6_0f350")]
 transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -5, 0, 0.5)
 
+[node name="Room Area" parent="Level Pieces/Rooms/Room 4" unique_id=888696116 node_paths=PackedStringArray("room_markers") instance=ExtResource("11_pa6b8")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -9.5, 3, 0)
+room_markers = [NodePath("../../../../Path Network/Room Markers/RoomMarker10")]
+
 [node name="Room 5" type="Node3D" parent="Level Pieces/Rooms" unique_id=1536411999]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -15, 0, -48)
 
@@ -896,6 +980,10 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5
 [node name="Light Fixture2" parent="Level Pieces/Rooms/Room 5" unique_id=1001084459 instance=ExtResource("4_81xng")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
 
+[node name="Room Area" parent="Level Pieces/Rooms/Room 5" unique_id=1341937520 node_paths=PackedStringArray("room_markers") instance=ExtResource("11_pa6b8")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -9.5, 3, 0)
+room_markers = [NodePath("../../../../Path Network/Room Markers/RoomMarker11")]
+
 [node name="Room 6" type="Node3D" parent="Level Pieces/Rooms" unique_id=1323675278]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 6)
 
@@ -931,6 +1019,11 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -7, 
 
 [node name="Light Fixture2" parent="Level Pieces/Rooms/Room 6" unique_id=489896459 instance=ExtResource("4_81xng")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -7, 4, -3)
+
+[node name="Room Area" parent="Level Pieces/Rooms/Room 6" unique_id=1194146397 node_paths=PackedStringArray("room_markers") instance=ExtResource("11_pa6b8")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -7, 3, 0)
+room_markers = [NodePath("../../../../Path Network/Room Markers/RoomMarker3")]
+area_size = Vector3(13, 12, 15)
 
 [node name="Room 7" type="Node3D" parent="Level Pieces/Rooms" unique_id=1175222827]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -6)
@@ -989,6 +1082,11 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -7, 
 [node name="Light Fixture6" parent="Level Pieces/Rooms/Room 7" unique_id=1170968410 instance=ExtResource("4_81xng")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -7, 4, -3)
 
+[node name="Room Area" parent="Level Pieces/Rooms/Room 7" unique_id=1064919394 node_paths=PackedStringArray("room_markers") instance=ExtResource("11_pa6b8")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -13, 3, 0)
+room_markers = [NodePath("../../../../Path Network/Room Markers/RoomMarker4"), NodePath("../../../../Path Network/Room Markers/RoomMarker5")]
+area_size = Vector3(13, 12, 27)
+
 [node name="Room 8" type="Node3D" parent="Level Pieces/Rooms" unique_id=2108041417]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0, -27)
 
@@ -1036,6 +1134,11 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5
 [node name="Light Fixture2" parent="Level Pieces/Rooms/Room 8" unique_id=1117895381 instance=ExtResource("4_81xng")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
 
+[node name="Room Area" parent="Level Pieces/Rooms/Room 8" unique_id=608759452 node_paths=PackedStringArray("room_markers") instance=ExtResource("11_pa6b8")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -9.5, 3, -1)
+room_markers = [NodePath("../../../../Path Network/Room Markers/RoomMarker6"), NodePath("../../../../Path Network/Room Markers/RoomMarker7")]
+area_size = Vector3(15, 12, 10)
+
 [node name="Room 9" type="Node3D" parent="Level Pieces/Rooms" unique_id=312502061]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0, -42)
 
@@ -1068,6 +1171,11 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5
 [node name="Light Fixture2" parent="Level Pieces/Rooms/Room 9" unique_id=1674753385 instance=ExtResource("4_81xng")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
 
+[node name="Room Area" parent="Level Pieces/Rooms/Room 9" unique_id=1933927500 node_paths=PackedStringArray("room_markers") instance=ExtResource("11_pa6b8")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -9.5, 3, 0.5)
+room_markers = [NodePath("../../../../Path Network/Room Markers/RoomMarker8"), NodePath("../../../../Path Network/Room Markers/RoomMarker9")]
+area_size = Vector3(14, 12, 10)
+
 [node name="Room 10" type="Node3D" parent="Level Pieces/Rooms" unique_id=1311087377]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 23)
 
@@ -1099,6 +1207,10 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5
 
 [node name="Light Fixture2" parent="Level Pieces/Rooms/Room 10" unique_id=1479061864 instance=ExtResource("4_81xng")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
+
+[node name="Room Area" parent="Level Pieces/Rooms/Room 10" unique_id=787706708 node_paths=PackedStringArray("room_markers") instance=ExtResource("11_pa6b8")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -9.5, 3, 0)
+room_markers = [NodePath("../../../../Path Network/Room Markers/RoomMarker21"), NodePath("../../../../Path Network/Room Markers/RoomMarker22")]
 
 [node name="Room 11" type="Node3D" parent="Level Pieces/Rooms" unique_id=2123110392]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, 23)
@@ -1147,6 +1259,10 @@ dimensions = Vector3(2, 1, 1)
 [node name="Door2" parent="Level Pieces/Rooms/Room 11" unique_id=1466722284 instance=ExtResource("6_0f350")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5, 0, -6)
 
+[node name="Room Area" parent="Level Pieces/Rooms/Room 11" unique_id=28311646 node_paths=PackedStringArray("room_markers") instance=ExtResource("11_pa6b8")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -9.5, 3, 0)
+room_markers = [NodePath("../../../../Path Network/Room Markers/RoomMarker19"), NodePath("../../../../Path Network/Room Markers/RoomMarker20")]
+
 [node name="Room 12" type="Node3D" parent="Level Pieces/Rooms" unique_id=1171148263]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0, 23)
 
@@ -1182,6 +1298,10 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5
 
 [node name="Light Fixture2" parent="Level Pieces/Rooms/Room 12" unique_id=904898719 instance=ExtResource("4_81xng")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5, 4, -3)
+
+[node name="Room Area" parent="Level Pieces/Rooms/Room 12" unique_id=1012742272 node_paths=PackedStringArray("room_markers") instance=ExtResource("11_pa6b8")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -9.5, 3, 0)
+room_markers = [NodePath("../../../../Path Network/Room Markers/RoomMarker18")]
 
 [node name="Room 13" type="Node3D" parent="Level Pieces/Rooms" unique_id=754676469]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -48, 0, 12)
@@ -1219,6 +1339,10 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5
 [node name="Door" parent="Level Pieces/Rooms/Room 13" unique_id=1410695000 instance=ExtResource("6_0f350")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0, -2.5)
 
+[node name="Room Area" parent="Level Pieces/Rooms/Room 13" unique_id=1562964868 node_paths=PackedStringArray("room_markers") instance=ExtResource("11_pa6b8")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -9.5, 3, 0)
+room_markers = [NodePath("../../../../Path Network/Room Markers/RoomMarker17")]
+
 [node name="Room 14" type="Node3D" parent="Level Pieces/Rooms" unique_id=705482876]
 transform = Transform3D(-1, 0, -5.9604645e-08, 0, 1, 0, 5.9604645e-08, 0, -1, -9, 0, 27)
 
@@ -1255,6 +1379,10 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9.5
 [node name="Door" parent="Level Pieces/Rooms/Room 14" unique_id=744188725 instance=ExtResource("6_0f350")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5.0000005, 0, 2.5)
 
+[node name="Room Area" parent="Level Pieces/Rooms/Room 14" unique_id=679426334 node_paths=PackedStringArray("room_markers") instance=ExtResource("11_pa6b8")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -9.5, 3, 0)
+room_markers = [NodePath("../../../../Path Network/Room Markers/RoomMarker23")]
+
 [node name="Closet01" type="Node3D" parent="Level Pieces/Rooms" unique_id=1325994696]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 37)
 
@@ -1288,6 +1416,11 @@ dimensions = Vector3(3, 4, 1)
 [node name="Light Fixture3" parent="Level Pieces/Rooms/Closet01" unique_id=452462826 instance=ExtResource("4_81xng")]
 transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, -2.5, 4, 0)
 
+[node name="Room Area" parent="Level Pieces/Rooms/Closet01" unique_id=1697948782 node_paths=PackedStringArray("room_markers") instance=ExtResource("11_pa6b8")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -2.5, 3, 0)
+room_markers = [NodePath("../../../../Path Network/Room Markers/RoomMarker24")]
+area_size = Vector3(7, 12, 6)
+
 [node name="Closet02" type="Node3D" parent="Level Pieces/Rooms" unique_id=320162144]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -58, 0, 1)
 
@@ -1320,6 +1453,11 @@ dimensions = Vector3(3, 4, 1)
 
 [node name="Light Fixture3" parent="Level Pieces/Rooms/Closet02" unique_id=1583985800 instance=ExtResource("4_81xng")]
 transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, -2.5, 4, 0)
+
+[node name="Room Area" parent="Level Pieces/Rooms/Closet02" unique_id=794169829 node_paths=PackedStringArray("room_markers") instance=ExtResource("11_pa6b8")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -2.5, 3, 0)
+room_markers = [NodePath("../../../../Path Network/Room Markers/RoomMarker16")]
+area_size = Vector3(7, 12, 6)
 
 [node name="Closet03" type="Node3D" parent="Level Pieces/Rooms" unique_id=1207664553]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -1, 0, -59)
@@ -1357,6 +1495,11 @@ dimensions = Vector3(2, 4, 1)
 
 [node name="Light Fixture3" parent="Level Pieces/Rooms/Closet03" unique_id=834846073 instance=ExtResource("4_81xng")]
 transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, -2.5, 4, 0)
+
+[node name="Room Area" parent="Level Pieces/Rooms/Closet03" unique_id=1127117316 node_paths=PackedStringArray("room_markers") instance=ExtResource("11_pa6b8")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -2.5, 3, 0)
+room_markers = [NodePath("../../../../Path Network/Room Markers/RoomMarker12")]
+area_size = Vector3(7, 12, 6)
 
 [node name="Room 32" type="Node3D" parent="Level Pieces/Rooms" unique_id=1833545928]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -16.5, 0, -21)
@@ -1417,6 +1560,11 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -20.
 [node name="Light Fixture6" parent="Level Pieces/Rooms/Room 32" unique_id=159075017 instance=ExtResource("4_81xng")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -21, 4, -2.9999971)
 
+[node name="Room Area" parent="Level Pieces/Rooms/Room 32" unique_id=748275244 node_paths=PackedStringArray("room_markers") instance=ExtResource("11_pa6b8")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -11.5, 3, 1.5000076)
+room_markers = [NodePath("../../../../Path Network/Room Markers/RoomMarker14"), NodePath("../../../../Path Network/Room Markers/RoomMarker15")]
+area_size = Vector3(19, 12, 32)
+
 [node name="Arcade Spawn Points" type="Node3D" parent="." unique_id=1050600164]
 
 [node name="Machine Marker 1" type="Marker3D" parent="Arcade Spawn Points" unique_id=1185279659]
@@ -1464,14 +1612,18 @@ transform = Transform3D(0.5000001, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, 0.500
 [node name="Machine Marker 15" type="Marker3D" parent="Arcade Spawn Points" unique_id=2053650254]
 transform = Transform3D(-1.0000001, 0, -2.682209e-07, 0, 1, 0, 2.682209e-07, 0, -1.0000001, 4, 0, -45)
 
-[node name="UI" type="Control" parent="." unique_id=1883121469 node_paths=PackedStringArray("machine_label")]
+[node name="UI" type="Control" parent="." unique_id=1883121469 node_paths=PackedStringArray("machine_label", "escape_message")]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("11_ha31o")
 script = ExtResource("12_ha31o")
 machine_label = NodePath("HBoxContainer/Label")
+escape_message = NodePath("Label")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI" unique_id=1226855675]
 layout_mode = 1
@@ -1479,10 +1631,28 @@ offset_left = 13.0
 offset_top = 1.0
 offset_right = 53.0
 offset_bottom = 41.0
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="UI/HBoxContainer" unique_id=322967870]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.81, 0.11339999, 0.11339999, 1)
 text = "0 / 7"
 
+[node name="Label" type="Label" parent="UI" unique_id=1866269784]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 10.0
+offset_right = 20.0
+offset_bottom = 29.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "ESCAPE"
+horizontal_alignment = 1
+
 [node name="Mini Game Layer" type="CanvasLayer" parent="." unique_id=1668518054]
+
+[connection signal="body_entered" from="Level Pieces/Boundary Walls/Escape Area" to="Game Manager" method="_on_escape_area_body_entered"]

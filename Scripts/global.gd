@@ -1,6 +1,8 @@
 extends Node
 
+enum DIFFICULTY { EASY, NORMAL, HARD }
 var game_manager: GameManager
+var difficulty: DIFFICULTY = DIFFICULTY.NORMAL
 
 var arcade_messages: Array[String] = [
 	"Keep going!",

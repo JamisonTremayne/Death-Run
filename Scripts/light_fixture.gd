@@ -12,7 +12,17 @@ func _ready() -> void:
 	mat = mesh_instance.material_override.duplicate() as StandardMaterial3D
 	mesh_instance.material_override = mat
 	if can_randomize:
-		randomize_state()
+		var on_percent: float = 0.6
+		var off_percent: float = 0.3
+		if Global.difficulty == Global.DIFFICULTY.EASY:
+			on_percent = 0.8
+			off_percent = 0.15
+		elif Global.difficulty == Global.DIFFICULTY.HARD:
+			on_percent = 0.3
+			off_percent = 0.5
+		randomize_state(on_percent, off_percent)
+	else:
+		apply_state()
 
 func randomize_state(on_percent: float = 0.6, off_percent: float = 0.3) -> void:
 	if flicker_timer:

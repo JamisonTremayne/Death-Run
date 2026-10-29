@@ -16,6 +16,7 @@ func interact() -> void:
 	b_open = true
 	door_open_timer.start()
 	audio.play()
+	Global.game_manager.make_noise(global_position, 25.0)
 
 func _on_door_open_timer_timeout() -> void:
 	rotate_y(-PI / 2)

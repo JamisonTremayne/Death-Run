@@ -11,6 +11,9 @@ albedo_color = Color(0.58, 0.58, 0.58, 1)
 albedo_texture = ExtResource("1_03613")
 texture_filter = 0
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_5tmi2"]
+size = Vector3(3.5, 3, 2)
+
 [node name="Reaper" type="Node3D" unique_id=1972070130]
 script = ExtResource("1_dhqmi")
 
@@ -25,3 +28,24 @@ mesh = ExtResource("1_1ws32")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9250288, 0)
 light_volumetric_fog_energy = 16.0
 light_negative = true
+
+[node name="Sight Cone" type="Area3D" parent="." unique_id=1933021147]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="Sight Cone" unique_id=1621306446]
+transform = Transform3D(1, 0, 0, 0, -0.008965135, 0.9999599, 0, -0.9999599, -0.008965135, 0, 1.3110156, 0)
+depth = 3.0
+polygon = PackedVector2Array(0, 0, -20, 30, 20, 30)
+
+[node name="Death Zone" type="Area3D" parent="." unique_id=2075453923]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Death Zone" unique_id=213388255]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7336322, -1.0920062)
+shape = SubResource("BoxShape3D_5tmi2")
+
+[connection signal="body_entered" from="Sight Cone" to="." method="_on_sight_cone_body_entered"]
+[connection signal="body_exited" from="Sight Cone" to="." method="_on_sight_cone_body_exited"]
+[connection signal="body_entered" from="Death Zone" to="." method="_on_death_zone_body_entered"]

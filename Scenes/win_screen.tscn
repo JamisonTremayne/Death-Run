@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://ct8gu07183cvu"]
+
+[ext_resource type="Theme" uid="uid://bpo8kha124nqk" path="res://Assets/Themes/theme_arcade.tres" id="1_l5sol"]
+[ext_resource type="Texture2D" uid="uid://d4io5p2rkau4h" path="res://Assets/Sprites/spritesheet_arcademan.png" id="2_a00f1"]
+[ext_resource type="Script" uid="uid://camxuc7rs8bqa" path="res://Scripts/win_screen.gd" id="2_awi1s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a00f1"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awi1s"]
+atlas = ExtResource("2_a00f1")
+region = Rect2(0, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwc64"]
+atlas = ExtResource("2_a00f1")
+region = Rect2(0, 12, 12, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5tmi2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awi1s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bwc64")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Win Screen" type="Control" unique_id=1390947622]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_l5sol")
+script = ExtResource("2_awi1s")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1697336977]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a00f1")
+
+[node name="Label" type="Label" parent="PanelContainer" unique_id=1858301861]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0666666, 1, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "YOU MADE IT OUT
+CONGRATS!"
+horizontal_alignment = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PanelContainer" unique_id=1354896526]
+position = Vector2(162, 144)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_5tmi2")
+autoplay = "default"
+frame_progress = 0.88994414
+
+[node name="Timer" type="Timer" parent="." unique_id=19343007]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

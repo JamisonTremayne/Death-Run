@@ -39,6 +39,7 @@ func interact() -> void:
 	player.b_canlook = false
 	using = true
 	await _player_enter_animation()
+	Global.game_manager.active_arcade = self
 	if !arcade_game:
 		arcade_game = Global.game_manager.start_arcade_game()
 		arcade_game.game_exited.connect(leave_machine)
@@ -53,6 +54,7 @@ func leave_machine() -> void:
 	player.b_canmove = true
 	player.b_canlook = true
 	using = false
+	Global.game_manager.active_arcade = null
 
 func _player_enter_animation() -> void:
 	var player: Player = Global.game_manager.player
@@ -95,3 +97,4 @@ func arcade_die() -> void:
 	if Global.game_manager:
 		Global.game_manager.increment_anger()
 	audio.play()
+	Global.game_manager.make_noise(global_position, 10000000000.0)

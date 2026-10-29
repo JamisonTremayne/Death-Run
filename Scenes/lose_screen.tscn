@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://b1upe8vgqyb8g"]
+
+[ext_resource type="Theme" uid="uid://ciwcyq3eque7s" path="res://Assets/Themes/theme_spooky.tres" id="1_s2rrh"]
+[ext_resource type="Script" uid="uid://cyptswwtck5rp" path="res://Scripts/lose_screen.gd" id="2_488pv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_488pv"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="Lose Screen" type="Control" unique_id=207476619]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_s2rrh")
+script = ExtResource("2_488pv")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=258051108]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_488pv")
+
+[node name="Label" type="Label" parent="PanelContainer" unique_id=1775301490]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "YOU LOSE"
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="." unique_id=1992788300]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
