@@ -85,6 +85,9 @@ albedo_texture = ExtResource("5_n45e2")
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cp0ys"]
 
 [sub_resource type="FontFile" id="FontFile_5tmi2"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
 cache/0/variation_coordinates = {}
 cache/0/face_index = 0
 cache/0/embolden = 0.0
@@ -110,76 +113,74 @@ cache/0/6/0/underline_position = 0.0
 cache/0/6/0/underline_thickness = 0.0
 cache/0/6/0/scale = 1.0
 
-[node name="Root" type="Node" unique_id=1930904718]
-
-[node name="Main Menu" type="Node3D" parent="." unique_id=1166050223 node_paths=PackedStringArray("main_menu", "htp_menu", "play_menu")]
+[node name="Main Menu" type="Node3D" unique_id=1166050223 node_paths=PackedStringArray("main_menu", "htp_menu", "play_menu")]
 script = ExtResource("1_cp0ys")
 main_menu = NodePath("UI/CenterContainer/Main Menu")
 htp_menu = NodePath("UI/CenterContainer/HTP Menu")
 play_menu = NodePath("UI/CenterContainer/Play Menu")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Main Menu" unique_id=1714747261]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1714747261]
 environment = SubResource("Environment_ce3w2")
 
-[node name="Room 1" type="Node3D" parent="Main Menu" unique_id=692814009]
+[node name="Room 1" type="Node3D" parent="." unique_id=692814009]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -12.022, 0, 0)
 
-[node name="Wall" parent="Main Menu/Room 1" unique_id=1933338827 instance=ExtResource("1_1ehe0")]
+[node name="Wall" parent="Room 1" unique_id=1933338827 instance=ExtResource("1_1ehe0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 6)
 dimensions = Vector3(10, 4, 1)
 
-[node name="Wall2" parent="Main Menu/Room 1" unique_id=1143620147 instance=ExtResource("1_1ehe0")]
+[node name="Wall2" parent="Room 1" unique_id=1143620147 instance=ExtResource("1_1ehe0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 0)
 dimensions = Vector3(10, 4, 1)
 
-[node name="Wall3" parent="Main Menu/Room 1" unique_id=611863539 instance=ExtResource("1_1ehe0")]
+[node name="Wall3" parent="Room 1" unique_id=611863539 instance=ExtResource("1_1ehe0")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 2, 0)
 dimensions = Vector3(11, 4, 1)
 
-[node name="Ceiling" parent="Main Menu/Room 1" unique_id=1544349712 instance=ExtResource("2_ce3w2")]
+[node name="Ceiling" parent="Room 1" unique_id=1544349712 instance=ExtResource("2_ce3w2")]
 transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, -9.5, 4, 0)
 visible = false
 dimensions = Vector2(10, 13)
 b_top = true
 
-[node name="Light Fixture" parent="Main Menu/Room 1" unique_id=258141496 instance=ExtResource("3_n45e2")]
+[node name="Light Fixture" parent="Room 1" unique_id=258141496 instance=ExtResource("3_n45e2")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -11.639956, 4, 2.461374)
 can_randomize = false
 state = 2
 
-[node name="Machine Mesh" type="MeshInstance3D" parent="Main Menu/Room 1" unique_id=591138931]
+[node name="Machine Mesh" type="MeshInstance3D" parent="Room 1" unique_id=591138931]
 transform = Transform3D(0.44231233, 0, 0.23315185, 0, 0.5, 0, -0.23315185, 0, 0.44231233, -12.46596, 0.5000001, 4.708741)
 material_override = SubResource("StandardMaterial3D_n45e2")
 mesh = SubResource("ArrayMesh_opfnp")
 
-[node name="Screen Mesh" type="MeshInstance3D" parent="Main Menu/Room 1" unique_id=814364101]
+[node name="Screen Mesh" type="MeshInstance3D" parent="Room 1" unique_id=814364101]
 transform = Transform3D(0.4663037, 0.7781955, 0.42068133, 8.075563e-08, -0.47554773, 0.8796898, 0.88462454, -0.41020265, -0.22174977, -12.479967, 1.1698697, 4.7161245)
 material_override = SubResource("StandardMaterial3D_cp0ys")
 mesh = SubResource("QuadMesh_yhxw7")
 
-[node name="Machine Mesh2" type="MeshInstance3D" parent="Main Menu/Room 1" unique_id=919200193]
+[node name="Machine Mesh2" type="MeshInstance3D" parent="Room 1" unique_id=919200193]
 transform = Transform3D(0.2114522, 0, -0.45308712, 0, 0.5, 0, 0.45308712, 0, 0.2114522, -10.9912405, 0.5000001, 1.6466395)
 material_override = SubResource("StandardMaterial3D_opfnp")
 mesh = SubResource("ArrayMesh_opfnp")
 
-[node name="Screen Mesh2" type="MeshInstance3D" parent="Main Menu/Room 1" unique_id=1693367929]
+[node name="Screen Mesh2" type="MeshInstance3D" parent="Room 1" unique_id=1693367929]
 transform = Transform3D(-0.90617424, 0.3720246, 0.2011113, 7.594852e-08, -0.47554767, 0.8796898, 0.42290437, 0.79715246, 0.4309292, -10.997937, 1.1698697, 1.632291)
 material_override = SubResource("StandardMaterial3D_cp0ys")
 mesh = SubResource("QuadMesh_yhxw7")
 
-[node name="Floor" parent="Main Menu" unique_id=93573318 instance=ExtResource("2_ce3w2")]
+[node name="Floor" parent="." unique_id=93573318 instance=ExtResource("2_ce3w2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
 dimensions = Vector2(25, 25)
 
-[node name="Floor2" parent="Main Menu" unique_id=1202752440 instance=ExtResource("2_ce3w2")]
+[node name="Floor2" parent="." unique_id=1202752440 instance=ExtResource("2_ce3w2")]
 transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, -3, 4, 0)
 dimensions = Vector2(25, 25)
 b_top = true
 
-[node name="Camera3D" type="Camera3D" parent="Main Menu" unique_id=625865821]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=625865821]
 transform = Transform3D(-0.6273179, -0.051552415, -0.77705514, 0, 0.99780655, -0.066197805, 0.7787633, -0.041527063, -0.62594193, -2.9358912, 1.2887155, -5.1625)
 
-[node name="UI" type="Control" parent="Main Menu" unique_id=1469877171]
+[node name="UI" type="Control" parent="." unique_id=1469877171]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -189,7 +190,7 @@ grow_vertical = 2
 theme = ExtResource("6_opfnp")
 metadata/_edit_use_anchors_ = true
 
-[node name="CenterContainer" type="CenterContainer" parent="Main Menu/UI" unique_id=316417300]
+[node name="CenterContainer" type="CenterContainer" parent="UI" unique_id=316417300]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -198,56 +199,56 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Main Menu" type="VBoxContainer" parent="Main Menu/UI/CenterContainer" unique_id=528870257]
+[node name="Main Menu" type="VBoxContainer" parent="UI/CenterContainer" unique_id=528870257]
 layout_mode = 2
 theme_override_constants/separation = 12
 alignment = 1
 
-[node name="Label" type="Label" parent="Main Menu/UI/CenterContainer/Main Menu" unique_id=390176873]
+[node name="Label" type="Label" parent="UI/CenterContainer/Main Menu" unique_id=390176873]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.7815, 0.31, 1)
 theme_override_constants/outline_size = 4
 text = "Abandoned Arcade Simulator"
 horizontal_alignment = 1
 
-[node name="Play Button" type="Button" parent="Main Menu/UI/CenterContainer/Main Menu" unique_id=942405803]
+[node name="Play Button" type="Button" parent="UI/CenterContainer/Main Menu" unique_id=942405803]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 8
 text = "PLAY GAME"
 
-[node name="HTP Button" type="Button" parent="Main Menu/UI/CenterContainer/Main Menu" unique_id=2134103495]
+[node name="HTP Button" type="Button" parent="UI/CenterContainer/Main Menu" unique_id=2134103495]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 8
 text = "HOW TO PLAY"
 
-[node name="Quit Button" type="Button" parent="Main Menu/UI/CenterContainer/Main Menu" unique_id=1689643935]
+[node name="Quit Button" type="Button" parent="UI/CenterContainer/Main Menu" unique_id=1689643935]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 8
 text = "QUIT"
 
-[node name="Play Menu" type="VBoxContainer" parent="Main Menu/UI/CenterContainer" unique_id=1773409061]
+[node name="Play Menu" type="VBoxContainer" parent="UI/CenterContainer" unique_id=1773409061]
 visible = false
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Main Menu/UI/CenterContainer/Play Menu" unique_id=2104648645]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/CenterContainer/Play Menu" unique_id=2104648645]
 layout_mode = 2
 alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer" unique_id=1846761936]
+[node name="PanelContainer" type="PanelContainer" parent="UI/CenterContainer/Play Menu/HBoxContainer" unique_id=1846761936]
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_cp0ys")
 
-[node name="Easy Mode" type="Button" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer" unique_id=1042986689]
+[node name="Easy Mode" type="Button" parent="UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer" unique_id=1042986689]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer" unique_id=1390039625]
+[node name="MarginContainer" type="MarginContainer" parent="UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer" unique_id=1390039625]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 5
@@ -255,18 +256,18 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer/MarginContainer" unique_id=993951751]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer/MarginContainer" unique_id=993951751]
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=2028488371]
+[node name="Label" type="Label" parent="UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=2028488371]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.13966668, 1, 0.110000014, 1)
 text = "EASY"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=597511122]
+[node name="Label2" type="Label" parent="UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=597511122]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.81, 0.81, 0.81, 1)
 theme_override_fonts/font = SubResource("FontFile_5tmi2")
@@ -276,15 +277,15 @@ Games are easier
 The arcade is brighter"
 horizontal_alignment = 1
 
-[node name="PanelContainer2" type="PanelContainer" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer" unique_id=1245696095]
+[node name="PanelContainer2" type="PanelContainer" parent="UI/CenterContainer/Play Menu/HBoxContainer" unique_id=1245696095]
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_cp0ys")
 
-[node name="Normal Mode" type="Button" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer2" unique_id=1609497822]
+[node name="Normal Mode" type="Button" parent="UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer2" unique_id=1609497822]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer2" unique_id=1947050407]
+[node name="MarginContainer" type="MarginContainer" parent="UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer2" unique_id=1947050407]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 5
@@ -292,18 +293,18 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer2/MarginContainer" unique_id=1162296032]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer2/MarginContainer" unique_id=1162296032]
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" unique_id=1235987888]
+[node name="Label" type="Label" parent="UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" unique_id=1235987888]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9000279, 0.85352874, 0, 1)
 text = "NORMAL"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" unique_id=1133735041]
+[node name="Label2" type="Label" parent="UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" unique_id=1133735041]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.81, 0.81, 0.81, 1)
 theme_override_fonts/font = SubResource("FontFile_5tmi2")
@@ -313,15 +314,15 @@ Games are normal
 "
 horizontal_alignment = 1
 
-[node name="PanelContainer3" type="PanelContainer" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer" unique_id=820184140]
+[node name="PanelContainer3" type="PanelContainer" parent="UI/CenterContainer/Play Menu/HBoxContainer" unique_id=820184140]
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_cp0ys")
 
-[node name="Hard Mode" type="Button" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer3" unique_id=1012580338]
+[node name="Hard Mode" type="Button" parent="UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer3" unique_id=1012580338]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer3" unique_id=1908959734]
+[node name="MarginContainer" type="MarginContainer" parent="UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer3" unique_id=1908959734]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 5
@@ -329,18 +330,18 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer3/MarginContainer" unique_id=1104444177]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer3/MarginContainer" unique_id=1104444177]
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer3/MarginContainer/VBoxContainer" unique_id=1990201742]
+[node name="Label" type="Label" parent="UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer3/MarginContainer/VBoxContainer" unique_id=1990201742]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9, 0.13499998, 0, 1)
 text = "HARD"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer3/MarginContainer/VBoxContainer" unique_id=1405051396]
+[node name="Label2" type="Label" parent="UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer3/MarginContainer/VBoxContainer" unique_id=1405051396]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.81, 0.81, 0.81, 1)
 theme_override_fonts/font = SubResource("FontFile_5tmi2")
@@ -350,36 +351,36 @@ Games are harder
 The arcade is darker"
 horizontal_alignment = 1
 
-[node name="Back Button" type="Button" parent="Main Menu/UI/CenterContainer/Play Menu" unique_id=193472347]
+[node name="Back Button" type="Button" parent="UI/CenterContainer/Play Menu" unique_id=193472347]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 8
 text = "BACK"
 
-[node name="HTP Menu" type="VBoxContainer" parent="Main Menu/UI/CenterContainer" unique_id=2063620208]
+[node name="HTP Menu" type="VBoxContainer" parent="UI/CenterContainer" unique_id=2063620208]
 visible = false
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Main Menu/UI/CenterContainer/HTP Menu" unique_id=865897421]
+[node name="PanelContainer" type="PanelContainer" parent="UI/CenterContainer/HTP Menu" unique_id=865897421]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Main Menu/UI/CenterContainer/HTP Menu/PanelContainer" unique_id=1328976912]
+[node name="MarginContainer" type="MarginContainer" parent="UI/CenterContainer/HTP Menu/PanelContainer" unique_id=1328976912]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Main Menu/UI/CenterContainer/HTP Menu/PanelContainer/MarginContainer" unique_id=81105147]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/CenterContainer/HTP Menu/PanelContainer/MarginContainer" unique_id=81105147]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Main Menu/UI/CenterContainer/HTP Menu/PanelContainer/MarginContainer/VBoxContainer" unique_id=233271356]
+[node name="Label" type="Label" parent="UI/CenterContainer/HTP Menu/PanelContainer/MarginContainer/VBoxContainer" unique_id=233271356]
 layout_mode = 2
 text = "How To PLAY"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="Main Menu/UI/CenterContainer/HTP Menu/PanelContainer/MarginContainer/VBoxContainer" unique_id=1949239744]
+[node name="Label2" type="Label" parent="UI/CenterContainer/HTP Menu/PanelContainer/MarginContainer/VBoxContainer" unique_id=1949239744]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.81, 0.81, 0.81, 1)
 theme_override_fonts/font = SubResource("FontFile_5tmi2")
@@ -394,18 +395,21 @@ text = "- Play games and then escape.
 - Dying makes it angry
 - Don't die"
 
-[node name="Back Button" type="Button" parent="Main Menu/UI/CenterContainer/HTP Menu" unique_id=237407528]
+[node name="Back Button" type="Button" parent="UI/CenterContainer/HTP Menu" unique_id=237407528]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 8
 text = "BACK"
 
-[connection signal="pressed" from="Main Menu/UI/CenterContainer/Main Menu/Play Button" to="Main Menu" method="_on_play_button_pressed"]
-[connection signal="pressed" from="Main Menu/UI/CenterContainer/Main Menu/HTP Button" to="Main Menu" method="_on_htp_button_pressed"]
-[connection signal="pressed" from="Main Menu/UI/CenterContainer/Main Menu/Quit Button" to="Main Menu" method="_on_quit_button_pressed"]
-[connection signal="pressed" from="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer/Easy Mode" to="Main Menu" method="_on_easy_mode_pressed"]
-[connection signal="pressed" from="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer2/Normal Mode" to="Main Menu" method="_on_normal_mode_pressed"]
-[connection signal="pressed" from="Main Menu/UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer3/Hard Mode" to="Main Menu" method="_on_hard_mode_pressed"]
-[connection signal="pressed" from="Main Menu/UI/CenterContainer/Play Menu/Back Button" to="Main Menu" method="_on_back_button_pressed"]
-[connection signal="pressed" from="Main Menu/UI/CenterContainer/HTP Menu/Back Button" to="Main Menu" method="_on_back_button_pressed"]
+[node name="Main Menu Music" type="AudioStreamPlayer" parent="." unique_id=2087960750]
+autoplay = true
+
+[connection signal="pressed" from="UI/CenterContainer/Main Menu/Play Button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="UI/CenterContainer/Main Menu/HTP Button" to="." method="_on_htp_button_pressed"]
+[connection signal="pressed" from="UI/CenterContainer/Main Menu/Quit Button" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer/Easy Mode" to="." method="_on_easy_mode_pressed"]
+[connection signal="pressed" from="UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer2/Normal Mode" to="." method="_on_normal_mode_pressed"]
+[connection signal="pressed" from="UI/CenterContainer/Play Menu/HBoxContainer/PanelContainer3/Hard Mode" to="." method="_on_hard_mode_pressed"]
+[connection signal="pressed" from="UI/CenterContainer/Play Menu/Back Button" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="UI/CenterContainer/HTP Menu/Back Button" to="." method="_on_back_button_pressed"]

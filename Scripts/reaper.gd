@@ -13,6 +13,7 @@ enum STATE { WANDERING, INVESTIGATING, CHASING }
 @export var path_network: PathNetwork
 @export var player: Player
 @onready var shadow_light: OmniLight3D = $OmniLight3D
+@onready var reaper_kill_sound: AudioStreamPlayer3D = $"Reaper Kill Sound"
 var check_timer: Timer
 var follow_path: Array[Marker3D] = []
 var last_path_marker: Marker3D = null
@@ -196,6 +197,7 @@ func _on_death_zone_body_entered(body: Node3D) -> void:
 	if body == player:
 		b_killing = true
 		if Global.game_manager.active_arcade:
+			Global.game_manager.active_arcade.arcade_game.visible = false
 			await Global.game_manager.active_arcade.leave_machine()
 		player.b_canlook = false
 		player.b_canmove = false
@@ -206,9 +208,13 @@ func _on_death_zone_body_entered(body: Node3D) -> void:
 		var _object_rot := atan2(-forward_dir.x, -forward_dir.z) + PI
 		var target_rotation := player.head.rotation.y + angle_difference(player.head.rotation.y, _object_rot)
 		tween.tween_property(player, "global_position", forward_pos, 0.2)
-		tween.parallel().tween_property(player.head, "rotation:y", target_rotation, 0.2)
-		tween.parallel().tween_property(player.camera, "rotation_degrees", Vector3.ZERO, 0.2)
-		tween.tween_property(player.camera, "fov", 179, 0.5)
+		tween.parallel().tween_property(player.head, "rotation:y", target_rotation, 0.8)
+		tween.parallel().tween_property(player.camera, "rotation_degrees", Vector3.ZERO, 0.8)
+		await tween.finished
+		reaper_kill_sound.play()
+		tween = create_tween()
+		tween.tween_property(player.camera, "fov", 179, 1.0)
+		tween.tween_property(player.camera, "fov", 1, 0.2)
 		await tween.finished
 		
 		get_tree().change_scene_to_file("res://Scenes/lose_screen.tscn")

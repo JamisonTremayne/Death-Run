@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cnkceykar1u38"]
+
+[ext_resource type="Script" uid="uid://br7y6ywl6fcij" path="res://Scripts/apple_pickup.gd" id="1_1ghgr"]
+[ext_resource type="Texture2D" uid="uid://d17xkh1vr01uy" path="res://Assets/Sprites/sprite_apple.png" id="1_v58kq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d0obg"]
+radius = 8.0
+
+[node name="Apple Pickup" type="Node2D" unique_id=1220113449]
+script = ExtResource("1_1ghgr")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=861257346]
+scale = Vector2(2, 2)
+texture = ExtResource("1_v58kq")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1707049246]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=860996428]
+shape = SubResource("CircleShape2D_d0obg")
+
+[node name="Lifetime Timer" type="Timer" parent="." unique_id=1227438353]
+one_shot = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

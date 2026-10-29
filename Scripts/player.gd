@@ -17,6 +17,7 @@ const CAMERA_DEFAULT_POS := Vector3(0.0, 1.646, 0.0)
 @onready var camera: Camera3D = $Head/Camera3D
 @onready var stamina_bar: ProgressBar = $"Player UI/Stamina Bar"
 @onready var interaction_indicators: Control = $"Player UI/Interaction Indicators"
+@onready var footsteps_audio: AudioStreamPlayer3D = $"Footsteps Audio"
 var current_interactable : Interactable = null
 var stamina_regen_timer : Timer
 var current_stamina : float = MAX_STAMINA
@@ -76,6 +77,8 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
+		if !footsteps_audio.playing:
+			footsteps_audio.play()
 		if b_sprinting:
 			Global.game_manager.make_noise(global_position, 12.5)
 		else:
@@ -83,6 +86,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
+		footsteps_audio.stop()
 	
 	if b_sprinting:
 		current_stamina -= SPRINT_STAMINA_DRAIN * delta

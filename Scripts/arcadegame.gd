@@ -8,6 +8,8 @@ const MAX_ITERATIONS := 3
 @export var description: String = "What is going on?"
 @export var minigame_time: int = 10
 @export var b_timer_die: bool = false
+@export var timer_sound: AudioStreamPlayer
+@export var death_sound: AudioStreamPlayer
 var countdown_timer: Timer
 var alt_timer: Timer
 var difficulty: int = 3
@@ -84,6 +86,8 @@ func game_completed() -> void:
 
 func die() -> void:
 	died.emit()
+	if death_sound:
+		death_sound.play()
 	b_can_quit = false
 	countdown_timer.stop()
 	game_area.modulate = Color.RED
@@ -95,6 +99,8 @@ func die() -> void:
 
 func _on_countdown_timer_timeout() -> void:
 	time_left -= 1
+	if timer_sound:
+		timer_sound.play()
 	if b_in_countdown_screen:
 		countdown_screen.set_time_label(time_left)
 		if time_left == 0:

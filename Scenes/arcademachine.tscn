@@ -36,7 +36,11 @@ transform = Transform3D(2.0786855e-08, 0.87969, 0.4755478, 3.8452466e-08, -0.475
 material_override = SubResource("StandardMaterial3D_rw1l7")
 mesh = SubResource("QuadMesh_5tmi2")
 
-[node name="Audio" type="AudioStreamPlayer3D" parent="." unique_id=107308190]
+[node name="Death Audio" type="AudioStreamPlayer3D" parent="." unique_id=107308190]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 stream = ExtResource("3_hv83o")
 volume_db = 80.0
+
+[node name="Ambient Audio" type="AudioStreamPlayer3D" parent="." unique_id=367114952]
+volume_db = -20.0
+autoplay = true

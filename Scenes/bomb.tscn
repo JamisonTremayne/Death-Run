@@ -20,4 +20,8 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=395623024]
 shape = SubResource("CircleShape2D_5tmi2")
 
+[node name="Lifetime Timer" type="Timer" parent="." unique_id=1673067584]
+one_shot = true
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Lifetime Timer" to="." method="_on_lifetime_timer_timeout"]

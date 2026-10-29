@@ -10,7 +10,8 @@ const ARCADETEXTURE_05 = preload("uid://d3e6co7fnpqx2")
 @onready var machine_mesh: MeshInstance3D = $"Machine Mesh"
 @onready var screen_mesh: MeshInstance3D = $"Screen Mesh"
 @onready var textures: Array[Texture] = [ARCADETEXTURE_01, ARCADETEXTURE_02, ARCADETEXTURE_03, ARCADETEXTURE_04, ARCADETEXTURE_05]
-@onready var audio: AudioStreamPlayer3D = $Audio
+@onready var death_audio: AudioStreamPlayer3D = $"Death Audio"
+@onready var ambient_audio: AudioStreamPlayer3D = $"Ambient Audio"
 ## This variable keeps track of the game on the machine in case the player pauses it and leaves.
 var arcade_game: ArcadeGame = null 
 var active: bool = true
@@ -38,6 +39,7 @@ func interact() -> void:
 	player.b_canmove = false
 	player.b_canlook = false
 	using = true
+	ambient_audio.stop()
 	await _player_enter_animation()
 	Global.game_manager.active_arcade = self
 	if !arcade_game:
@@ -54,6 +56,8 @@ func leave_machine() -> void:
 	player.b_canmove = true
 	player.b_canlook = true
 	using = false
+	if active:
+		ambient_audio.play()
 	Global.game_manager.active_arcade = null
 
 func _player_enter_animation() -> void:
@@ -96,5 +100,5 @@ func complete() -> void:
 func arcade_die() -> void:
 	if Global.game_manager:
 		Global.game_manager.increment_anger()
-	audio.play()
+	death_audio.play()
 	Global.game_manager.make_noise(global_position, 10000000000.0)

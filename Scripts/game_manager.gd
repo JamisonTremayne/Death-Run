@@ -5,6 +5,8 @@ const LOSE_SCREEN = preload("uid://b1upe8vgqyb8g")
 const WIN_SCREEN = preload("uid://ct8gu07183cvu")
 const ARCADEMACHINE = preload("uid://cvdiuifwvqj2y")
 const ARCADE_BOMB_DODGE = preload("uid://44smhk5aro77")
+const ARCADE_SIMON_SAYS = preload("uid://dj42d830fv4cy")
+const ARCADE_APPLE_PICKING = preload("uid://ckopicjnug46a")
 
 @export var debug_mode: bool = false
 @export var reaper: Reaper
@@ -13,7 +15,7 @@ const ARCADE_BOMB_DODGE = preload("uid://44smhk5aro77")
 @export var arcade_spawn_points: Node3D
 @export var minigame_layer: CanvasLayer
 @export var exit_door: Node3D
-var arcade_selection: Array[PackedScene] = [ARCADE_BOMB_DODGE]
+var arcade_selection: Array[PackedScene] = [ARCADE_BOMB_DODGE, ARCADE_SIMON_SAYS, ARCADE_APPLE_PICKING]
 var active_arcade: ArcadeMachine = null
 var arcade_cycle_counter: int = 0
 var machines_completed: int = 0
@@ -23,6 +25,7 @@ var arcade_starting_difficulty: int = 3
 var arcade_difficulty_scaling: int = 3
 
 func _ready() -> void:
+	randomize()
 	Global.game_manager = self
 	if !debug_mode:
 		if Global.difficulty == Global.DIFFICULTY.EASY:
@@ -41,6 +44,7 @@ func _ready() -> void:
 			arcade_starting_difficulty = 4
 			arcade_difficulty_scaling = 4
 	_spawn_machines()
+	arcade_selection.shuffle()
 	game_ui.update_machine_label(machines_completed, machines_required)
 
 ## USEFUL CONTROLS FOR DEBUG MODE
@@ -62,7 +66,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func increment_anger() -> void:
 	reaper.anger_level += 1
-	print("Anger Increased -- Anger Level: ", reaper.anger_level)
+	#print("Anger Increased -- Anger Level: ", reaper.anger_level)
 	reaper.update_anger()
 
 ## ONLY USED FOR DEBUG MODE

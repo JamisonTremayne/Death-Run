@@ -5,6 +5,7 @@ enum STATE { ON, OFF, FLICKERING }
 @export var can_randomize: bool = true
 @export var state: STATE = STATE.ON
 @onready var mesh_instance: MeshInstance3D = $MeshInstance3D
+@onready var flicker_audio: AudioStreamPlayer3D = $"Flicker Audio"
 var mat: StandardMaterial3D
 var flicker_timer: Timer
 
@@ -65,6 +66,7 @@ func flicker() -> void:
 	await flicker_timer.timeout
 	
 	turn_off()
+	flicker_audio.play()
 	var random_off_duration: float = randf_range(0.01, 0.3)
 	flicker_timer.start(random_off_duration)
 	await flicker_timer.timeout

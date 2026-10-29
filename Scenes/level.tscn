@@ -40,7 +40,6 @@ size = Vector3(5, 5, 5)
 
 [node name="Game Manager" type="Node" parent="." unique_id=775940638 node_paths=PackedStringArray("reaper", "player", "game_ui", "arcade_spawn_points", "minigame_layer", "exit_door")]
 script = ExtResource("1_oqgf2")
-debug_mode = true
 reaper = NodePath("../Reaper")
 player = NodePath("../Player")
 game_ui = NodePath("../UI")

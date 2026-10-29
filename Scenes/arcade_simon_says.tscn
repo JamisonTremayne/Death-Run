@@ -1,0 +1,135 @@
+[gd_scene format=3 uid="uid://dj42d830fv4cy"]
+
+[ext_resource type="Script" uid="uid://bypc7clp8rj1c" path="res://Scripts/arcade_simon_says.gd" id="1_4hv7h"]
+[ext_resource type="Texture2D" uid="uid://3nwt3plwolp" path="res://Assets/Sprites/sprite_w.png" id="3_431q7"]
+[ext_resource type="AudioStream" uid="uid://t1phai4p5ind" path="res://Assets/Audio/Sound Effects/sfx_bell.mp3" id="4_431q7"]
+[ext_resource type="Texture2D" uid="uid://cug6ihseemnkm" path="res://Assets/Sprites/sprite_a.png" id="4_rrc03"]
+[ext_resource type="Texture2D" uid="uid://d0nucsl0y0p5f" path="res://Assets/Sprites/sprite_s.png" id="5_a88ue"]
+[ext_resource type="PackedScene" uid="uid://c5g6kgc8y320g" path="res://Scenes/timer_display.tscn" id="5_rrc03"]
+[ext_resource type="PackedScene" uid="uid://bafrc5r7yc024" path="res://Scenes/countdown_screen.tscn" id="6_a88ue"]
+[ext_resource type="Texture2D" uid="uid://dnxx8nwqixu23" path="res://Assets/Sprites/sprite_d.png" id="6_wlbf1"]
+[ext_resource type="Texture2D" uid="uid://d4io5p2rkau4h" path="res://Assets/Sprites/spritesheet_arcademan.png" id="7_itskd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rklae"]
+atlas = ExtResource("7_itskd")
+region = Rect2(0, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qxltk"]
+atlas = ExtResource("7_itskd")
+region = Rect2(0, 12, 12, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gpppm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rklae")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rklae")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rklae")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qxltk")
+}],
+"loop": 1,
+"name": &"move",
+"speed": 6.0
+}]
+
+[node name="Arcade -Simon Says" type="Control" unique_id=175869071 node_paths=PackedStringArray("W", "A", "S", "D", "feedback_sound", "countdown_screen", "timer_display", "game_area", "timer_sound", "death_sound")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4hv7h")
+W = NodePath("Game Area/W")
+A = NodePath("Game Area/A")
+S = NodePath("Game Area/S")
+D = NodePath("Game Area/D")
+feedback_sound = NodePath("Game Area/Feedback Sound")
+countdown_screen = NodePath("UI/Countdown Screen")
+timer_display = NodePath("UI/Timer Display")
+game_area = NodePath("Game Area")
+description = "Match the pattern"
+b_timer_die = true
+timer_sound = NodePath("Game Area/Timer Sound")
+death_sound = NodePath("Game Area/Game Death Sound")
+
+[node name="Game Area" type="Node2D" parent="." unique_id=56669444]
+position = Vector2(160, 90)
+
+[node name="Background" type="Polygon2D" parent="Game Area" unique_id=1347427682]
+modulate = Color(0.23, 0.22747001, 0.0782, 1)
+position = Vector2(-160, -90)
+polygon = PackedVector2Array(-100, -100, 420, -100, 420, 280, -100, 280)
+
+[node name="Game Death Sound" type="AudioStreamPlayer" parent="Game Area" unique_id=852492246]
+
+[node name="Timer Sound" type="AudioStreamPlayer" parent="Game Area" unique_id=823100635]
+stream = ExtResource("4_431q7")
+volume_db = -20.0
+
+[node name="W" type="Sprite2D" parent="Game Area" unique_id=694773306]
+modulate = Color(0.73393077, 0.71230227, 0.43367058, 1)
+position = Vector2(0, -28)
+scale = Vector2(2, 2)
+texture = ExtResource("3_431q7")
+
+[node name="A" type="Sprite2D" parent="Game Area" unique_id=871587975]
+modulate = Color(0.73393077, 0.71230227, 0.43367058, 1)
+position = Vector2(-32, 4)
+scale = Vector2(2, 2)
+texture = ExtResource("4_rrc03")
+
+[node name="S" type="Sprite2D" parent="Game Area" unique_id=427224611]
+modulate = Color(0.73393077, 0.71230227, 0.43367058, 1)
+position = Vector2(0, 4)
+scale = Vector2(2, 2)
+texture = ExtResource("5_a88ue")
+
+[node name="D" type="Sprite2D" parent="Game Area" unique_id=790291157]
+modulate = Color(0.73393077, 0.71230227, 0.43367058, 1)
+position = Vector2(32, 4)
+scale = Vector2(2, 2)
+texture = ExtResource("6_wlbf1")
+
+[node name="Arcade Man Sprite" type="AnimatedSprite2D" parent="Game Area" unique_id=560865010]
+position = Vector2(0, 41)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_gpppm")
+animation = &"move"
+autoplay = "move"
+frame_progress = 0.21329464
+
+[node name="Feedback Sound" type="AudioStreamPlayer" parent="Game Area" unique_id=1290359347]
+stream = ExtResource("4_431q7")
+volume_db = -10.0
+pitch_scale = 1.4
+
+[node name="UI" type="Control" parent="." unique_id=848221707]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Timer Display" parent="UI" unique_id=292359955 instance=ExtResource("5_rrc03")]
+layout_mode = 1
+
+[node name="Countdown Screen" parent="UI" unique_id=223301394 instance=ExtResource("6_a88ue")]
+layout_mode = 1
