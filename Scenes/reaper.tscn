@@ -3,7 +3,8 @@
 [ext_resource type="ArrayMesh" uid="uid://rlg0y3fguycd" path="res://Assets/Meshes/mesh_reaper.tres" id="1_1ws32"]
 [ext_resource type="Texture2D" uid="uid://bcuh0218jkdg1" path="res://Assets/Textures/reapertexture.png" id="1_03613"]
 [ext_resource type="Script" uid="uid://da6syouquecdd" path="res://Scripts/reaper.gd" id="1_dhqmi"]
-[ext_resource type="AudioStream" uid="uid://t1phai4p5ind" path="res://Assets/Audio/Sound Effects/sfx_bell.mp3" id="4_74bwk"]
+[ext_resource type="AudioStream" uid="uid://e58cg8t02xgx" path="res://Assets/Audio/Sound Effects/scary_sound.mp3" id="4_74bwk"]
+[ext_resource type="AudioStream" uid="uid://c7lwcc4w511hf" path="res://Assets/Audio/Sound Effects/whispering.mp3" id="4_i3l8k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dhqmi"]
 shading_mode = 0
@@ -48,10 +49,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7336322, -1.0920062)
 shape = SubResource("BoxShape3D_5tmi2")
 
 [node name="Reaper Sounds" type="AudioStreamPlayer3D" parent="." unique_id=691713729]
+stream = ExtResource("4_i3l8k")
+volume_db = 50.0
+unit_size = 0.1
+pitch_scale = 0.4
 autoplay = true
+max_distance = 50.0
 
 [node name="Reaper Kill Sound" type="AudioStreamPlayer3D" parent="." unique_id=472416547]
 stream = ExtResource("4_74bwk")
+volume_db = 80.0
 
 [connection signal="body_entered" from="Sight Cone" to="." method="_on_sight_cone_body_entered"]
 [connection signal="body_exited" from="Sight Cone" to="." method="_on_sight_cone_body_exited"]

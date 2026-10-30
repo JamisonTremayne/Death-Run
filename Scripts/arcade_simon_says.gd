@@ -95,7 +95,7 @@ func good_hit(value: int, time: float = 0.25) -> void:
 			pitch = D_pitch
 	sprite.modulate = good_color
 	feedback_sound.pitch_scale = pitch
-	feedback_sound.play()
+	feedback_sound.play(0.2)
 	var timer := Timer.new()
 	game_area.add_child(timer)
 	timer.start(time)
@@ -121,4 +121,4 @@ func bad_hit(value: int) -> void:
 			pitch = D_pitch
 	sprite.modulate = bad_color
 	feedback_sound.pitch_scale = pitch / 2.17
-	feedback_sound.play()
+	feedback_sound.play(0.2)

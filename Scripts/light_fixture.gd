@@ -13,14 +13,14 @@ func _ready() -> void:
 	mat = mesh_instance.material_override.duplicate() as StandardMaterial3D
 	mesh_instance.material_override = mat
 	if can_randomize:
-		var on_percent: float = 0.6
-		var off_percent: float = 0.3
+		var on_percent: float = 0.5
+		var off_percent: float = 0.35
 		if Global.difficulty == Global.DIFFICULTY.EASY:
 			on_percent = 0.8
 			off_percent = 0.15
 		elif Global.difficulty == Global.DIFFICULTY.HARD:
-			on_percent = 0.3
-			off_percent = 0.5
+			on_percent = 0.1
+			off_percent = 0.7
 		randomize_state(on_percent, off_percent)
 	else:
 		apply_state()
@@ -49,6 +49,7 @@ func apply_state() -> void:
 			flicker_timer.autostart = false
 			flicker_timer.one_shot = true
 			add_child(flicker_timer)
+			flicker_audio.play()
 			flicker()
 
 func turn_on() -> void:
@@ -66,7 +67,6 @@ func flicker() -> void:
 	await flicker_timer.timeout
 	
 	turn_off()
-	flicker_audio.play()
 	var random_off_duration: float = randf_range(0.01, 0.3)
 	flicker_timer.start(random_off_duration)
 	await flicker_timer.timeout

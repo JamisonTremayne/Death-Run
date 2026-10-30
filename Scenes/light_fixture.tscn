@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b0iodptuv6jx2"]
 
 [ext_resource type="Script" uid="uid://c0fao7n1x8ehg" path="res://Scripts/light_fixture.gd" id="1_slesj"]
+[ext_resource type="AudioStream" uid="uid://dtluruvmdcr0i" path="res://Assets/Audio/Sound Effects/Lightsbegoing.wav" id="2_106cs"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rw1l7"]
 emission_enabled = true
@@ -25,3 +26,5 @@ material_override = SubResource("StandardMaterial3D_rw1l7")
 mesh = SubResource("BoxMesh_5tmi2")
 
 [node name="Flicker Audio" type="AudioStreamPlayer3D" parent="." unique_id=764798158]
+stream = ExtResource("2_106cs")
+volume_db = -20.0

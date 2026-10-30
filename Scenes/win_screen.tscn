@@ -3,6 +3,7 @@
 [ext_resource type="Theme" uid="uid://bpo8kha124nqk" path="res://Assets/Themes/theme_arcade.tres" id="1_l5sol"]
 [ext_resource type="Texture2D" uid="uid://d4io5p2rkau4h" path="res://Assets/Sprites/spritesheet_arcademan.png" id="2_a00f1"]
 [ext_resource type="Script" uid="uid://camxuc7rs8bqa" path="res://Scripts/win_screen.gd" id="2_awi1s"]
+[ext_resource type="AudioStream" uid="uid://bp8jqe31484ni" path="res://Assets/Audio/Sound Effects/yay.mp3" id="4_bwc64"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a00f1"]
 bg_color = Color(0, 0, 0, 1)
@@ -67,5 +68,9 @@ frame_progress = 0.88994414
 wait_time = 5.0
 one_shot = true
 autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1700044758]
+stream = ExtResource("4_bwc64")
+autoplay = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

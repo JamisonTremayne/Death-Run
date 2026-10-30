@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c7lwcc4w511hf"
+path="res://.godot/imported/whispering.mp3-66416111013259b482fe4f31109df977.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Sound Effects/whispering.mp3"
+dest_files=["res://.godot/imported/whispering.mp3-66416111013259b482fe4f31109df977.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

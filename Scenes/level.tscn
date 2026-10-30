@@ -13,6 +13,7 @@
 [ext_resource type="Theme" uid="uid://ciwcyq3eque7s" path="res://Assets/Themes/theme_spooky.tres" id="11_ha31o"]
 [ext_resource type="PackedScene" uid="uid://b0klf0ywa3wbt" path="res://Scenes/room_area.tscn" id="11_pa6b8"]
 [ext_resource type="Script" uid="uid://b1flc5mli567c" path="res://Scripts/game_ui.gd" id="12_ha31o"]
+[ext_resource type="Script" uid="uid://b214eig37fra1" path="res://Scripts/ambient.gd" id="14_crh0w"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6phgx"]
 sky_top_color = Color(0.52, 0.52, 0.52, 1)
@@ -54,7 +55,7 @@ environment = SubResource("Environment_wqkje")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8374123, 0)
 
 [node name="Reaper" parent="." unique_id=1972070130 node_paths=PackedStringArray("path_network", "player") instance=ExtResource("2_wqkje")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 19)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.5, 0, -15)
 path_network = NodePath("../Path Network")
 player = NodePath("../Player")
 
@@ -1653,5 +1654,9 @@ text = "ESCAPE"
 horizontal_alignment = 1
 
 [node name="Mini Game Layer" type="CanvasLayer" parent="." unique_id=1668518054]
+
+[node name="Ambient" type="AudioStreamPlayer" parent="." unique_id=2080777760]
+volume_db = -20.0
+script = ExtResource("14_crh0w")
 
 [connection signal="body_entered" from="Level Pieces/Boundary Walls/Escape Area" to="Game Manager" method="_on_escape_area_body_entered"]

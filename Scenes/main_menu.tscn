@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://boq0g3bcfq8kd" path="res://Assets/Textures/arcadetexture01.png" id="4_ce3w2"]
 [ext_resource type="Texture2D" uid="uid://c03i7hbrd6phu" path="res://Assets/Textures/arcadetexture02.png" id="5_n45e2"]
 [ext_resource type="Theme" uid="uid://ciwcyq3eque7s" path="res://Assets/Themes/theme_spooky.tres" id="6_opfnp"]
+[ext_resource type="AudioStream" uid="uid://egwo13jeoqow" path="res://Assets/Audio/Sound Effects/Main Menu(Quieter).wav" id="8_yhxw7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1ehe0"]
 sky_top_color = Color(0.52, 0.52, 0.52, 1)
@@ -403,6 +404,7 @@ theme_override_font_sizes/font_size = 8
 text = "BACK"
 
 [node name="Main Menu Music" type="AudioStreamPlayer" parent="." unique_id=2087960750]
+stream = ExtResource("8_yhxw7")
 autoplay = true
 
 [connection signal="pressed" from="UI/CenterContainer/Main Menu/Play Button" to="." method="_on_play_button_pressed"]

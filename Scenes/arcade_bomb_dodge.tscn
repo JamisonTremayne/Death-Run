@@ -3,9 +3,12 @@
 [ext_resource type="Script" uid="uid://cgvnm0q5lsfg8" path="res://Scripts/arcade_bomb_dodge.gd" id="1_r12tm"]
 [ext_resource type="PackedScene" uid="uid://chgtnmj0r3kd1" path="res://Scenes/arcade_man.tscn" id="2_o5fxh"]
 [ext_resource type="PackedScene" uid="uid://bafrc5r7yc024" path="res://Scenes/countdown_screen.tscn" id="2_un5i1"]
-[ext_resource type="AudioStream" uid="uid://t1phai4p5ind" path="res://Assets/Audio/Sound Effects/sfx_bell.mp3" id="3_n7r45"]
+[ext_resource type="AudioStream" uid="uid://2xwu2egoagps" path="res://Assets/Audio/Sound Effects/arcade_boost.mp3" id="3_3i2cv"]
 [ext_resource type="PackedScene" uid="uid://c5g6kgc8y320g" path="res://Scenes/timer_display.tscn" id="3_sr8wj"]
+[ext_resource type="AudioStream" uid="uid://cl6ia61el73q" path="res://Assets/Audio/Sound Effects/arcade_lose_scary.mp3" id="4_bn6ov"]
+[ext_resource type="AudioStream" uid="uid://dwli0wpf4um1i" path="res://Assets/Audio/Sound Effects/timer_countdown.mp3" id="4_gh1ls"]
 [ext_resource type="PackedScene" uid="uid://exovi7pkh6fn" path="res://Scenes/destroy_area.tscn" id="5_0ihan"]
+[ext_resource type="AudioStream" uid="uid://cd5sqrb8e13ph" path="res://Assets/Audio/Sound Effects/Definately Finished.wav" id="7_gh1ls"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5tmi2"]
 normal = Vector2(1, 0)
@@ -15,7 +18,7 @@ normal = Vector2(-1, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0ihan"]
 
-[node name="Arcade - Bomb Dodge" type="Control" unique_id=175869071 node_paths=PackedStringArray("arcademan", "bomb_container", "countdown_screen", "timer_display", "game_area", "timer_sound", "death_sound")]
+[node name="Arcade - Bomb Dodge" type="Control" unique_id=175869071 node_paths=PackedStringArray("arcademan", "bomb_container", "countdown_screen", "timer_display", "game_area", "timer_sound", "death_sound", "music")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,6 +34,7 @@ game_area = NodePath("Game Area")
 description = "Dodge the bombs"
 timer_sound = NodePath("Game Area/Timer Sound")
 death_sound = NodePath("Game Area/Game Death Sound")
+music = NodePath("AudioStreamPlayer")
 
 [node name="Game Area" type="Node2D" parent="." unique_id=56669444]
 position = Vector2(160, 90)
@@ -48,6 +52,7 @@ jump_audio = NodePath("Arcade Man Jump Sound")
 [node name="Arcade Man Move Sound" type="AudioStreamPlayer" parent="Game Area/Arcade Man" unique_id=1293407336]
 
 [node name="Arcade Man Jump Sound" type="AudioStreamPlayer" parent="Game Area/Arcade Man" unique_id=296985722]
+stream = ExtResource("3_3i2cv")
 
 [node name="Left Wall" type="StaticBody2D" parent="Game Area" unique_id=1172770314]
 position = Vector2(-160, -90)
@@ -80,10 +85,10 @@ position = Vector2(0, 124)
 [node name="Bomb Container" type="Node2D" parent="Game Area" unique_id=789899393]
 
 [node name="Game Death Sound" type="AudioStreamPlayer" parent="Game Area" unique_id=852492246]
+stream = ExtResource("4_bn6ov")
 
 [node name="Timer Sound" type="AudioStreamPlayer" parent="Game Area" unique_id=823100635]
-stream = ExtResource("3_n7r45")
-volume_db = -20.0
+stream = ExtResource("4_gh1ls")
 
 [node name="UI" type="Control" parent="." unique_id=848221707]
 layout_mode = 1
@@ -98,3 +103,7 @@ layout_mode = 1
 
 [node name="Countdown Screen" parent="UI" unique_id=223301394 instance=ExtResource("2_un5i1")]
 layout_mode = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=17368908]
+stream = ExtResource("7_gh1ls")
+autoplay = true

@@ -2,10 +2,13 @@
 
 [ext_resource type="Script" uid="uid://c3nhmg15kc7op" path="res://Scripts/arcade_apple_picking.gd" id="1_w14xm"]
 [ext_resource type="PackedScene" uid="uid://chgtnmj0r3kd1" path="res://Scenes/arcade_man.tscn" id="2_gnpgo"]
-[ext_resource type="AudioStream" uid="uid://t1phai4p5ind" path="res://Assets/Audio/Sound Effects/sfx_bell.mp3" id="4_4r87d"]
+[ext_resource type="AudioStream" uid="uid://cl6ia61el73q" path="res://Assets/Audio/Sound Effects/arcade_lose_scary.mp3" id="3_h116m"]
+[ext_resource type="AudioStream" uid="uid://2xwu2egoagps" path="res://Assets/Audio/Sound Effects/arcade_boost.mp3" id="4_j5qc0"]
+[ext_resource type="AudioStream" uid="uid://dwli0wpf4um1i" path="res://Assets/Audio/Sound Effects/timer_countdown.mp3" id="4_wwo6a"]
 [ext_resource type="PackedScene" uid="uid://c5g6kgc8y320g" path="res://Scenes/timer_display.tscn" id="5_bp8cp"]
 [ext_resource type="Theme" uid="uid://bpo8kha124nqk" path="res://Assets/Themes/theme_arcade.tres" id="6_fulas"]
 [ext_resource type="PackedScene" uid="uid://bafrc5r7yc024" path="res://Scenes/countdown_screen.tscn" id="6_ie7as"]
+[ext_resource type="AudioStream" uid="uid://cd5sqrb8e13ph" path="res://Assets/Audio/Sound Effects/Definately Finished.wav" id="9_wwo6a"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5tmi2"]
 normal = Vector2(1, 0)
@@ -18,7 +21,7 @@ normal = Vector2(-1, 0)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_w14xm"]
 normal = Vector2(0, 1)
 
-[node name="Arcade - Apple Pick" type="Control" unique_id=175869071 node_paths=PackedStringArray("arcademan", "pickup_container", "fruit_label", "pickup_sound", "countdown_screen", "timer_display", "game_area", "timer_sound", "death_sound")]
+[node name="Arcade - Apple Pick" type="Control" unique_id=175869071 node_paths=PackedStringArray("arcademan", "pickup_container", "fruit_label", "pickup_sound", "countdown_screen", "timer_display", "game_area", "timer_sound", "death_sound", "music")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,6 +40,7 @@ description = "Pick apples, avoid the bombs"
 b_timer_die = true
 timer_sound = NodePath("Game Area/Timer Sound")
 death_sound = NodePath("Game Area/Game Death Sound")
+music = NodePath("AudioStreamPlayer")
 
 [node name="Game Area" type="Node2D" parent="." unique_id=56669444]
 position = Vector2(160, 90)
@@ -82,16 +86,16 @@ position = Vector2(153, -1)
 shape = SubResource("WorldBoundaryShape2D_w14xm")
 
 [node name="Game Death Sound" type="AudioStreamPlayer" parent="Game Area" unique_id=852492246]
+stream = ExtResource("3_h116m")
 
 [node name="Timer Sound" type="AudioStreamPlayer" parent="Game Area" unique_id=823100635]
-stream = ExtResource("4_4r87d")
+stream = ExtResource("4_wwo6a")
 volume_db = -20.0
 
 [node name="Pickup Container" type="Node2D" parent="Game Area" unique_id=671260454]
 
 [node name="Pickup Sound" type="AudioStreamPlayer" parent="Game Area" unique_id=404548500]
-stream = ExtResource("4_4r87d")
-volume_db = -10.0
+stream = ExtResource("4_j5qc0")
 
 [node name="UI" type="Control" parent="." unique_id=848221707]
 layout_mode = 1
@@ -125,3 +129,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.12, 0.11432, 0.0348, 1)
 theme_override_font_sizes/font_size = 10
 text = "0 / 5"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=655047773]
+stream = ExtResource("9_wwo6a")
+autoplay = true

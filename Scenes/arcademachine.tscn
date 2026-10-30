@@ -2,7 +2,8 @@
 
 [ext_resource type="ArrayMesh" uid="uid://b83pe7tu18vli" path="res://Assets/Meshes/mesh_arcademachine.tres" id="1_ee7rn"]
 [ext_resource type="Script" uid="uid://qbyel2tgg547" path="res://Scripts/arcademachine.gd" id="1_hv83o"]
-[ext_resource type="AudioStream" uid="uid://t1phai4p5ind" path="res://Assets/Audio/Sound Effects/sfx_bell.mp3" id="3_hv83o"]
+[ext_resource type="AudioStream" uid="uid://eyxtrvykopu6" path="res://Assets/Audio/Sound Effects/explosion.mp3" id="3_skl7u"]
+[ext_resource type="AudioStream" uid="uid://dvgdrduvkbyv5" path="res://Assets/Audio/Sound Effects/arcade_noises.mp3" id="4_skl7u"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_skl7u"]
 
@@ -38,9 +39,10 @@ mesh = SubResource("QuadMesh_5tmi2")
 
 [node name="Death Audio" type="AudioStreamPlayer3D" parent="." unique_id=107308190]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-stream = ExtResource("3_hv83o")
+stream = ExtResource("3_skl7u")
 volume_db = 80.0
 
 [node name="Ambient Audio" type="AudioStreamPlayer3D" parent="." unique_id=367114952]
-volume_db = -20.0
+stream = ExtResource("4_skl7u")
+volume_db = -50.0
 autoplay = true

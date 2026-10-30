@@ -81,8 +81,10 @@ func _physics_process(delta: float) -> void:
 			footsteps_audio.play()
 		if b_sprinting:
 			Global.game_manager.make_noise(global_position, 12.5)
+			footsteps_audio.volume_db = -10.0
 		else:
 			Global.game_manager.make_noise(global_position, 2.0)
+			footsteps_audio.volume_db = -30.0
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)

@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://dpdii3tgy8nwl"]
 
 [ext_resource type="Script" uid="uid://b2fagm34ygttj" path="res://Scripts/door.gd" id="1_w6aom"]
-[ext_resource type="AudioStream" uid="uid://t1phai4p5ind" path="res://Assets/Audio/Sound Effects/sfx_bell.mp3" id="2_p0e35"]
+[ext_resource type="AudioStream" uid="uid://bmb008skre4x6" path="res://Assets/Audio/Sound Effects/Door_Open.wav" id="2_ab4ky"]
+[ext_resource type="AudioStream" uid="uid://1t13md5ym036" path="res://Assets/Audio/Sound Effects/Door_Close.mp3" id="3_a43ba"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rw1l7"]
 albedo_color = Color(0.82139057, 0.6784501, 0.57176423, 1)
@@ -18,6 +19,8 @@ collision_layer = 3
 collision_mask = 0
 script = ExtResource("1_w6aom")
 door_open_timer = NodePath("Timer")
+open_sound = ExtResource("2_ab4ky")
+close_sound = ExtResource("3_a43ba")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1306756971]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.5, 0)
@@ -34,7 +37,7 @@ one_shot = true
 
 [node name="Audio" type="AudioStreamPlayer3D" parent="." unique_id=1509228434]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-stream = ExtResource("2_p0e35")
+stream = ExtResource("2_ab4ky")
 volume_db = 5.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_door_open_timer_timeout"]

@@ -95,6 +95,7 @@ func _player_exit_animation() -> void:
 func complete() -> void:
 	screen_mesh.visible = false
 	active = false
+	arcade_game.queue_free()
 	machine_completed.emit()
 
 func arcade_die() -> void:

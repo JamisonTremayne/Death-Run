@@ -1,14 +1,17 @@
 [gd_scene format=3 uid="uid://dj42d830fv4cy"]
 
 [ext_resource type="Script" uid="uid://bypc7clp8rj1c" path="res://Scripts/arcade_simon_says.gd" id="1_4hv7h"]
+[ext_resource type="AudioStream" uid="uid://dwli0wpf4um1i" path="res://Assets/Audio/Sound Effects/timer_countdown.mp3" id="2_a88ue"]
+[ext_resource type="AudioStream" uid="uid://cl6ia61el73q" path="res://Assets/Audio/Sound Effects/arcade_lose_scary.mp3" id="2_wlbf1"]
 [ext_resource type="Texture2D" uid="uid://3nwt3plwolp" path="res://Assets/Sprites/sprite_w.png" id="3_431q7"]
-[ext_resource type="AudioStream" uid="uid://t1phai4p5ind" path="res://Assets/Audio/Sound Effects/sfx_bell.mp3" id="4_431q7"]
 [ext_resource type="Texture2D" uid="uid://cug6ihseemnkm" path="res://Assets/Sprites/sprite_a.png" id="4_rrc03"]
 [ext_resource type="Texture2D" uid="uid://d0nucsl0y0p5f" path="res://Assets/Sprites/sprite_s.png" id="5_a88ue"]
 [ext_resource type="PackedScene" uid="uid://c5g6kgc8y320g" path="res://Scenes/timer_display.tscn" id="5_rrc03"]
 [ext_resource type="PackedScene" uid="uid://bafrc5r7yc024" path="res://Scenes/countdown_screen.tscn" id="6_a88ue"]
 [ext_resource type="Texture2D" uid="uid://dnxx8nwqixu23" path="res://Assets/Sprites/sprite_d.png" id="6_wlbf1"]
 [ext_resource type="Texture2D" uid="uid://d4io5p2rkau4h" path="res://Assets/Sprites/spritesheet_arcademan.png" id="7_itskd"]
+[ext_resource type="AudioStream" uid="uid://2xwu2egoagps" path="res://Assets/Audio/Sound Effects/arcade_boost.mp3" id="8_a88ue"]
+[ext_resource type="AudioStream" uid="uid://cd5sqrb8e13ph" path="res://Assets/Audio/Sound Effects/Definately Finished.wav" id="10_rrc03"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rklae"]
 atlas = ExtResource("7_itskd")
@@ -48,7 +51,7 @@ animations = [{
 "speed": 6.0
 }]
 
-[node name="Arcade -Simon Says" type="Control" unique_id=175869071 node_paths=PackedStringArray("W", "A", "S", "D", "feedback_sound", "countdown_screen", "timer_display", "game_area", "timer_sound", "death_sound")]
+[node name="Arcade -Simon Says" type="Control" unique_id=175869071 node_paths=PackedStringArray("W", "A", "S", "D", "feedback_sound", "countdown_screen", "timer_display", "game_area", "timer_sound", "death_sound", "music")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -68,6 +71,7 @@ description = "Match the pattern"
 b_timer_die = true
 timer_sound = NodePath("Game Area/Timer Sound")
 death_sound = NodePath("Game Area/Game Death Sound")
+music = NodePath("AudioStreamPlayer")
 
 [node name="Game Area" type="Node2D" parent="." unique_id=56669444]
 position = Vector2(160, 90)
@@ -78,10 +82,10 @@ position = Vector2(-160, -90)
 polygon = PackedVector2Array(-100, -100, 420, -100, 420, 280, -100, 280)
 
 [node name="Game Death Sound" type="AudioStreamPlayer" parent="Game Area" unique_id=852492246]
+stream = ExtResource("2_wlbf1")
 
 [node name="Timer Sound" type="AudioStreamPlayer" parent="Game Area" unique_id=823100635]
-stream = ExtResource("4_431q7")
-volume_db = -20.0
+stream = ExtResource("2_a88ue")
 
 [node name="W" type="Sprite2D" parent="Game Area" unique_id=694773306]
 modulate = Color(0.73393077, 0.71230227, 0.43367058, 1)
@@ -113,11 +117,10 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_gpppm")
 animation = &"move"
 autoplay = "move"
-frame_progress = 0.21329464
+frame_progress = 0.45181742
 
 [node name="Feedback Sound" type="AudioStreamPlayer" parent="Game Area" unique_id=1290359347]
-stream = ExtResource("4_431q7")
-volume_db = -10.0
+stream = ExtResource("8_a88ue")
 pitch_scale = 1.4
 
 [node name="UI" type="Control" parent="." unique_id=848221707]
@@ -133,3 +136,7 @@ layout_mode = 1
 
 [node name="Countdown Screen" parent="UI" unique_id=223301394 instance=ExtResource("6_a88ue")]
 layout_mode = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1816803260]
+stream = ExtResource("10_rrc03")
+autoplay = true

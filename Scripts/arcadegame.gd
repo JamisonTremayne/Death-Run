@@ -10,6 +10,7 @@ const MAX_ITERATIONS := 3
 @export var b_timer_die: bool = false
 @export var timer_sound: AudioStreamPlayer
 @export var death_sound: AudioStreamPlayer
+@export var music: AudioStreamPlayer
 var countdown_timer: Timer
 var alt_timer: Timer
 var difficulty: int = 3
@@ -61,6 +62,7 @@ func finish_game() -> void:
 		_start_countdown()
 
 func pause_game() -> void:
+	music.stop()
 	b_can_quit = false
 	countdown_timer.paused = true
 	alt_timer.stop()
@@ -77,6 +79,7 @@ func resume_game() -> void:
 	b_can_quit = true
 	visible = true
 	countdown_timer.paused = false
+	music.play()
 	_start_countdown(true)
 	
 func game_completed() -> void:
@@ -85,6 +88,7 @@ func game_completed() -> void:
 	queue_free()
 
 func die() -> void:
+	music.stream_paused = true
 	died.emit()
 	if death_sound:
 		death_sound.play()
@@ -95,6 +99,7 @@ func die() -> void:
 	alt_timer.start(2.5)
 	await alt_timer.timeout
 	b_can_quit = true
+	music.stream_paused = false
 	finish_game()
 
 func _on_countdown_timer_timeout() -> void:
